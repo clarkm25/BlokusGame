@@ -48,6 +48,5 @@ public class BlokusDumbAi extends GameComputerPlayer {
 
         Logger.log("BlokusDumbAi", "Sending move");
         //game.sendAction(new BlokusMoveAction(this, ROW, COL));
-        game.sendAction(new BlokusPlaceAction(this));
     }
 }

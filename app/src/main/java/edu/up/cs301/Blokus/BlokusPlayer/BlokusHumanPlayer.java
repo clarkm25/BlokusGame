@@ -73,29 +73,46 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         int y = (int)motionEvent.getY();
         Path selectedPiece;
 
+        //Player 1's box
         if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
 
-        }
+                }
+            }
+        } //Player 2's box
         else if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.BOTTOM_BOXES) && (y < DrawBoard.BOTTOM_BOXES + DrawBoard.PBOX_HEIGHT)) {
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
 
-        }
+                }
+            }
+        } //Player 3's box
         else if ((x > DrawBoard.RIGHT_BOXES) && (x < DrawBoard.RIGHT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
 
-        }
+                }
+            }
+        } //Player 4's box
         else if ((x > DrawBoard.RIGHT_BOXES) && (x < DrawBoard.RIGHT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.BOTTOM_BOXES) && (y < DrawBoard.BOTTOM_BOXES + DrawBoard.PBOX_HEIGHT)) {
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
 
+                }
+            }
         }
 
         //Size of grid
         if ((x > 700) && (x < 1300) && (y > 50) && (y < 650)) {
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
-                    if ((x > (i * drawBoard.GRIDBOX_SIZE)) && (x < ((i+1) * drawBoard.GRIDBOX_SIZE))
-                            && (y > (i * drawBoard.GRIDBOX_SIZE)) && (y < ((i+1) * drawBoard.GRIDBOX_SIZE))) {
+            for (int i = 0; i < 19; i++) {
+                for (int j = 0; j < 19; j++) {
+                    if ((x > ((j * DrawBoard.GRIDBOX_SIZE) + 700)) && (x < (((j+1) * DrawBoard.GRIDBOX_SIZE) + 700))
+                            && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
 
                     }
                 }
