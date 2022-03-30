@@ -128,13 +128,26 @@ public class BlokusBlock {
      * @param player
      * @return piece1 - Path for first piece
      */
-    public Path block1(Canvas c, int player, boolean onBoard) {
+    public Path block1(int player, boolean onBoard) {
         Path piece1 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            c.drawRect(10 + x, 30 + y, 40 + x, 60 + y, this.getColor(player));
+            x = this.getX(player) + 10;
+            y = this.getY(player) + 30;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece1.moveTo(x, y);
+            piece1.lineTo( (DrawBoard.GRIDBOX_SIZE * 1) + x, y);
+            piece1.lineTo((DrawBoard.GRIDBOX_SIZE * 1) + x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece1.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece1.lineTo(x, y);
         }
         else if (onBoard == true) {
 
@@ -151,13 +164,26 @@ public class BlokusBlock {
      * @param player
      * @return piece2 - Path for second piece
      */
-    public Path block2(Canvas c, int player, boolean onBoard) {
+    public Path block2(int player, boolean onBoard) {
         Path piece2 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            c.drawRect(60 + x, 30 + y, 150 + x, 60 + y, this.getColor(player));
+            x = this.getX(player) + 60;
+            y = this.getY(player) + 30;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece2.moveTo(x, y);
+            piece2.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, y);
+            piece2.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece2.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece2.lineTo(x, y);
         }
         else if (onBoard == true) {
 
@@ -176,17 +202,26 @@ public class BlokusBlock {
      */
     public Path block3(int player, boolean onBoard) {
         Path piece3 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            piece3.moveTo(170 + x,30 + y);
-            piece3.lineTo(260 + x,30 + y);
-            piece3.lineTo(260 + x,90 + y);
-            piece3.lineTo(200 + x,90 + y);
-            piece3.lineTo(200 + x,60 + y);
-            piece3.lineTo(170 + x,60 + y);
-            piece3.lineTo(170 + x,30 + y);
+            x = this.getX(player) + 170;
+            y = this.getY(player) + 30;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece3.moveTo(x, y);
+            piece3.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, y);
+            piece3.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x,(DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece3.lineTo((DrawBoard.GRIDBOX_SIZE * 1) + x,(DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece3.lineTo((DrawBoard.GRIDBOX_SIZE * 1) + x,(DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece3.lineTo(x,(DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece3.lineTo(x, y);
         }
         else if (onBoard == true) {
 
@@ -203,13 +238,32 @@ public class BlokusBlock {
      * @param player
      * @return piece4 - Path for four piece
      */
-    public Path block4(Canvas c, int player, boolean onBoard) {
+    public Path block4(int player, boolean onBoard, int col, int row) {
         Path piece4 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            c.drawRect(300 + x, 30 + y, 360 + x, 90 + y, this.getColor(player));        }
+            /** FOR NORMAL 4TH PIECE - CHANGED FOR ALPHA RELEASE
+            x = this.getX(player) + 300;
+            y = this.getY(player) + 30;
+             */
+
+            x = 10 + this.getX(player) + ((DrawBoard.GRIDBOX_SIZE * 3) * row);
+            y = 10 + this.getY(player) + ((DrawBoard.GRIDBOX_SIZE * 3) * col);
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece4.moveTo(x, y);
+            piece4.lineTo((DrawBoard.GRIDBOX_SIZE * 2) + x, y);
+            piece4.lineTo((DrawBoard.GRIDBOX_SIZE * 2) + x, (DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece4.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece4.lineTo(x, y);
+        }
         else if (onBoard == true) {
 
         }
@@ -227,8 +281,17 @@ public class BlokusBlock {
      */
     public Path block5(int player, boolean onBoard) {
         Path piece5 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
+
+        if (onBoard == false) {
+            x = this.getX(player) + 380;
+            y = this.getY(player) + 30;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
 
         if (onBoard == false) {
             piece5.moveTo(380 + x,30 + y);
@@ -237,7 +300,8 @@ public class BlokusBlock {
             piece5.lineTo(410 + x,90 + y);
             piece5.lineTo(410 + x,60 + y);
             piece5.lineTo(380 + x,60 + y);
-            piece5.lineTo(380 + x,30 + y);        }
+            piece5.lineTo(380 + x,30 + y);
+        }
         else if (onBoard == true) {
 
         }
@@ -255,8 +319,17 @@ public class BlokusBlock {
      */
     public Path block6(int player, boolean onBoard) {
         Path piece6 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
+
+        if (onBoard == false) {
+            x = this.getX(player) + 490;
+            y = this.getY(player) + 60;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
 
         if (onBoard == false) {
             piece6.moveTo(490 + x,60 + y);
@@ -271,7 +344,8 @@ public class BlokusBlock {
             piece6.lineTo(520 + x,120 + y);
             piece6.lineTo(520 + x,90 + y);
             piece6.lineTo(490 + x,90 + y);
-            piece6.lineTo(490 + x,60 + y);        }
+            piece6.lineTo(490 + x,60 + y);
+        }
         else if (onBoard == true) {
 
         }
@@ -287,13 +361,27 @@ public class BlokusBlock {
      * @param player
      * @return piece7 - Path for seventh piece
      */
-    public Path block7(Canvas c, int player, boolean onBoard) {
+    public Path block7(int player, boolean onBoard) {
         Path piece7 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            c.drawRect(10 + x,100 + y, 70 + x,130 + y, this.getColor(player));        }
+            x = this.getX(player) + 10;
+            y = this.getY(player) + 100;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece7.moveTo(10 + x, 100 + y);
+            piece7.lineTo(70 + x, 100 + y);
+            piece7.lineTo(70 + x, 130 + y);
+            piece7.lineTo(10 + x, 130 + y);
+            piece7.lineTo(10 + x, 100 + y);
+        }
         else if (onBoard == true) {
 
         }
@@ -311,8 +399,17 @@ public class BlokusBlock {
      */
     public Path block8(int player, boolean onBoard) {
         Path piece8 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
+
+        if (onBoard == false) {
+            x = this.getX(player) + 80;
+            y = this.getY(player) + 100;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
 
         if (onBoard == false) {
             piece8.moveTo(80 + x,100 + y);
@@ -323,7 +420,8 @@ public class BlokusBlock {
             piece8.lineTo(110 + x,160 + y);
             piece8.lineTo(110 + x,130 + y);
             piece8.lineTo(80 + x,130 + y);
-            piece8.lineTo(80 + x,100 + y);        }
+            piece8.lineTo(80 + x,100 + y);
+        }
         else if (onBoard == true) {
 
         }
@@ -341,8 +439,17 @@ public class BlokusBlock {
      */
     public Path block9(int player, boolean onBoard) {
         Path piece9 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
+
+        if (onBoard == false) {
+            x = this.getX(player) + 180;
+            y = this.getY(player) + 200;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
 
         if (onBoard == false) {
             piece9.moveTo(180 + x,200 + y);
@@ -353,7 +460,8 @@ public class BlokusBlock {
             piece9.lineTo(210 + x,140 + y);
             piece9.lineTo(210 + x,170 + y);
             piece9.lineTo(180 + x,170 + y);
-            piece9.lineTo(180 + x,200 + y);        }
+            piece9.lineTo(180 + x,200 + y);
+        }
         else if (onBoard == true) {
 
         }
@@ -371,11 +479,28 @@ public class BlokusBlock {
      */
     public Path block10(int player, boolean onBoard) {
         Path piece10 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece10.
+            x = this.getX(player) + 310;
+            y = this.getY(player) + 130;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece10.moveTo(310 + x,130 + y);
+            piece10.lineTo(370 + x,130 + y);
+            piece10.lineTo(370 + x,160 + y);
+            piece10.lineTo(430 + x,160 + y);
+            piece10.lineTo(430 + x,190 + y);
+            piece10.lineTo(340 + x,190 + y);
+            piece10.lineTo(340 + x,160 + y);
+            piece10.lineTo(310 + x,160 + y);
+            piece10.lineTo(310 + x,130 + y);
         }
         else if (onBoard == true) {
 
@@ -394,11 +519,28 @@ public class BlokusBlock {
      */
     public Path block11(int player, boolean onBoard) {
         Path piece11 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece11.
+            x = this.getX(player) + 450;
+            y = this.getY(player) + 130;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece11.moveTo(450 + x,130 + y);
+            piece11.lineTo(480 + x,130 + y);
+            piece11.lineTo(480 + x,160 + y);
+            piece11.lineTo(540 + x,160 + y);
+            piece11.lineTo(540 + x,220 + y);
+            piece11.lineTo(510 + x,220 + y);
+            piece11.lineTo(510 + x,190 + y);
+            piece11.lineTo(450 + x,190 + y);
+            piece11.lineTo(450 + x,130 + y);
         }
         else if (onBoard == true) {
 
@@ -417,11 +559,26 @@ public class BlokusBlock {
      */
     public Path block12(int player, boolean onBoard) {
         Path piece12 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece12.
+            x = this.getX(player) + 10;
+            y = this.getY(player) + 220;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece12.moveTo(10 + x,220 + y);
+            piece12.lineTo(130 + x,220 + y);
+            piece12.lineTo(130 + x,280 + y);
+            piece12.lineTo(100 + x,280 + y);
+            piece12.lineTo(100 + x,250 + y);
+            piece12.lineTo(10 + x,250 + y);
+            piece12.lineTo(10 + x,220 + y);
         }
         else if (onBoard == true) {
 
@@ -440,11 +597,28 @@ public class BlokusBlock {
      */
     public Path block13(int player, boolean onBoard) {
         Path piece13 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece13.
+            x = this.getX(player) + 240;
+            y = this.getY(player) + 250;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece13.moveTo(240 + x,250 + y);
+            piece13.lineTo(270 + x,250 + y);
+            piece13.lineTo(270 + x,220 + y);
+            piece13.lineTo(300 + x,220 + y);
+            piece13.lineTo(300 + x,250 + y);
+            piece13.lineTo(360 + x,250 + y);
+            piece13.lineTo(360 + x,280 + y);
+            piece13.lineTo(240 + x,280 + y);
+            piece13.lineTo(240 + x,280 + y);
         }
         else if (onBoard == true) {
 
@@ -463,11 +637,30 @@ public class BlokusBlock {
      */
     public Path block14(int player, boolean onBoard) {
         Path piece14 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece14.
+            x = this.getX(player) + 400;
+            y = this.getY(player) + 320;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece14.moveTo(400 + x,320 + y);
+            piece14.lineTo(400 + x,260 + y);
+            piece14.lineTo(430 + x,260 + y);
+            piece14.lineTo(430 + x,230 + y);
+            piece14.lineTo(490 + x,230 + y);
+            piece14.lineTo(490 + x,260 + y);
+            piece14.lineTo(460 + x,260 + y);
+            piece14.lineTo(460 + x,290 + y);
+            piece14.lineTo(430 + x,290 + y);
+            piece14.lineTo(430 + x,320 + y);
+            piece14.lineTo(400 + x,320 + y);
         }
         else if (onBoard == true) {
 
@@ -486,11 +679,30 @@ public class BlokusBlock {
      */
     public Path block15(int player, boolean onBoard) {
         Path piece15 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece15.
+            x = this.getX(player) + 500;
+            y = this.getY(player) + 290;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece15.moveTo(500 + x,290 + y);
+            piece15.lineTo(530 + x,290 + y);
+            piece15.lineTo(530 + x,230 + y);
+            piece15.lineTo(560 + x,230 + y);
+            piece15.lineTo(560 + x,260 + y);
+            piece15.lineTo(590 + x,260 + y);
+            piece15.lineTo(590 + x,290 + y);
+            piece15.lineTo(560 + x,290 + y);
+            piece15.lineTo(560 + x,320 + y);
+            piece15.lineTo(500 + x,320 + y);
+            piece15.lineTo(500 + x,290 + y);
         }
         else if (onBoard == true) {
 
@@ -509,11 +721,28 @@ public class BlokusBlock {
      */
     public Path block16(int player, boolean onBoard) {
         Path piece16 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece16.
+            x = this.getX(player) + 40;
+            y = this.getY(player) + 320;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece16.moveTo(40 + x,320 + y);
+            piece16.lineTo(40 + x,410 + y);
+            piece16.lineTo(100 + x,410 + y);
+            piece16.lineTo(100 + x,380 + y);
+            piece16.lineTo(70 + x,380 + y);
+            piece16.lineTo(70 + x,350 + y);
+            piece16.lineTo(100 + x,350 + y);
+            piece16.lineTo(100 + x,320 + y);
+            piece16.lineTo(40 + x,320 + y);
         }
         else if (onBoard == true) {
 
@@ -532,11 +761,28 @@ public class BlokusBlock {
      */
     public Path block17(int player, boolean onBoard) {
         Path piece17 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece17.
+            x = this.getX(player) + 140;
+            y = this.getY(player) + 350;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece17.moveTo(140 + x,350 + y);
+            piece17.lineTo(200 + x,350 + y);
+            piece17.lineTo(200 + x,320 + y);
+            piece17.lineTo(230 + x,320 + y);
+            piece17.lineTo(230 + x,410 + y);
+            piece17.lineTo(200 + x,410 + y);
+            piece17.lineTo(200 + x,380 + y);
+            piece17.lineTo(140 + x,380 + y);
+            piece17.lineTo(140 + x,350 + y);
         }
         else if (onBoard == true) {
 
@@ -555,11 +801,26 @@ public class BlokusBlock {
      */
     public Path block18(int player, boolean onBoard) {
         Path piece18 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece18.
+            x = this.getX(player) + 270;
+            y = this.getY(player) + 320;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece18.moveTo(x, y);
+            piece18.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, y);
+            piece18.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, (DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece18.lineTo((DrawBoard.GRIDBOX_SIZE * 2) + x, (DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece18.lineTo((DrawBoard.GRIDBOX_SIZE * 2) + x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece18.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece18.lineTo(x, y);
         }
         else if (onBoard == true) {
 
@@ -578,11 +839,24 @@ public class BlokusBlock {
      */
     public Path block19(int player, boolean onBoard) {
         Path piece19 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece19.
+            x = this.getX(player) + 300;
+            y = this.getY(player) + 320;
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece19.moveTo(x, y);
+            piece19.lineTo((DrawBoard.GRIDBOX_SIZE * 5) + x, y);
+            piece19.lineTo((DrawBoard.GRIDBOX_SIZE * 5) + x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece19.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece19.lineTo(x, y);
         }
         else if (onBoard == true) {
 
@@ -601,11 +875,24 @@ public class BlokusBlock {
      */
     public Path block20(int player, boolean onBoard) {
         Path piece20 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
 
         if (onBoard == false) {
-            //piece20.
+            x = this.getX(player);
+            y = this.getY(player);
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
+
+        if (onBoard == false) {
+            piece20.moveTo(x, y);
+            piece20.lineTo((DrawBoard.GRIDBOX_SIZE * 4) + x, y);
+            piece20.lineTo((DrawBoard.GRIDBOX_SIZE * 4) + x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece20.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
+            piece20.lineTo(x, y);
         }
         else if (onBoard == true) {
 
@@ -624,8 +911,17 @@ public class BlokusBlock {
      */
     public Path block21(int player, boolean onBoard) {
         Path piece21 = new Path();
-        int x = this.getX(player);
-        int y = this.getY(player);
+        int x;
+        int y;
+
+        if (onBoard == false) {
+            x = this.getX(player);
+            y = this.getY(player);
+        }
+        else {
+            x = 0;
+            y = 0;
+        }
 
         if (onBoard == false) {
             //piece21.

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 
+import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
 
@@ -39,6 +40,7 @@ public class DrawBoard extends FlashSurfaceView {
     Paint textPaint = new Paint();
 
     protected BlokusGameState blokusState;
+    private BlokusBlock pieces = new BlokusBlock();
 
     /**
      * DrawBoard
@@ -132,835 +134,494 @@ public class DrawBoard extends FlashSurfaceView {
         this.drawGrid(c);
 
         //Top left box
-        c.drawRect(LEFT_BOXES, TOP_BOXES, LEFT_BOXES + PBOX_WIDTH, TOP_BOXES + PBOX_HEIGHT, gridPaint);
+        c.drawRect(LEFT_BOXES, TOP_BOXES, LEFT_BOXES + PBOX_WIDTH,
+                TOP_BOXES + PBOX_HEIGHT, gridPaint);
         //Bottom left box
-        c.drawRect(LEFT_BOXES, BOTTOM_BOXES, LEFT_BOXES + PBOX_WIDTH, BOTTOM_BOXES + PBOX_HEIGHT, gridPaint);
+        c.drawRect(LEFT_BOXES, BOTTOM_BOXES, LEFT_BOXES + PBOX_WIDTH,
+                BOTTOM_BOXES + PBOX_HEIGHT, gridPaint);
         //Top right box
-        c.drawRect(RIGHT_BOXES, TOP_BOXES, RIGHT_BOXES + PBOX_WIDTH, TOP_BOXES + PBOX_HEIGHT, gridPaint);
+        c.drawRect(RIGHT_BOXES, TOP_BOXES, RIGHT_BOXES + PBOX_WIDTH,
+                TOP_BOXES + PBOX_HEIGHT, gridPaint);
         //Bottom right box
-        c.drawRect(RIGHT_BOXES, BOTTOM_BOXES, RIGHT_BOXES + PBOX_WIDTH, BOTTOM_BOXES + PBOX_HEIGHT, gridPaint);
+        c.drawRect(RIGHT_BOXES, BOTTOM_BOXES, RIGHT_BOXES + PBOX_WIDTH,
+                BOTTOM_BOXES + PBOX_HEIGHT, gridPaint);
 
-        //Yellow - Four block piece (Bottom Left Corner) - First Piece
-        Path piecePath = new Path();
-        piecePath.reset();
-        piecePath.moveTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 17), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 18));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 20), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 18));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 20), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 20));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 19), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 20));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 19), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 19));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 17), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 19));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 17), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 18));
-        c.drawPath(piecePath, yellow);
+        /** PLAYER ONE BOX -- RED */
+        //Red 4 piece - 1st piece
+        c.drawPath(pieces.block4(1, false, 0, 0), red);
 
-        //Yellow - Five block piece (Upper Left from first piece)
-        c.drawRect(BOARD_START_WIDTH + (GRIDBOX_SIZE * 16), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 13),
-                BOARD_START_WIDTH + (GRIDBOX_SIZE * 17), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 18), yellow);
+        //Red 4 piece - 2nd piece
+        c.drawPath(pieces.block4(1, false, 0, 1), red);
 
-        //Yellow - Four block piece (Left from first piece)
-        c.drawRect(BOARD_START_WIDTH + (GRIDBOX_SIZE * 12), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 18),
-                BOARD_START_WIDTH + (GRIDBOX_SIZE * 16), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 19), yellow);
+        //Red 4 piece - 3rd piece
+        c.drawPath(pieces.block4(1, false, 0, 2), red);
+
+        //Red 4 piece - 4th piece
+        c.drawPath(pieces.block4(1, false, 0, 3), red);
+
+        //Red 4 piece - 5th piece
+        c.drawPath(pieces.block4(1, false, 0, 4), red);
+
+        //Red 4 piece - 6th piece
+        c.drawPath(pieces.block4(1, false, 0, 5), red);
+
+        //Red 4 piece - 7th piece
+        c.drawPath(pieces.block4(1, false, 1, 0), red);
+
+        //Red 4 piece - 8th piece
+        c.drawPath(pieces.block4(1, false, 1, 1), red);
+
+        //Red 4 piece - 9th piece
+        c.drawPath(pieces.block4(1, false, 1, 2), red);
+
+        //Red 4 piece - 10th piece
+        c.drawPath(pieces.block4(1, false, 1, 3), red);
+
+        //Red 4 piece - 11th piece
+        c.drawPath(pieces.block4(1, false, 1, 4), red);
+
+        //Red 4 piece - 12th piece
+        c.drawPath(pieces.block4(1, false, 1, 5), red);
+
+        //Red 4 piece - 13th piece
+        c.drawPath(pieces.block4(1, false, 2, 0), red);
+
+        //Red 4 piece - 14th piece
+        c.drawPath(pieces.block4(1, false, 2, 1), red);
+
+        //Red 4 piece - 15th piece
+        c.drawPath(pieces.block4(1, false, 2, 2), red);
+
+        //Red 4 piece - 16th piece
+        c.drawPath(pieces.block4(1, false, 2, 3), red);
+
+        //Red 4 piece - 17th piece
+        c.drawPath(pieces.block4(1, false, 2, 4), red);
+
+        //Red 4 piece - 18th piece
+        c.drawPath(pieces.block4(1, false, 2, 5), red);
+
+        //Red 4 piece - 19th piece
+        c.drawPath(pieces.block4(1, false, 3, 0), red);
+
+        //Red 4 piece - 20st piece
+        c.drawPath(pieces.block4(1, false, 3, 1), red);
+
+        //Red 4 piece - 21st piece
+        c.drawPath(pieces.block4(1, false, 3, 2), red);
 
 
-        //Red - Four block piece
-        piecePath.reset();
-        piecePath.moveTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 5), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 1));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 8), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 1));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 8), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 3));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 7), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 3));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 7), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 2));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 5), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 2));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 5), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 1));
-        c.drawPath(piecePath, red);
-        piecePath.reset();
+        /** PLAYER ONE BOX -- BLUE */
+        //Blue 4 piece - 1st piece
+        c.drawPath(pieces.block4(2, false, 0, 0), blue);
 
-        //Red - Five block piece
-        c.drawRect(BOARD_START_WIDTH, BOARD_START_HEIGHT, BOARD_START_WIDTH + (GRIDBOX_SIZE * 5),
-                BOARD_START_HEIGHT + GRIDBOX_SIZE, red);
+        //Blue 4 piece - 2nd piece
+        c.drawPath(pieces.block4(2, false, 0, 1), blue);
 
-        //Red - Four block piece
-        c.drawRect(BOARD_START_WIDTH + (GRIDBOX_SIZE * 8), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 3),
-                BOARD_START_WIDTH + (GRIDBOX_SIZE * 9),
-                BOARD_START_HEIGHT + (GRIDBOX_SIZE * 3) + (GRIDBOX_SIZE * 4), red);
+        //Blue 4 piece - 3rd piece
+        c.drawPath(pieces.block4(2, false, 0, 2), blue);
+
+        //Blue 4 piece - 4th piece
+        c.drawPath(pieces.block4(2, false, 0, 3), blue);
+
+        //Blue 4 piece - 5th piece
+        c.drawPath(pieces.block4(2, false, 0, 4), blue);
+
+        //Blue 4 piece - 6th piece
+        c.drawPath(pieces.block4(2, false, 0, 5), blue);
+
+        //Blue 4 piece - 7th piece
+        c.drawPath(pieces.block4(2, false, 1, 0), blue);
+
+        //Blue 4 piece - 8th piece
+        c.drawPath(pieces.block4(2, false, 1, 1), blue);
+
+        //Blue 4 piece - 9th piece
+        c.drawPath(pieces.block4(2, false, 1, 2), blue);
+
+        //Blue 4 piece - 10th piece
+        c.drawPath(pieces.block4(2, false, 1, 3), blue);
+
+        //Blue 4 piece - 11th piece
+        c.drawPath(pieces.block4(2, false, 1, 4), blue);
+
+        //Blue 4 piece - 12th piece
+        c.drawPath(pieces.block4(2, false, 1, 5), blue);
+
+        //Blue 4 piece - 13th piece
+        c.drawPath(pieces.block4(2, false, 2, 0), blue);
+
+        //Blue 4 piece - 14th piece
+        c.drawPath(pieces.block4(2, false, 2, 1), blue);
+
+        //Blue 4 piece - 15th piece
+        c.drawPath(pieces.block4(2, false, 2, 2), blue);
+
+        //Blue 4 piece - 16th piece
+        c.drawPath(pieces.block4(2, false, 2, 3), blue);
+
+        //Blue 4 piece - 17th piece
+        c.drawPath(pieces.block4(2, false, 2, 4), blue);
+
+        //Blue 4 piece - 18th piece
+        c.drawPath(pieces.block4(2, false, 2, 5), blue);
+
+        //Blue 4 piece - 19th piece
+        c.drawPath(pieces.block4(2, false, 3, 0), blue);
+
+        //Blue 4 piece - 20st piece
+        c.drawPath(pieces.block4(2, false, 3, 1), blue);
+
+        //Blue 4 piece - 21st piece
+        c.drawPath(pieces.block4(2, false, 3, 2), blue);
 
 
-        //Green - 5 block piece
-        c.drawRect(BOARD_START_WIDTH + (GRIDBOX_SIZE * 19), BOARD_START_HEIGHT,
-                BOARD_START_WIDTH + (GRIDBOX_SIZE * 20),
-                BOARD_START_HEIGHT + (GRIDBOX_SIZE * 5), green);
+        /** PLAYER ONE BOX -- GREEN */
+        //Green 4 piece - 1st piece
+        c.drawPath(pieces.block4(3, false, 0, 0), green);
 
-        //Green - 4 block piece
-        c.drawRect(BOARD_START_WIDTH + (GRIDBOX_SIZE * 18), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 5),
-                BOARD_START_WIDTH + (GRIDBOX_SIZE * 19),
-                BOARD_START_HEIGHT + (GRIDBOX_SIZE * 5) + (GRIDBOX_SIZE * 4), green);
+        //Green 4 piece - 2nd piece
+        c.drawPath(pieces.block4(3, false, 0, 1), green);
 
-        //Green - 4 block piece
-        piecePath.reset();
-        piecePath.moveTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 15), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 9));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 18), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 9));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 18), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 11));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 17), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 11));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 17), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 10));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 15), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 10));
-        piecePath.lineTo(BOARD_START_WIDTH + (GRIDBOX_SIZE * 15), BOARD_START_HEIGHT + (GRIDBOX_SIZE * 9));
-        c.drawPath(piecePath, green);
+        //Green 4 piece - 3rd piece
+        c.drawPath(pieces.block4(3, false, 0, 2), green);
+
+        //Green 4 piece - 4th piece
+        c.drawPath(pieces.block4(3, false, 0, 3), green);
+
+        //Green 4 piece - 5th piece
+        c.drawPath(pieces.block4(3, false, 0, 4), green);
+
+        //Green 4 piece - 6th piece
+        c.drawPath(pieces.block4(3, false, 0, 5), green);
+
+        //Green 4 piece - 7th piece
+        c.drawPath(pieces.block4(3, false, 1, 0), green);
+
+        //Green 4 piece - 8th piece
+        c.drawPath(pieces.block4(3, false, 1, 1), green);
+
+        //Green 4 piece - 9th piece
+        c.drawPath(pieces.block4(3, false, 1, 2), green);
+
+        //Green 4 piece - 10th piece
+        c.drawPath(pieces.block4(3, false, 1, 3), green);
+
+        //Green 4 piece - 11th piece
+        c.drawPath(pieces.block4(3, false, 1, 4), green);
+
+        //Green 4 piece - 12th piece
+        c.drawPath(pieces.block4(3, false, 1, 5), green);
+
+        //Green 4 piece - 13th piece
+        c.drawPath(pieces.block4(3, false, 2, 0), green);
+
+        //Green 4 piece - 14th piece
+        c.drawPath(pieces.block4(3, false, 2, 1), green);
+
+        //Green 4 piece - 15th piece
+        c.drawPath(pieces.block4(3, false, 2, 2), green);
+
+        //Green 4 piece - 16th piece
+        c.drawPath(pieces.block4(3, false, 2, 3), green);
+
+        //Green 4 piece - 17th piece
+        c.drawPath(pieces.block4(3, false, 2, 4), green);
+
+        //Green 4 piece - 18th piece
+        c.drawPath(pieces.block4(3, false, 2, 5), green);
+
+        //Green 4 piece - 19th piece
+        c.drawPath(pieces.block4(3, false, 3, 0), green);
+
+        //Green 4 piece - 20st piece
+        c.drawPath(pieces.block4(3, false, 3, 1), green);
+
+        //Green 4 piece - 21st piece
+        c.drawPath(pieces.block4(3, false, 3, 2), green);
 
 
-        //Blue - 4 block pieces
-        c.drawRect(BOARD_START_WIDTH, BOARD_START_HEIGHT + (GRIDBOX_SIZE * 16),
-                BOARD_START_WIDTH + GRIDBOX_SIZE,
-                BOARD_START_HEIGHT + (GRIDBOX_SIZE * 16) + (GRIDBOX_SIZE * 4), blue);
+        /** PLAYER ONE BOX -- Yellow */
+        //Yellow 4 piece - 1st piece
+        c.drawPath(pieces.block4(4, false, 0, 0), yellow);
 
-        //Blue - 5 block pieces
-        c.drawRect(BOARD_START_WIDTH + GRIDBOX_SIZE, BOARD_START_HEIGHT + (GRIDBOX_SIZE * 15),
-                BOARD_START_WIDTH + GRIDBOX_SIZE + (GRIDBOX_SIZE * 4),
-                BOARD_START_HEIGHT + (GRIDBOX_SIZE * 16), blue);
+        //Yellow 4 piece - 2nd piece
+        c.drawPath(pieces.block4(4, false, 0, 1), yellow);
+
+        //Yellow 4 piece - 3rd piece
+        c.drawPath(pieces.block4(4, false, 0, 2), yellow);
+
+        //Yellow 4 piece - 4th piece
+        c.drawPath(pieces.block4(4, false, 0, 3), yellow);
+
+        //Yellow 4 piece - 5th piece
+        c.drawPath(pieces.block4(4, false, 0, 4), yellow);
+
+        //Yellow 4 piece - 6th piece
+        c.drawPath(pieces.block4(4, false, 0, 5), yellow);
+
+        //Yellow 4 piece - 7th piece
+        c.drawPath(pieces.block4(4, false, 1, 0), yellow);
+
+        //Yellow 4 piece - 8th piece
+        c.drawPath(pieces.block4(4, false, 1, 1), yellow);
+
+        //Yellow 4 piece - 9th piece
+        c.drawPath(pieces.block4(4, false, 1, 2), yellow);
+
+        //Yellow 4 piece - 10th piece
+        c.drawPath(pieces.block4(4, false, 1, 3), yellow);
+
+        //Yellow 4 piece - 11th piece
+        c.drawPath(pieces.block4(4, false, 1, 4), yellow);
+
+        //Yellow 4 piece - 12th piece
+        c.drawPath(pieces.block4(4, false, 1, 5), yellow);
+
+        //Yellow 4 piece - 13th piece
+        c.drawPath(pieces.block4(4, false, 2, 0), yellow);
+
+        //Yellow 4 piece - 14th piece
+        c.drawPath(pieces.block4(4, false, 2, 1), yellow);
+
+        //Yellow 4 piece - 15th piece
+        c.drawPath(pieces.block4(4, false, 2, 2), yellow);
+
+        //Yellow 4 piece - 16th piece
+        c.drawPath(pieces.block4(4, false, 2, 3), yellow);
+
+        //Yellow 4 piece - 17th piece
+        c.drawPath(pieces.block4(4, false, 2, 4), yellow);
+
+        //Yellow 4 piece - 18th piece
+        c.drawPath(pieces.block4(4, false, 2, 5), yellow);
+
+        //Yellow 4 piece - 19th piece
+        c.drawPath(pieces.block4(4, false, 3, 0), yellow);
+
+        //Yellow 4 piece - 20st piece
+        c.drawPath(pieces.block4(4, false, 3, 1), yellow);
+
+        //Yellow 4 piece - 21st piece
+        c.drawPath(pieces.block4(4, false, 3, 2), yellow);
 
 
         /**
-         * PLAYER ONE BOX -- RED
-         */
-        //Red 1 piece (1st row 1st piece)
-        c.drawRect(10 + LEFT_BOXES, 30 + TOP_BOXES, 40 + LEFT_BOXES, 60 + TOP_BOXES, red);
+         * USED LATER FOR FINAL GAME
+         *
+        //PLAYER ONE BOX -- RED
+        //Red 1 piece (1st row 1st piece) - 1st piece
+        c.drawPath(pieces.block1(1, false), red);
 
-        //Red 3 piece (1st row 2nd piece)
-        c.drawRect(60 + LEFT_BOXES, 30 + TOP_BOXES, 150 + LEFT_BOXES, 60 + TOP_BOXES, red);
+        //Red 3 piece (1st row 2nd piece) - 2nd piece
+        c.drawPath(pieces.block2(1, false), red);
 
-        //Red 5 piece (1st row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(170 + LEFT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(260 + LEFT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(260 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,30 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red 5 piece (1st row 3rd piece) - 3rd piece
+        c.drawPath(pieces.block3(1, false), red);
 
-        //Red 4 piece (1st row 4rd piece)
-        c.drawRect(300 + LEFT_BOXES, 30 + TOP_BOXES, 360 + LEFT_BOXES, 90 + TOP_BOXES, red);
+        //Red 4 piece (1st row 4rd piece) - 4th piece
+        c.drawPath(pieces.block4(1, false), red);
 
-        //Red 3 piece (1st row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(380 + LEFT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(440 + LEFT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(440 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(410 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(410 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(380 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(380 + LEFT_BOXES,30 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red 3 piece (1st row 5th piece) - 5th piece
+        c.drawPath(pieces.block5(1, false), red);
 
-        //Red five pieces (1st row 6th piece)
-        piecePath.reset();
-        piecePath.moveTo(490 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(580 + LEFT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(580 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,120 + TOP_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,120 + TOP_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,60 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red five pieces (1st row 6th piece) - 6th piece
+        c.drawPath(pieces.block6(1, false), red);
 
         //Red two piece (2nd row 1st piece) - 7th piece
-        c.drawRect(10 + LEFT_BOXES,100 + TOP_BOXES,70 + LEFT_BOXES,130 + TOP_BOXES, red);
+        c.drawPath(pieces.block7(1, false), red);
 
         //Red four piece (2nd row 2nd piece) - 8th piece
-        piecePath.reset();
-        piecePath.moveTo(80 + LEFT_BOXES,100 + TOP_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,100 + TOP_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(110 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(110 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(80 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(80 + LEFT_BOXES,100 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        c.drawPath(pieces.block8(1, false), red);
 
         //Red four piece (2nd row 3rd piece) - 9th piece
-        piecePath.reset();
-        piecePath.moveTo(180 + LEFT_BOXES,200 + TOP_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,200 + TOP_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,140 + TOP_BOXES);
-        piecePath.lineTo(210 + LEFT_BOXES,140 + TOP_BOXES);
-        piecePath.lineTo(210 + LEFT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(180 + LEFT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(180 + LEFT_BOXES,200 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        c.drawPath(pieces.block9(1, false), red);
 
         //Red five piece (2nd row 4th piece) - 10th piece
-        piecePath.reset();
-        piecePath.moveTo(310 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(370 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(370 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(340 + LEFT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(340 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(310 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(310 + LEFT_BOXES,130 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        c.drawPath(pieces.block10(1, false), red);
 
-        //Red five piece (2nd row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(450 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(480 + LEFT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(480 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(540 + LEFT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(540 + LEFT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(510 + LEFT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(510 + LEFT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(450 + LEFT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(450 + LEFT_BOXES,130 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red five piece (2nd row 5th piece) - 11th piece
+        c.drawPath(pieces.block11(1, false), red);
 
-        //Red five piece (3rd row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(10 + LEFT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(130 + LEFT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(130 + LEFT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(10 + LEFT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(10 + LEFT_BOXES,220 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red five piece (3rd row 1st piece) - 12th piece
+        c.drawPath(pieces.block12(1, false), red);
 
-        //Red five piece (3rd row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(240 + LEFT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(300 + LEFT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(300 + LEFT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(360 + LEFT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(360 + LEFT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,280 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red five piece (3rd row 2nd piece) - 13th piece
+        c.drawPath(pieces.block13(1, false), red);
 
-        //Red five piece (3rd row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(400 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(400 + LEFT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(460 + LEFT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(460 + LEFT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(400 + LEFT_BOXES,320 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red five piece (3rd row 3rd piece) - 14th piece
+        c.drawPath(pieces.block14(1, false), red);
 
-        //Red five piece (3rd row 4th piece)
-        piecePath.reset();
-        piecePath.moveTo(500 + LEFT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(530 + LEFT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(530 + LEFT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(590 + LEFT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(590 + LEFT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(500 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(500 + LEFT_BOXES,290 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red five piece (3rd row 4th piece) - 15th piece
+        c.drawPath(pieces.block15(1, false), red);
 
-        //Red five piece (4th row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(40 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(40 + LEFT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(70 + LEFT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(70 + LEFT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(40 + LEFT_BOXES,320 + TOP_BOXES);
-        c.drawPath(piecePath, red);
+        //Red five piece (4th row 1st piece) - 16th piece
+        c.drawPath(pieces.block16(1, false), red);
 
-        //Red five piece (4th row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(140 + LEFT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(230 + LEFT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(230 + LEFT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,350 + TOP_BOXES);
-        c.drawPath(piecePath, red);
-
-        /**
-         * PLAYER TWO BOX -- BLUE
-         */
-        //Blue 1 piece (1st row 1st piece)
-        c.drawRect(10 + LEFT_BOXES, 30 + BOTTOM_BOXES, 40 + LEFT_BOXES, 60 + BOTTOM_BOXES, blue);
-
-        //Blue 3 piece (1st row 2nd piece)
-        c.drawRect(60 + LEFT_BOXES, 30 + BOTTOM_BOXES, 150 + LEFT_BOXES, 60 + BOTTOM_BOXES, blue);
-
-        //Blue 5 piece (1st row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(170 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(260 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(260 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue 4 piece (1st row 4rd piece)
-        c.drawRect(300 + LEFT_BOXES, 30 + BOTTOM_BOXES, 360 + LEFT_BOXES, 90 + BOTTOM_BOXES, blue);
-
-        //Blue 3 piece (1st row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(380 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(440 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(440 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(410 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(410 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(380 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(380 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five pieces (1st row 6th piece)
-        piecePath.reset();
-        piecePath.moveTo(490 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(580 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(580 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + LEFT_BOXES,120 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,120 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,60 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue two piece (2nd row 1st piece)
-        c.drawRect(10 + LEFT_BOXES,100 + BOTTOM_BOXES,70 + LEFT_BOXES,130 + BOTTOM_BOXES, blue);
-
-        //Blue four piece (2nd row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(80 + LEFT_BOXES,100 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,100 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(110 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(110 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(80 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(80 + LEFT_BOXES,100 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue four piece (2nd row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(180 + LEFT_BOXES,200 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,200 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,140 + BOTTOM_BOXES);
-        piecePath.lineTo(210 + LEFT_BOXES,140 + BOTTOM_BOXES);
-        piecePath.lineTo(210 + LEFT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(180 + LEFT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(180 + LEFT_BOXES,200 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (2nd row 4th piece)
-        piecePath.reset();
-        piecePath.moveTo(310 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(370 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(370 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(340 + LEFT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(340 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(310 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(310 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (2nd row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(450 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(480 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(480 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(540 + LEFT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(540 + LEFT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(510 + LEFT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(510 + LEFT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(450 + LEFT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(450 + LEFT_BOXES,130 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (3rd row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(10 + LEFT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(130 + LEFT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(130 + LEFT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(10 + LEFT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(10 + LEFT_BOXES,220 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (3rd row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(240 + LEFT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + LEFT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(300 + LEFT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(300 + LEFT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(360 + LEFT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(360 + LEFT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + LEFT_BOXES,280 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (3rd row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(400 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(400 + LEFT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + LEFT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(460 + LEFT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(460 + LEFT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(400 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (3rd row 4th piece)
-        piecePath.reset();
-        piecePath.moveTo(500 + LEFT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(530 + LEFT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(530 + LEFT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(590 + LEFT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(590 + LEFT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(500 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(500 + LEFT_BOXES,290 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (4th row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(40 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(40 + LEFT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(70 + LEFT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(70 + LEFT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(40 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        //Blue five piece (4th row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(140 + LEFT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(230 + LEFT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(230 + LEFT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + LEFT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + LEFT_BOXES,350 + BOTTOM_BOXES);
-        c.drawPath(piecePath, blue);
-
-        /**
-         * PLAYER THREE BOX -- GREEN
-         */
-        //Green 1 piece (1st row 1st piece)
-        c.drawRect(10 + RIGHT_BOXES, 30 + TOP_BOXES, 40 + RIGHT_BOXES, 60 + TOP_BOXES, green);
-
-        //Green 3 piece (1st row 2nd piece)
-        c.drawRect(60 + RIGHT_BOXES, 30 + TOP_BOXES, 150 + RIGHT_BOXES, 60 + TOP_BOXES, green);
-
-        //Green 5 piece (1st row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(170 + RIGHT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(260 + RIGHT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(260 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,30 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green 4 piece (1st row 4rd piece)
-        c.drawRect(300 + RIGHT_BOXES, 30 + TOP_BOXES, 360 + RIGHT_BOXES, 90 + TOP_BOXES, green);
-
-        //Green 3 piece (1st row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(380 + RIGHT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(440 + RIGHT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(440 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(410 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(410 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(380 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(380 + RIGHT_BOXES,30 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five pieces (1st row 6th piece)
-        piecePath.reset();
-        piecePath.moveTo(490 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,30 + TOP_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(580 + RIGHT_BOXES,60 + TOP_BOXES);
-        piecePath.lineTo(580 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,120 + TOP_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,120 + TOP_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,90 + TOP_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,60 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green two piece (2nd row 1st piece)
-        c.drawRect(10 + RIGHT_BOXES,100 + TOP_BOXES,70 + RIGHT_BOXES,130 + TOP_BOXES, green);
-
-        //Green four piece (2nd row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(80 + RIGHT_BOXES,100 + TOP_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,100 + TOP_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(110 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(110 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(80 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(80 + RIGHT_BOXES,100 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green four piece (2nd row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(180 + RIGHT_BOXES,200 + TOP_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,200 + TOP_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,140 + TOP_BOXES);
-        piecePath.lineTo(210 + RIGHT_BOXES,140 + TOP_BOXES);
-        piecePath.lineTo(210 + RIGHT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(180 + RIGHT_BOXES,170 + TOP_BOXES);
-        piecePath.lineTo(180 + RIGHT_BOXES,200 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (2nd row 4th piece)
-        piecePath.reset();
-        piecePath.moveTo(310 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(370 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(370 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(340 + RIGHT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(340 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(310 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(310 + RIGHT_BOXES,130 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (2nd row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(450 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(480 + RIGHT_BOXES,130 + TOP_BOXES);
-        piecePath.lineTo(480 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(540 + RIGHT_BOXES,160 + TOP_BOXES);
-        piecePath.lineTo(540 + RIGHT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(510 + RIGHT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(510 + RIGHT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(450 + RIGHT_BOXES,190 + TOP_BOXES);
-        piecePath.lineTo(450 + RIGHT_BOXES,130 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (3rd row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(10 + RIGHT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(130 + RIGHT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(130 + RIGHT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(10 + RIGHT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(10 + RIGHT_BOXES,220 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (3rd row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(240 + RIGHT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(300 + RIGHT_BOXES,220 + TOP_BOXES);
-        piecePath.lineTo(300 + RIGHT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(360 + RIGHT_BOXES,250 + TOP_BOXES);
-        piecePath.lineTo(360 + RIGHT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,280 + TOP_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,280 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (3rd row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(400 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(400 + RIGHT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(460 + RIGHT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(460 + RIGHT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(400 + RIGHT_BOXES,320 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (3rd row 4th piece)
-        piecePath.reset();
-        piecePath.moveTo(500 + RIGHT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(530 + RIGHT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(530 + RIGHT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,230 + TOP_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(590 + RIGHT_BOXES,260 + TOP_BOXES);
-        piecePath.lineTo(590 + RIGHT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,290 + TOP_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(500 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(500 + RIGHT_BOXES,290 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (4th row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(40 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(40 + RIGHT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(70 + RIGHT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(70 + RIGHT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(40 + RIGHT_BOXES,320 + TOP_BOXES);
-        c.drawPath(piecePath, green);
-
-        //Green five piece (4th row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(140 + RIGHT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,350 + TOP_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(230 + RIGHT_BOXES,320 + TOP_BOXES);
-        piecePath.lineTo(230 + RIGHT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,410 + TOP_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,380 + TOP_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,350 + TOP_BOXES);
-        c.drawPath(piecePath, green);
+        //Red five piece (4th row 2nd piece) - 17th piece
+        c.drawPath(pieces.block18(1, false), red);
 
 
-        /**
-         * PLAYER FOUR BOX -- YELLOW
-         */
-        //Yellow 1 piece (1st row 1st piece)
-        c.drawRect(10 + RIGHT_BOXES, 30 + BOTTOM_BOXES, 40 + RIGHT_BOXES, 60 + BOTTOM_BOXES, yellow);
+        //PLAYER TWO BOX -- BLUE
+        //Blue 1 piece (1st row 1st piece) - 1st piece
+        c.drawPath(pieces.block1(2, false), blue);
 
-        //Yellow 3 piece (1st row 2nd piece)
-        c.drawRect(60 + RIGHT_BOXES, 30 + BOTTOM_BOXES, 150 + RIGHT_BOXES, 60 + BOTTOM_BOXES, yellow);
+        //Blue 3 piece (1st row 2nd piece) - 2nd piece
+        c.drawPath(pieces.block2(2, false), blue);
 
-        //Yellow 5 piece (1st row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(170 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(260 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(260 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue 5 piece (1st row 3rd piece) - 3rd piece
+        c.drawPath(pieces.block3(2, false), blue);
 
-        //Yellow 4 piece (1st row 4rd piece)
-        c.drawRect(300 + RIGHT_BOXES, 30 + BOTTOM_BOXES, 360 + RIGHT_BOXES, 90 + BOTTOM_BOXES, yellow);
+        //Blue 4 piece (1st row 4rd piece) - 4th piece
+        c.drawPath(pieces.block4(2, false), blue);
 
-        //Yellow 3 piece (1st row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(380 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(440 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(440 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(410 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(410 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(380 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(380 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue 3 piece (1st row 5th piece) - 5th piece
+        c.drawPath(pieces.block5(2, false), blue);
 
-        //Yellow five pieces (1st row 6th piece)
-        piecePath.reset();
-        piecePath.moveTo(490 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,30 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(580 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        piecePath.lineTo(580 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(550 + RIGHT_BOXES,120 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,120 + BOTTOM_BOXES);
-        piecePath.lineTo(520 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,90 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,60 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five pieces (1st row 6th piece) - 6th piece
+        c.drawPath(pieces.block6(2, false), blue);
 
-        //Yellow two piece (2nd row 1st piece)
-        c.drawRect(10 + RIGHT_BOXES,100 + BOTTOM_BOXES,70 + RIGHT_BOXES,130 + BOTTOM_BOXES, yellow);
+        //Blue two piece (2nd row 1st piece) - 7th piece
+        c.drawPath(pieces.block7(2, false), blue);
 
-        //Yellow four piece (2nd row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(80 + RIGHT_BOXES,100 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,100 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(170 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(110 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(110 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(80 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(80 + RIGHT_BOXES,100 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue four piece (2nd row 2nd piece) - 8th piece
+        c.drawPath(pieces.block8(2, false), blue);
 
-        //Yellow four piece (2nd row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(180 + RIGHT_BOXES,200 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,200 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,140 + BOTTOM_BOXES);
-        piecePath.lineTo(210 + RIGHT_BOXES,140 + BOTTOM_BOXES);
-        piecePath.lineTo(210 + RIGHT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(180 + RIGHT_BOXES,170 + BOTTOM_BOXES);
-        piecePath.lineTo(180 + RIGHT_BOXES,200 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue four piece (2nd row 3rd piece) - 9th piece
+        c.drawPath(pieces.block9(2, false), blue);
 
-        //Yellow five piece (2nd row 4th piece)
-        piecePath.reset();
-        piecePath.moveTo(310 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(370 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(370 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(340 + RIGHT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(340 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(310 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(310 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (2nd row 4th piece) - 10th piece
+        c.drawPath(pieces.block10(2, false), blue);
 
-        //Yellow five piece (2nd row 5th piece)
-        piecePath.reset();
-        piecePath.moveTo(450 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(480 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        piecePath.lineTo(480 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(540 + RIGHT_BOXES,160 + BOTTOM_BOXES);
-        piecePath.lineTo(540 + RIGHT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(510 + RIGHT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(510 + RIGHT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(450 + RIGHT_BOXES,190 + BOTTOM_BOXES);
-        piecePath.lineTo(450 + RIGHT_BOXES,130 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (2nd row 5th piece) - 11th piece
+        c.drawPath(pieces.block11(2, false), blue);
 
-        //Yellow five piece (3rd row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(10 + RIGHT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(130 + RIGHT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(130 + RIGHT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(10 + RIGHT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(10 + RIGHT_BOXES,220 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (3rd row 1st piece) - 12th piece
+        c.drawPath(pieces.block12(2, false), blue);
 
-        //Yellow five piece (3rd row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(240 + RIGHT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(270 + RIGHT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(300 + RIGHT_BOXES,220 + BOTTOM_BOXES);
-        piecePath.lineTo(300 + RIGHT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(360 + RIGHT_BOXES,250 + BOTTOM_BOXES);
-        piecePath.lineTo(360 + RIGHT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,280 + BOTTOM_BOXES);
-        piecePath.lineTo(240 + RIGHT_BOXES,280 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (3rd row 2nd piece) - 13th piece
+        c.drawPath(pieces.block13(2, false), blue);
 
-        //Yellow five piece (3rd row 3rd piece)
-        piecePath.reset();
-        piecePath.moveTo(400 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(400 + RIGHT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(490 + RIGHT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(460 + RIGHT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(460 + RIGHT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(430 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(400 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (3rd row 3rd piece) - 14th piece
+        c.drawPath(pieces.block14(2, false), blue);
 
-        //Yellow five piece (3rd row 4th piece)
-        piecePath.reset();
-        piecePath.moveTo(500 + RIGHT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(530 + RIGHT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(530 + RIGHT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,230 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(590 + RIGHT_BOXES,260 + BOTTOM_BOXES);
-        piecePath.lineTo(590 + RIGHT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,290 + BOTTOM_BOXES);
-        piecePath.lineTo(560 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(500 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(500 + RIGHT_BOXES,290 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (3rd row 4th piece) - 15th piece
+        c.drawPath(pieces.block15(2, false), blue);
 
-        //Yellow five piece (4th row 1st piece)
-        piecePath.reset();
-        piecePath.moveTo(40 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(40 + RIGHT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(70 + RIGHT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(70 + RIGHT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(100 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(40 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (4th row 1st piece) - 16th piece
+        c.drawPath(pieces.block16(2, false), blue);
 
-        //Yellow five piece (4th row 2nd piece)
-        piecePath.reset();
-        piecePath.moveTo(140 + RIGHT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,350 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(230 + RIGHT_BOXES,320 + BOTTOM_BOXES);
-        piecePath.lineTo(230 + RIGHT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,410 + BOTTOM_BOXES);
-        piecePath.lineTo(200 + RIGHT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,380 + BOTTOM_BOXES);
-        piecePath.lineTo(140 + RIGHT_BOXES,350 + BOTTOM_BOXES);
-        c.drawPath(piecePath, yellow);
+        //Blue five piece (4th row 2nd piece) - 17th piece
+        c.drawPath(pieces.block17(2, false), blue);
 
+
+        //PLAYER THREE BOX -- GREEN
+        //Green 1 piece (1st row 1st piece) - 1st piece
+        c.drawPath(pieces.block1(3, false), green);
+
+        //Green 3 piece (1st row 2nd piece) - 2nd piece
+        c.drawPath(pieces.block2(3, false), green);
+
+        //Green 5 piece (1st row 3rd piece) - 3rd piece
+        c.drawPath(pieces.block3(3, false), green);
+
+        //Green 4 piece (1st row 4rd piece) - 4th piece
+        c.drawPath(pieces.block4(3, false), green);
+
+        //Green 3 piece (1st row 5th piece) - 5th piece
+        c.drawPath(pieces.block5(3, false), green);
+
+        //Green five pieces (1st row 6th piece) - 6th piece
+        c.drawPath(pieces.block6(3, false), green);
+
+        //Green two piece (2nd row 1st piece) - 7th piece
+        c.drawPath(pieces.block7(3, false), green);
+
+        //Green four piece (2nd row 2nd piece) - 8th piece
+        c.drawPath(pieces.block8(3, false), green);
+
+        //Green four piece (2nd row 3rd piece) - 9th piece
+        c.drawPath(pieces.block9(3, false), green);
+
+        //Green five piece (2nd row 4th piece) - 10th piece
+        c.drawPath(pieces.block10(3, false), green);
+
+        //Green five piece (2nd row 5th piece) - 11th piece
+        c.drawPath(pieces.block11(3, false), green);
+
+        //Green five piece (3rd row 1st piece) - 12th piece
+        c.drawPath(pieces.block12(3, false), green);
+
+        //Green five piece (3rd row 2nd piece) - 13th piece
+        c.drawPath(pieces.block13(3, false), green);
+
+        //Green five piece (3rd row 3rd piece) - 14th piece
+        c.drawPath(pieces.block14(3, false), green);
+
+        //Green five piece (3rd row 4th piece) - 15th piece
+        c.drawPath(pieces.block15(3, false), green);
+
+        //Green five piece (4th row 1st piece) - 16th piece
+        c.drawPath(pieces.block16(3, false), green);
+
+        //Green five piece (4th row 2nd piece) - 17th piece
+        c.drawPath(pieces.block17(3, false), green);
+
+
+        //PLAYER FOUR BOX -- YELLOW
+        //Yellow 1 piece (1st row 1st piece) - 1th piece
+        c.drawPath(pieces.block1(4, false), yellow);
+
+        //Yellow 3 piece (1st row 2nd piece) - 2th piece
+        c.drawPath(pieces.block2(4, false), yellow);
+
+        //Yellow 5 piece (1st row 3rd piece) - 3th piece
+        c.drawPath(pieces.block3(4, false), yellow);
+
+        //Yellow 4 piece (1st row 4rd piece) - 4th piece
+        c.drawPath(pieces.block4(4, false), yellow);
+
+        //Yellow 3 piece (1st row 5th piece) - 5th piece
+        c.drawPath(pieces.block5(4, false), yellow);
+
+        //Yellow five pieces (1st row 6th piece) - 6th piece
+        c.drawPath(pieces.block6(4, false), yellow);
+
+        //Yellow two piece (2nd row 1st piece) - 7th piece
+        c.drawPath(pieces.block7(4, false), yellow);
+
+        //Yellow four piece (2nd row 2nd piece) - 8th piece
+        c.drawPath(pieces.block8(4, false), yellow);
+
+        //Yellow four piece (2nd row 3rd piece) - 9th piece
+        c.drawPath(pieces.block9(4, false), yellow);
+
+        //Yellow five piece (2nd row 4th piece) - 10th piece
+        c.drawPath(pieces.block10(4, false), yellow);
+
+        //Yellow five piece (2nd row 5th piece) - 11th piece
+        c.drawPath(pieces.block11(4, false), yellow);
+
+        //Yellow five piece (3rd row 1st piece) - 12th piece
+        c.drawPath(pieces.block12(4, false), yellow);
+
+        //Yellow five piece (3rd row 2nd piece) - 13th piece
+        c.drawPath(pieces.block13(4, false), yellow);
+
+        //Yellow five piece (3rd row 3rd piece) - 14th piece
+        c.drawPath(pieces.block14(4, false), yellow);
+
+        //Yellow five piece (3rd row 4th piece) - 15th piece
+        c.drawPath(pieces.block15(4, false), yellow);
+
+        //Yellow five piece (4th row 1st piece) - 16th piece
+        c.drawPath(pieces.block16(4, false), yellow);
+
+        //Yellow five piece (4th row 2nd piece) - 17th piece
+        c.drawPath(pieces.block17(4, false), yellow);
+        */
+
+        //Player & Score
         this.drawPlayerInfo(c, 10, "Blue");
     } //onDraw
 
