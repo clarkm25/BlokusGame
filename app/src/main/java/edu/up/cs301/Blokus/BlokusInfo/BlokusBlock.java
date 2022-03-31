@@ -1,8 +1,5 @@
 package edu.up.cs301.Blokus.BlokusInfo;
 
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Path;
 
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
@@ -16,13 +13,40 @@ import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 public class BlokusBlock {
     private int type;
     private int blockScore;
+    private int[][] pieceArr;
 
     /** No param ctor */
-    public BlokusBlock() {
-        this.type = -1;
-        this.blockScore = 5;
+    public BlokusBlock()
+    {
+        this.type = 5;
+        this.blockScore = 4;
+        this.pieceArr = new int[5][5];
+        for(int i = 0; i<5; i++)
+        {
+            for(int j = 0; j<5; j++)
+            {
+                this.pieceArr[i][j] = 0;
+            }
+        }
+        this.pieceArr[0][0] = 2;
+        this.pieceArr[0][1] = 1;
+        this.pieceArr[1][0] = 1;
+        this.pieceArr[1][1] = 1;
     }
 
+    public BlokusBlock(BlokusBlock toCopy)
+    {
+        this.type = toCopy.type;
+        this.blockScore = toCopy.blockScore;
+        this.pieceArr = new int[5][5];
+        for(int i = 0; i<5; i++)
+        {
+            for(int j = 0; j<5; j++)
+            {
+                this.pieceArr[i][j] = toCopy.pieceArr[i][j];
+            }
+        }
+    }
     /** Getters of BlokusBlock variables */
     public int getType()
     {
@@ -34,6 +58,11 @@ public class BlokusBlock {
         return this.blockScore;
     }
 
+    public int[][] getPieceArr()
+    {
+        return this.pieceArr;
+    }
+
     /** Setters of BlokusBlock variables */
     public void setType(int toSet)
     {
@@ -43,6 +72,24 @@ public class BlokusBlock {
     public void setBlockScore(int toSet)
     {
         this.blockScore = toSet;
+    }
+
+    public void setPieceArr(int[][] toSet)
+    {
+        if(toSet == null)
+        {
+            return;
+        }
+        else
+        {
+            for(int i = 0; i<5; i++)
+            {
+                for(int j = 0; j<5; j++)
+                {
+                    this.pieceArr[i][j] = toSet[i][j];
+                }
+            }
+        }
     }
 
     /**
@@ -99,26 +146,6 @@ public class BlokusBlock {
         return y;
     } //getY
 
-    public Paint getColor(int player) {
-        Paint playerColor = new Paint();
-
-        if(player == 1) {
-            playerColor.setColor(Color.RED);
-        }
-        else if (player == 2) {
-            playerColor.setColor(Color.BLUE);
-        }
-        else if (player == 3) {
-            playerColor.setColor(Color.GREEN);
-        }
-        else if (player == 4) {
-            playerColor.setColor(Color.YELLOW);
-        }
-        else {
-            playerColor.setColor(Color.BLACK); //set to black if there is no player
-        }
-        return playerColor;
-    }
 
     /**
      * block1
@@ -938,6 +965,15 @@ public class BlokusBlock {
     @Override
     public String toString()
     {
-        return "Type: " + this.type + " Score: " + this.blockScore + "\n";
+        String toReturn = "Type: " + this.type + " Score: " + this.blockScore + "\n";
+        for(int i = 0; i<5; i++)
+        {
+            for(int j = 0; j<5; j++)
+            {
+                toReturn += this.pieceArr[i][j] + " ";
+            }
+            toReturn += "\n";
+        }
+        return toReturn;
     }
 }

@@ -71,14 +71,20 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int x = (int)motionEvent.getX();
         int y = (int)motionEvent.getY();
-        Path selectedPiece;
+        int p1X = 0;
+        int p1Y = 0;
 
         //Player 1's box
         if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 6; j++) {
+                    if((x > (p1X + 10 + (DrawBoard.LEFT_BOXES * j))) && (x < (p1X + 10 + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
+                            (y > (p1Y + 10 + (DrawBoard.TOP_BOXES * j))) && (y < (p1Y + 10 + (DrawBoard.TOP_BOXES * (j + 1))))) {
+                        p1X += 90;
+                        p1Y += 90;
 
+                    }
                 }
             }
         } //Player 2's box

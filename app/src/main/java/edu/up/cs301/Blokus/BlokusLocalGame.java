@@ -96,7 +96,10 @@ public class BlokusLocalGame extends LocalGame {
         else {
             return null;
         }
-        */
+        if (blokusState.getScore(0) > 100) {
+            return "Player 1 has won!";
+        }
+         */
 
         return null;
     } //checkIfGameOver
@@ -112,6 +115,7 @@ public class BlokusLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
+
         return false;
     } //makeMove
 }
