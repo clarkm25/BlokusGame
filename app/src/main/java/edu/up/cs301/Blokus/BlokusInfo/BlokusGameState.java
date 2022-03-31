@@ -413,6 +413,9 @@ public class BlokusGameState extends GameState {
      */
     public BlokusBlock[][] getBlockArray() { return this.blockArray; }
     public tileState[][] getBoard() { return this.board; }
+    public int getPlayerTurn() {
+        return this.playerTurn;
+    }
 
 
     /**

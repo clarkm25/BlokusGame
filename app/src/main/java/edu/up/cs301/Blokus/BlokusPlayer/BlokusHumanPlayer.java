@@ -81,8 +81,8 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                 for (int j = 0; j < 6; j++) {
                     if((x > (p1X + 10 + (DrawBoard.LEFT_BOXES * j))) && (x < (p1X + 10 + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
                             (y > (p1Y + 10 + (DrawBoard.TOP_BOXES * j))) && (y < (p1Y + 10 + (DrawBoard.TOP_BOXES * (j + 1))))) {
-                        p1X += 90;
-                        p1Y += 90;
+                        p1X += 90; //Horizontal space between pieces
+                        p1Y += 90; //Vertical space between pieces
 
                     }
                 }
