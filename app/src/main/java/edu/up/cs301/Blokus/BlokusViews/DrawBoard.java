@@ -86,6 +86,7 @@ public class DrawBoard extends FlashSurfaceView {
      * @param c
      */
     public void drawGrid(Canvas c) {
+        /** OLD DRAW GRID
         for(int i = 0; i < ROWS_AND_COLS; i++) {
             for (int j = 0; j < ROWS_AND_COLS; j++) {
                 c.drawRect((GRIDBOX_SIZE * j) + BOARD_START_WIDTH, (GRIDBOX_SIZE * i) + BOARD_START_HEIGHT,
@@ -93,6 +94,9 @@ public class DrawBoard extends FlashSurfaceView {
                         ((GRIDBOX_SIZE * i) + GRIDBOX_SIZE) + BOARD_START_HEIGHT, gridPaint);
             }
         }
+         */
+        //NEW DRAW GRID (POSSIBLY)
+
     } //drawGrid
 
     /**
@@ -341,7 +345,7 @@ public class DrawBoard extends FlashSurfaceView {
         c.drawPath(pieces.block4(3, false, 3, 2), blue);
 
 
-        /** PLAYER ONE BOX -- Yellow */
+        /** PLAYER ONE BOX -- YELLOW */
         //Yellow 4 piece - 1st piece
         c.drawPath(pieces.block4(4, false, 0, 0), yellow);
 
@@ -622,7 +626,8 @@ public class DrawBoard extends FlashSurfaceView {
         */
 
         //Player & Score
-        this.drawPlayerInfo(c, 10, "Blue");
+        this.drawPlayerInfo(c, blokusState.getPlayerScore(blokusState.getPlayerTurn()),
+                blokusState.getPlayerTurn());
     } //onDraw
 
     /**
@@ -631,15 +636,32 @@ public class DrawBoard extends FlashSurfaceView {
      * Draws player's turn as well as given player's score.
      *
      * @param canvas
-     * @param initPlayerPoints
-     * @param initPlayerTurn
+     * @param playerPoints
+     * @param playerTurn
      */
-    public void drawPlayerInfo(Canvas canvas, int initPlayerPoints, String initPlayerTurn) {
-        String playerTurn = initPlayerTurn;
-        int playerPoints = initPlayerPoints;
+    public void drawPlayerInfo(Canvas canvas, int playerPoints, int playerTurn) {
+        String player = "";
+        int playerScore = 0;
 
-        canvas.drawText("Player Turn: " + playerTurn, 800.0f, 700.0f, textPaint);
-        canvas.drawText(playerTurn + "'s points: " + playerPoints, 800.0f, 750.0f, textPaint);
+        if (playerTurn == 1) {
+            player = "Red";
+        }
+        else if (playerTurn == 2) {
+            player = "Blue";
+        }
+        else if (playerTurn == 3) {
+            player = "Green";
+        }
+        else if (playerTurn == 4) {
+            player = "Yellow";
+        }
+
+        canvas.drawText("Player Turn: " + player, 800.0f, 700.0f, textPaint);
+        canvas.drawText(playerTurn + "'s points: " + playerPoints , 800.0f, 750.0f, textPaint);
 
     }
+
+    //public Path createPiece() {
+
+    //}
 }

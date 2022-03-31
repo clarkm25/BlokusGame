@@ -2,6 +2,7 @@ package edu.up.cs301.Blokus;
 
 import android.util.Log;
 
+import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
@@ -120,6 +121,16 @@ public class BlokusLocalGame extends LocalGame {
      */
     @Override
     protected boolean makeMove(GameAction action) {
+
+        BlokusGameState blokusState = (BlokusGameState) super.state;
+
+        if (action instanceof BlokusSelectAction) {
+            BlokusSelectAction bsa = (BlokusSelectAction) action;
+
+            int piece = bsa.getSelectedPiece();
+        }
+
+        int move = blokusState.getPlayerTurn();
 
         return false;
     } //makeMove
