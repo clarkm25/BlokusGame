@@ -88,7 +88,7 @@ public class BlokusLocalGame extends LocalGame {
     /**
      * checkIfGameOver
      *
-     * Checks if the game is over and returns the winner if it is.
+     * Checks if the game is over and returns the winner if it is
      *
      * @return a string stating who the winner is based on their score
      */

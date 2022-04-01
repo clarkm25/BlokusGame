@@ -5,7 +5,7 @@ import android.graphics.Path;
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 
 /**
- * Class for each of the Blokus block pieces.
+ * Class for each of the Blokus block pieces and their array representations
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
  * @version March 31st 2022

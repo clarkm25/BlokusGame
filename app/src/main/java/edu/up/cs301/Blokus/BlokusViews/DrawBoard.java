@@ -186,6 +186,7 @@ public class DrawBoard extends FlashSurfaceView {
         //Draws grid for game
         this.drawGrid(c);
 
+        /** Player boxes themselves */
         //Top left box
         c.drawRect(LEFT_BOXES, TOP_BOXES, LEFT_BOXES + PBOX_WIDTH,
                 TOP_BOXES + PBOX_HEIGHT, gridPaint);

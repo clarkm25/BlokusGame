@@ -11,7 +11,7 @@ import edu.up.cs301.game.GameFramework.infoMessage.GameState;
  */
 public class BlokusGameState extends GameState {
 
-    /** Declaration of an enum type representing the states a certain tile can have*/
+    /** Declaration of an enum type representing the states a certain tile can have */
     public enum tileState{
         EMPTY, LEGAL, RED, BLUE, YELLOW, GREEN
     }
