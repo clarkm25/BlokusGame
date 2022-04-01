@@ -5,6 +5,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
+import android.graphics.Point;
 import android.util.AttributeSet;
 
 import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
@@ -20,7 +21,7 @@ import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
  */
 public class DrawBoard extends FlashSurfaceView {
 
-    //Instance variables
+    /* Instance variables */
     public static final int ROWS_AND_COLS = 20;
     public static final int GRIDBOX_SIZE = 30;
     public static final int BOARD_START_HEIGHT = 50;
@@ -32,19 +33,20 @@ public class DrawBoard extends FlashSurfaceView {
     public static final int PBOX_HEIGHT = 450;
     public static final int PBOX_WIDTH = 600;
 
+    /* Paint objects representing drawings on the canvas */
     Paint gridPaint = new Paint();
+    Paint legalPaint = new Paint();
     Paint yellow = new Paint();
     Paint red = new Paint();
     Paint green = new Paint();
     Paint blue = new Paint();
     Paint textPaint = new Paint();
 
+    /* Instance variables for the game state this will have access to and the pieces it needs to draw */
     protected BlokusGameState blokusState;
     private BlokusBlock pieces = new BlokusBlock();
 
     /**
-     * DrawBoard
-     *
      * default ctor for DrawBoard method
      *
      * @param context
@@ -52,11 +54,9 @@ public class DrawBoard extends FlashSurfaceView {
     public DrawBoard(Context context) {
         super(context);
         initialize();
-    } //DrawBoard
+    }
 
     /**
-     * DrawBoard
-     *
      * ctor for DrawBoard method that uses an AttributeSet
      *
      * @param context
@@ -68,32 +68,83 @@ public class DrawBoard extends FlashSurfaceView {
     } //DrawBoard
 
     /**
-     * initialize
-     *
      * Initializes SurfaceView being drawn on.
      */
     public void initialize() {
         setWillNotDraw(false);
-
+        this.blokusState = new BlokusGameState();
         this.setBackgroundColor(Color.WHITE);
     } //initialize
 
     /**
-     * drawGrid
+     * Helper method for onDraw method: Creates the 20x20 grid for Blokus.
      *
-     * Help Method for onDraw method: Creates the 20x20 grid for Blokus.
-     *
-     * @param c
+     * @param c canvas to draw on
      */
     public void drawGrid(Canvas c) {
-        for(int i = 0; i < ROWS_AND_COLS; i++) {
-            for (int j = 0; j < ROWS_AND_COLS; j++) {
-                c.drawRect((GRIDBOX_SIZE * j) + BOARD_START_WIDTH, (GRIDBOX_SIZE * i) + BOARD_START_HEIGHT,
-                        ((GRIDBOX_SIZE * j) + GRIDBOX_SIZE) + BOARD_START_WIDTH,
-                        ((GRIDBOX_SIZE * i) + GRIDBOX_SIZE) + BOARD_START_HEIGHT, gridPaint);
+        for(int i = 0; i < 20; i++) //Scans the board to draw tiles based off their current state
+        {
+            for (int j = 0; j < 20; j++)
+            {
+                drawGridSquare(c,j,i,getPaint(blokusState.getBoard()[i][j]));
+            }
+        }
+        for(int i = 0; i < 20; i++)
+        {
+            for (int j = 0; j < 20; j++)
+            {
+                if(blokusState.getBoard()[i][j] == BlokusGameState.tileState.LEGAL)
+                {
+                    drawGridSquare(c,j,i,legalPaint); //Redraws the legalPaint so the entire tile is highlighted
+                }
             }
         }
     } //drawGrid
+
+    /**
+     * Helper method for drawGrid based on the board to the appropriate square
+     *
+     * @param c canvas to draw on
+     * @param x given x coord
+     * @param y given y coord
+     */
+    public void drawGridSquare(Canvas c, int x, int y, Paint myPaint)
+    {
+        c.drawRect(GRIDBOX_SIZE*x + BOARD_START_WIDTH, GRIDBOX_SIZE*y + BOARD_START_HEIGHT,
+                GRIDBOX_SIZE*x + GRIDBOX_SIZE + BOARD_START_WIDTH,
+                GRIDBOX_SIZE*y + GRIDBOX_SIZE + BOARD_START_HEIGHT, myPaint);
+    }
+
+    /**
+     * Method to return the appropriate paint object based off the state of the tile in the board
+     *
+     * @param currState current tile
+     *
+     * @return paint object
+     */
+    public Paint getPaint(BlokusGameState.tileState currState)
+    {
+        switch (currState)
+        {
+            case EMPTY:
+                return gridPaint;
+
+            case RED:
+                return red;
+
+            case BLUE:
+                return blue;
+
+            case GREEN:
+                return green;
+
+            case YELLOW:
+                return yellow;
+
+        }
+        return gridPaint;
+    }
+
 
     /**
      * setState
@@ -118,6 +169,8 @@ public class DrawBoard extends FlashSurfaceView {
         //Initialize paints
         gridPaint.setColor(Color.BLACK);
         gridPaint.setStyle(Paint.Style.STROKE);
+        legalPaint.setColor(Color.CYAN);
+        legalPaint.setStyle(Paint.Style.STROKE);
         yellow.setColor(Color.YELLOW);
         yellow.setStyle(Paint.Style.FILL);
         red.setColor(Color.RED);
@@ -406,233 +459,87 @@ public class DrawBoard extends FlashSurfaceView {
         c.drawPath(pieces.block4(4, false, 3, 2), yellow);
 
 
-        /**
-         * USED LATER FOR FINAL GAME
-         *
-        //PLAYER ONE BOX -- RED
-        //Red 1 piece (1st row 1st piece) - 1st piece
-        c.drawPath(pieces.block1(1, false), red);
-
-        //Red 3 piece (1st row 2nd piece) - 2nd piece
-        c.drawPath(pieces.block2(1, false), red);
-
-        //Red 5 piece (1st row 3rd piece) - 3rd piece
-        c.drawPath(pieces.block3(1, false), red);
-
-        //Red 4 piece (1st row 4rd piece) - 4th piece
-        c.drawPath(pieces.block4(1, false), red);
-
-        //Red 3 piece (1st row 5th piece) - 5th piece
-        c.drawPath(pieces.block5(1, false), red);
-
-        //Red five pieces (1st row 6th piece) - 6th piece
-        c.drawPath(pieces.block6(1, false), red);
-
-        //Red two piece (2nd row 1st piece) - 7th piece
-        c.drawPath(pieces.block7(1, false), red);
-
-        //Red four piece (2nd row 2nd piece) - 8th piece
-        c.drawPath(pieces.block8(1, false), red);
-
-        //Red four piece (2nd row 3rd piece) - 9th piece
-        c.drawPath(pieces.block9(1, false), red);
-
-        //Red five piece (2nd row 4th piece) - 10th piece
-        c.drawPath(pieces.block10(1, false), red);
-
-        //Red five piece (2nd row 5th piece) - 11th piece
-        c.drawPath(pieces.block11(1, false), red);
-
-        //Red five piece (3rd row 1st piece) - 12th piece
-        c.drawPath(pieces.block12(1, false), red);
-
-        //Red five piece (3rd row 2nd piece) - 13th piece
-        c.drawPath(pieces.block13(1, false), red);
-
-        //Red five piece (3rd row 3rd piece) - 14th piece
-        c.drawPath(pieces.block14(1, false), red);
-
-        //Red five piece (3rd row 4th piece) - 15th piece
-        c.drawPath(pieces.block15(1, false), red);
-
-        //Red five piece (4th row 1st piece) - 16th piece
-        c.drawPath(pieces.block16(1, false), red);
-
-        //Red five piece (4th row 2nd piece) - 17th piece
-        c.drawPath(pieces.block18(1, false), red);
-
-
-        //PLAYER TWO BOX -- BLUE
-        //Blue 1 piece (1st row 1st piece) - 1st piece
-        c.drawPath(pieces.block1(2, false), blue);
-
-        //Blue 3 piece (1st row 2nd piece) - 2nd piece
-        c.drawPath(pieces.block2(2, false), blue);
-
-        //Blue 5 piece (1st row 3rd piece) - 3rd piece
-        c.drawPath(pieces.block3(2, false), blue);
-
-        //Blue 4 piece (1st row 4rd piece) - 4th piece
-        c.drawPath(pieces.block4(2, false), blue);
-
-        //Blue 3 piece (1st row 5th piece) - 5th piece
-        c.drawPath(pieces.block5(2, false), blue);
-
-        //Blue five pieces (1st row 6th piece) - 6th piece
-        c.drawPath(pieces.block6(2, false), blue);
-
-        //Blue two piece (2nd row 1st piece) - 7th piece
-        c.drawPath(pieces.block7(2, false), blue);
-
-        //Blue four piece (2nd row 2nd piece) - 8th piece
-        c.drawPath(pieces.block8(2, false), blue);
-
-        //Blue four piece (2nd row 3rd piece) - 9th piece
-        c.drawPath(pieces.block9(2, false), blue);
-
-        //Blue five piece (2nd row 4th piece) - 10th piece
-        c.drawPath(pieces.block10(2, false), blue);
-
-        //Blue five piece (2nd row 5th piece) - 11th piece
-        c.drawPath(pieces.block11(2, false), blue);
-
-        //Blue five piece (3rd row 1st piece) - 12th piece
-        c.drawPath(pieces.block12(2, false), blue);
-
-        //Blue five piece (3rd row 2nd piece) - 13th piece
-        c.drawPath(pieces.block13(2, false), blue);
-
-        //Blue five piece (3rd row 3rd piece) - 14th piece
-        c.drawPath(pieces.block14(2, false), blue);
-
-        //Blue five piece (3rd row 4th piece) - 15th piece
-        c.drawPath(pieces.block15(2, false), blue);
-
-        //Blue five piece (4th row 1st piece) - 16th piece
-        c.drawPath(pieces.block16(2, false), blue);
-
-        //Blue five piece (4th row 2nd piece) - 17th piece
-        c.drawPath(pieces.block17(2, false), blue);
-
-
-        //PLAYER THREE BOX -- GREEN
-        //Green 1 piece (1st row 1st piece) - 1st piece
-        c.drawPath(pieces.block1(3, false), green);
-
-        //Green 3 piece (1st row 2nd piece) - 2nd piece
-        c.drawPath(pieces.block2(3, false), green);
-
-        //Green 5 piece (1st row 3rd piece) - 3rd piece
-        c.drawPath(pieces.block3(3, false), green);
-
-        //Green 4 piece (1st row 4rd piece) - 4th piece
-        c.drawPath(pieces.block4(3, false), green);
-
-        //Green 3 piece (1st row 5th piece) - 5th piece
-        c.drawPath(pieces.block5(3, false), green);
-
-        //Green five pieces (1st row 6th piece) - 6th piece
-        c.drawPath(pieces.block6(3, false), green);
-
-        //Green two piece (2nd row 1st piece) - 7th piece
-        c.drawPath(pieces.block7(3, false), green);
-
-        //Green four piece (2nd row 2nd piece) - 8th piece
-        c.drawPath(pieces.block8(3, false), green);
-
-        //Green four piece (2nd row 3rd piece) - 9th piece
-        c.drawPath(pieces.block9(3, false), green);
-
-        //Green five piece (2nd row 4th piece) - 10th piece
-        c.drawPath(pieces.block10(3, false), green);
-
-        //Green five piece (2nd row 5th piece) - 11th piece
-        c.drawPath(pieces.block11(3, false), green);
-
-        //Green five piece (3rd row 1st piece) - 12th piece
-        c.drawPath(pieces.block12(3, false), green);
-
-        //Green five piece (3rd row 2nd piece) - 13th piece
-        c.drawPath(pieces.block13(3, false), green);
-
-        //Green five piece (3rd row 3rd piece) - 14th piece
-        c.drawPath(pieces.block14(3, false), green);
-
-        //Green five piece (3rd row 4th piece) - 15th piece
-        c.drawPath(pieces.block15(3, false), green);
-
-        //Green five piece (4th row 1st piece) - 16th piece
-        c.drawPath(pieces.block16(3, false), green);
-
-        //Green five piece (4th row 2nd piece) - 17th piece
-        c.drawPath(pieces.block17(3, false), green);
-
-
-        //PLAYER FOUR BOX -- YELLOW
-        //Yellow 1 piece (1st row 1st piece) - 1th piece
-        c.drawPath(pieces.block1(4, false), yellow);
-
-        //Yellow 3 piece (1st row 2nd piece) - 2th piece
-        c.drawPath(pieces.block2(4, false), yellow);
-
-        //Yellow 5 piece (1st row 3rd piece) - 3th piece
-        c.drawPath(pieces.block3(4, false), yellow);
-
-        //Yellow 4 piece (1st row 4rd piece) - 4th piece
-        c.drawPath(pieces.block4(4, false), yellow);
-
-        //Yellow 3 piece (1st row 5th piece) - 5th piece
-        c.drawPath(pieces.block5(4, false), yellow);
-
-        //Yellow five pieces (1st row 6th piece) - 6th piece
-        c.drawPath(pieces.block6(4, false), yellow);
-
-        //Yellow two piece (2nd row 1st piece) - 7th piece
-        c.drawPath(pieces.block7(4, false), yellow);
-
-        //Yellow four piece (2nd row 2nd piece) - 8th piece
-        c.drawPath(pieces.block8(4, false), yellow);
-
-        //Yellow four piece (2nd row 3rd piece) - 9th piece
-        c.drawPath(pieces.block9(4, false), yellow);
-
-        //Yellow five piece (2nd row 4th piece) - 10th piece
-        c.drawPath(pieces.block10(4, false), yellow);
-
-        //Yellow five piece (2nd row 5th piece) - 11th piece
-        c.drawPath(pieces.block11(4, false), yellow);
-
-        //Yellow five piece (3rd row 1st piece) - 12th piece
-        c.drawPath(pieces.block12(4, false), yellow);
-
-        //Yellow five piece (3rd row 2nd piece) - 13th piece
-        c.drawPath(pieces.block13(4, false), yellow);
-
-        //Yellow five piece (3rd row 3rd piece) - 14th piece
-        c.drawPath(pieces.block14(4, false), yellow);
-
-        //Yellow five piece (3rd row 4th piece) - 15th piece
-        c.drawPath(pieces.block15(4, false), yellow);
-
-        //Yellow five piece (4th row 1st piece) - 16th piece
-        c.drawPath(pieces.block16(4, false), yellow);
-
-        //Yellow five piece (4th row 2nd piece) - 17th piece
-        c.drawPath(pieces.block17(4, false), yellow);
-        */
-
         //Player & Score
         this.drawPlayerInfo(c, 10, "Blue");
     } //onDraw
+
+
+
+    /**
+     * This method will convert the coordinated of a touch event to a certain grid square
+     *
+     * @param x given x coord
+     * @param y given y coord
+     *
+     * @return Point
+     */
+    public Point mapPixelToGridSquare(int x, int y)
+    {
+    /**
+     * External Citation
+     * Date: 31 March 2022
+     * Problem: Could not map the pixels of a touch event to the board
+     * Resource:
+     * https://github.com/cs301up/TicTacToeSpr22
+     * Solution: I used the mapPixelToSquare method as a guide for the this method
+     * and the other method below
+     */
+     /* For loop to iterate through the possible locations for each grid square */
+        for(int i = 0; i<20; i++)
+        {
+            for(int j = 0; j<20; j++)
+            {
+                float left = GRIDBOX_SIZE*j + BOARD_START_WIDTH;
+                float right = GRIDBOX_SIZE*j + GRIDBOX_SIZE + BOARD_START_WIDTH;
+                float top = GRIDBOX_SIZE*i + BOARD_START_HEIGHT;
+                float bottom = GRIDBOX_SIZE*i + GRIDBOX_SIZE + BOARD_START_HEIGHT;
+                if((x > left) != (x> right) && (y > top) != (y> bottom)) //If it is within bounds, return the point
+                {
+                    return new Point(i,j);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method will map a touch event to a certain BlokusPiece so the type is set appropriately
+     *
+     * @param x given x coord
+     * @param y given y coord
+     *
+     * @return the translated point
+     */
+    public Point mapPixelToBlokusPiece(int x, int y)
+    {
+    /* For loop to account for the number of pieces to draw within the player box */
+    for(int i = 0; i<6; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            float left = 10 + LEFT_BOXES + ((GRIDBOX_SIZE * 3)*i);
+            float right = 10 + LEFT_BOXES + ((GRIDBOX_SIZE * 3)*i) + (GRIDBOX_SIZE*2);
+            float top = 10 + TOP_BOXES + ((GRIDBOX_SIZE * 3)*j);
+            float bottom = 10 + TOP_BOXES + ((GRIDBOX_SIZE * 3)*j) + (GRIDBOX_SIZE*2);
+            if((x > left) != (x> right) && (y > top) != (y> bottom)) //If it is within bounds, return the point
+            {
+                return new Point(i,j);
+            }
+        }
+    }
+
+    //Nothing has been matched
+    return null;
+    }
 
     /**
      * drawPlayerInfo
      *
      * Draws player's turn as well as given player's score.
      *
-     * @param canvas
-     * @param initPlayerPoints
-     * @param initPlayerTurn
+     * @param canvas the canvas to draw on
+     * @param initPlayerPoints the initial player points
+     * @param initPlayerTurn string representation of the player turn
      */
     public void drawPlayerInfo(Canvas canvas, int initPlayerPoints, String initPlayerTurn) {
         String playerTurn = initPlayerTurn;

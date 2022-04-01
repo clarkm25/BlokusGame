@@ -21,6 +21,7 @@ public class BlokusGameState extends GameState {
 
     /** Declaration of instance variables*/
     private int playerTurn;
+    private int selectedType;
     private int[] playerScore;
     private BlokusBlock [][] blockArray; //Represents each players collection of pieces
     private tileState[][] board;
@@ -31,6 +32,9 @@ public class BlokusGameState extends GameState {
 
         /* int containing the current player's turn*/
         this.playerTurn = 1;
+
+        /* int containing the currently selected block type */
+        this.selectedType = -1;
 
         /* Array for holding player scores */
         this.playerScore = new int[] {0,0,0,0};
@@ -53,6 +57,13 @@ public class BlokusGameState extends GameState {
                 this.board[i][j] = tileState.EMPTY;
             }
         }
+        /* Sets "random" places on the board to see if they draw correctly in onDraw */
+        this.board[10][2] = tileState.LEGAL;
+        this.board[9][19] = tileState.YELLOW;
+        this.board[1][1] = tileState.GREEN;
+        this.board[5][4] = tileState.BLUE;
+        this.board[19][19] = tileState.RED;
+
         this.gameOn = true;
     }
 
@@ -65,6 +76,9 @@ public class BlokusGameState extends GameState {
 
         /* Copy process for the player turn setting the playerTurn to the other state's playerTurn */
         this.playerTurn = toCopy.playerTurn;
+
+        /* Copy process for the currently selected type of piece*/
+        this.selectedType = toCopy.selectedType;
 
         /* Copy process for the player scores Starts by initializing a new array then copies contents over */
         this.playerScore = new int[4];
@@ -138,7 +152,7 @@ public class BlokusGameState extends GameState {
         int relY = 0;
         tileState playerState = getTileStateForId(playerTurn);
 
-        if(piece == null) //If passed piece is null (already placed) returns false
+        if(piece == null) //If passed piece is null (already placed or none selected) returns false
         {
             return false;
         }
@@ -304,6 +318,24 @@ public class BlokusGameState extends GameState {
     }
 
     /**
+     * This will act to clear all the current legal moves for the next player's turn
+     *
+     * @param board given board
+     */
+    public void clearBoard(tileState[][] board)
+    {
+        for(int i = 0; i<20; i++)
+        {
+            for(int j = 0; j<20; j++)
+            {
+                if(board[i][j] == tileState.LEGAL) //If tile is legal, set to empty
+                {
+                    board[i][j] = tileState.EMPTY;
+                }
+            }
+        }
+    }
+    /**
      * This will be the main helper method for calculating legal moves by going through a set of
      * checks that will check appropriate neighbors based on passed in ints
      *
@@ -416,7 +448,17 @@ public class BlokusGameState extends GameState {
     public int getPlayerTurn() {
         return this.playerTurn;
     }
+    public int getSelectedType() { return this.selectedType; }
+    public int[] getPlayerScore() { return this.playerScore; }
+    public boolean getGameOn() { return this.gameOn; }
 
+    /**
+     * Setter methods for the game state
+     */
+    public void setPlayerTurn(int toSet) { this.playerTurn = toSet; }
+    public void setSelectedType(int toSet) { this.selectedType = toSet; }
+    public void setPlayerScore(int idx, int toSet){ this.playerScore[idx] = toSet; }
+    public void setGameOn(boolean toSet) { this.gameOn = toSet; }
 
     /**
      * This will return a string version of the entire BlokusGameState

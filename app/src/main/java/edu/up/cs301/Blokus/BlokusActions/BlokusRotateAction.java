@@ -12,8 +12,6 @@ import edu.up.cs301.game.GameFramework.players.GamePlayer;
  */
 public class BlokusRotateAction extends GameAction {
 
-    private BlokusBlock piece;
-
     /**
      * constructor for BlokusRotateAction
      *
