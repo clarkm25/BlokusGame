@@ -1,8 +1,5 @@
 package edu.up.cs301.Blokus.BlokusInfo;
 
-import android.graphics.Matrix;
-import android.graphics.Path;
-
 import edu.up.cs301.game.GameFramework.infoMessage.GameState;
 
 /**
@@ -26,6 +23,8 @@ public class BlokusGameState extends GameState {
     private BlokusBlock [][] blockArray; //Represents each players collection of pieces
     private tileState[][] board;
     private boolean gameOn;
+    private int row = 0;
+    private int col = 0;
 
     /** Default ctor */
     public BlokusGameState() {
@@ -445,8 +444,17 @@ public class BlokusGameState extends GameState {
      */
     public BlokusBlock[][] getBlockArray() { return this.blockArray; }
     public tileState[][] getBoard() { return this.board; }
-    public int getPlayerTurn() {
-        return this.playerTurn;
+    public int getPlayerTurn() { return this.playerTurn; }
+    public int getPlayerScore(int player) {
+        return this.playerScore[player - 1];
+    }
+
+    public void setRow(int initRow) {
+        row = initRow;
+    }
+
+    public void setCol(int initCol) {
+        col = initCol;
     }
     public int getSelectedType() { return this.selectedType; }
     public int[] getPlayerScore() { return this.playerScore; }

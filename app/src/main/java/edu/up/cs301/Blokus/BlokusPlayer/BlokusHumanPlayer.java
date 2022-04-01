@@ -1,13 +1,16 @@
 package edu.up.cs301.Blokus.BlokusPlayer;
 
 import android.graphics.Color;
-import android.graphics.Path;
 import android.view.MotionEvent;
 import android.view.View;
 
+import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
+import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.IllegalMoveInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
@@ -31,6 +34,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     //Surface View being drawn on
     private DrawBoard drawBoard;
     private int layoutId; //ID
+    protected BlokusGameState blokusState;
 
     /**
      * BlokusHumanPlayer
@@ -55,13 +59,25 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
      */
     @Override
     public void onClick(View view) {
+        if (game == null) return;
 
+        GameAction action = null;
+        if (view.getId() == R.id.rotateButton) {
+            action = new BlokusRotateAction(this);
+        }
+        else if (view.getId() == R.id.quitButton) {
+            action = new BlokusQuitAction(this);
+        }
+        else if (view.getId() == R.id.helpButton) {
+            action = new BlokusHelpMenuAction(this);
+        }
     } //onClick
 
     /**
      * onTouch
      *
-     *
+     * Method used to select a piece that will be place on board as well as used to actually place
+     * pieces on board based on where the user clicks.
      *
      * @param view
      * @param motionEvent
@@ -71,36 +87,48 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int x = (int)motionEvent.getX();
         int y = (int)motionEvent.getY();
-        int p1X = 0;
-        int p1Y = 0;
+        int spaceX = 0;
+        int spaceY = 0;
 
         //Player 1's box
         if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 6; j++) {
-                    if((x > (p1X + 10 + (DrawBoard.LEFT_BOXES * j))) && (x < (p1X + 10 + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
-                            (y > (p1Y + 10 + (DrawBoard.TOP_BOXES * j))) && (y < (p1Y + 10 + (DrawBoard.TOP_BOXES * (j + 1))))) {
-                        p1X += 90; //Horizontal space between pieces
-                        p1Y += 90; //Vertical space between pieces
+                    if((x > (spaceX + 10 + (DrawBoard.LEFT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
+                            (y > (spaceY + 10 + (DrawBoard.TOP_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.TOP_BOXES * (j + 1))))) {
+
 
                     }
+                    spaceX += 90; //Horizontal space between pieces
+                    spaceY += 90; //Vertical space between pieces
                 }
             }
         } //Player 2's box
-        else if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
-                && (y > DrawBoard.BOTTOM_BOXES) && (y < DrawBoard.BOTTOM_BOXES + DrawBoard.PBOX_HEIGHT)) {
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
-
-                }
-            }
-        } //Player 3's box
         else if ((x > DrawBoard.RIGHT_BOXES) && (x < DrawBoard.RIGHT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
+                    if((x > (spaceX + 10 + (DrawBoard.RIGHT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.RIGHT_BOXES * (j + 1)))) &&
+                            (y > (spaceY + 10 + (DrawBoard.TOP_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.TOP_BOXES * (j + 1))))) {
+                        spaceX += 90; //Horizontal space between pieces
+                        spaceY += 90; //Vertical space between pieces
+                        /** Does not need to do anything as of now as this is an AI box */
+                    }
 
+                }
+            }
+        } //Player 3's box
+        else if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
+                && (y > DrawBoard.BOTTOM_BOXES) && (y < DrawBoard.BOTTOM_BOXES + DrawBoard.PBOX_HEIGHT)) {
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
+                    if((x > (spaceX + 10 + (DrawBoard.LEFT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
+                            (y > (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * (j + 1))))) {
+                        spaceX += 90; //Horizontal space between pieces
+                        spaceY += 90; //Vertical space between pieces
+                        /** Does not need to do anything as of now as this is an AI box */
+                    }
                 }
             }
         } //Player 4's box
@@ -108,7 +136,12 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                 && (y > DrawBoard.BOTTOM_BOXES) && (y < DrawBoard.BOTTOM_BOXES + DrawBoard.PBOX_HEIGHT)) {
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
-
+                    if((x > (spaceX + 10 + (DrawBoard.RIGHT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.RIGHT_BOXES * (j + 1)))) &&
+                            (y > (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * (j + 1))))) {
+                        spaceX += 90; //Horizontal space between pieces
+                        spaceY += 90; //Vertical space between pieces
+                        /** Does not need to do anything as of now as this is an AI box */
+                    }
                 }
             }
         }
@@ -119,7 +152,8 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                 for (int j = 0; j < 19; j++) {
                     if ((x > ((j * DrawBoard.GRIDBOX_SIZE) + 700)) && (x < (((j+1) * DrawBoard.GRIDBOX_SIZE) + 700))
                             && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
-
+                        blokusState.setCol(j);
+                        blokusState.setRow(i);
                     }
                 }
             }
@@ -144,6 +178,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             return; //If there is no BlokusGameState
         }
         else {
+            blokusState = ((BlokusGameState)info);
             drawBoard.setState((BlokusGameState)info);
             drawBoard.invalidate();
             Logger.log(TAG, "receiving");
