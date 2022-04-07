@@ -92,6 +92,59 @@ public class BlokusBlock {
         }
     }
 
+    public int[][] getPiece(int piece) {
+        switch(piece) {
+            case 1:
+                this.pieceArr[0][0] = 2;
+            case 2:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[0][2] = 1;
+
+            case 3:
+
+            case 4:
+
+            case 5:
+
+            case 6:
+
+            case 7:
+
+            case 8:
+
+            case 9:
+
+            case 10:
+
+            case 11:
+
+            case 12:
+
+            case 13:
+
+            case 14:
+
+            case 15:
+
+            case 16:
+
+            case 17:
+
+            case 18:
+
+            case 19:
+
+            case 20:
+
+            case 21:
+
+
+        }
+
+        return this.pieceArr;
+    }
+
     /**
      * getX
      *
@@ -211,9 +264,6 @@ public class BlokusBlock {
             piece2.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
             piece2.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 1) + y);
             piece2.lineTo(x, y);
-        }
-        else if (onBoard == true) {
-
         }
 
         return piece2;
