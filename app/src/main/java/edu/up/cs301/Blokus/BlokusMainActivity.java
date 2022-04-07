@@ -62,7 +62,9 @@ public class BlokusMainActivity extends GameMainActivity {
 
         // Add the default players
         defaultConfig.addPlayer("Human", 0); //GUI
-        defaultConfig.addPlayer("Dumb Computer Player #1", 3); // Dumb Computer Player 3
+        defaultConfig.addPlayer("Computer Player #1", 1); //Default is Dumb AI
+        defaultConfig.addPlayer("Computer Player #2", 1); //Default is Dumb AI
+        defaultConfig.addPlayer("Computer Player #3", 1); //Default is Dumb AI
 
         // Set the initial information for the remote player
         //defaultConfig.setRemoteData("Remote Player", "", 1);
