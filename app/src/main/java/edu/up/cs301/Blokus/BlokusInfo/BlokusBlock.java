@@ -102,42 +102,128 @@ public class BlokusBlock {
                 this.pieceArr[0][2] = 1;
 
             case 3:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[0][2] = 1;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[1][2] = 1;
 
             case 4:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[1][0] = 1;
+                this.pieceArr[1][1] = 1;
 
             case 5:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[1][1] = 1;
 
             case 6:
+                this.pieceArr[1][0] = 2;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[2][1] = 1;
+                this.pieceArr[1][2] = 1;
 
             case 7:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
 
             case 8:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[1][2] = 1;
 
             case 9:
+                this.pieceArr[1][0] = 2;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[1][2] = 1;
 
             case 10:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[1][2] = 1;
+                this.pieceArr[1][3] = 1;
 
             case 11:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[1][0] = 1;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[1][2] = 1;
+                this.pieceArr[2][2] = 1;
 
             case 12:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[0][2] = 1;
+                this.pieceArr[0][3] = 1;
+                this.pieceArr[1][3] = 1;
 
             case 13:
+                this.pieceArr[1][0] = 2;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[1][2] = 1;
+                this.pieceArr[1][3] = 1;
 
             case 14:
+                this.pieceArr[2][0] = 2;
+                this.pieceArr[1][0] = 1;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[0][2] = 1;
 
             case 15:
+                this.pieceArr[2][0] = 2;
+                this.pieceArr[2][1] = 1;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[1][2] = 1;
+                this.pieceArr[0][1] = 1;
 
             case 16:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[1][0] = 1;
+                this.pieceArr[2][0] = 1;
+                this.pieceArr[2][1] = 1;
 
             case 17:
+                this.pieceArr[1][0] = 2;
+                this.pieceArr[1][1] = 1;
+                this.pieceArr[1][2] = 1;
+                this.pieceArr[0][2] = 1;
+                this.pieceArr[2][2] = 1;
 
             case 18:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[0][2] = 1;
+                this.pieceArr[1][2] = 1;
 
             case 19:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[0][2] = 1;
+                this.pieceArr[0][3] = 1;
+                this.pieceArr[0][4] = 1;
 
             case 20:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[0][1] = 1;
+                this.pieceArr[0][2] = 1;
+                this.pieceArr[0][3] = 1;
+
 
             case 21:
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[1][0] = 1;
+                this.pieceArr[2][0] = 1;
+                this.pieceArr[2][1] = 1;
+                this.pieceArr[2][2] = 1;
 
 
         }
@@ -362,8 +448,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 380;
-            y = this.getY(player) + 30;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -400,8 +486,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 490;
-            y = this.getY(player) + 60;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -444,8 +530,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 10;
-            y = this.getY(player) + 100;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -480,8 +566,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 80;
-            y = this.getY(player) + 100;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -520,8 +606,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 180;
-            y = this.getY(player) + 200;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -560,8 +646,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 310;
-            y = this.getY(player) + 130;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -600,8 +686,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 450;
-            y = this.getY(player) + 130;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -640,8 +726,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 10;
-            y = this.getY(player) + 220;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -678,8 +764,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 240;
-            y = this.getY(player) + 250;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -718,8 +804,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 400;
-            y = this.getY(player) + 320;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -760,8 +846,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 500;
-            y = this.getY(player) + 290;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -802,8 +888,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 40;
-            y = this.getY(player) + 320;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -811,15 +897,15 @@ public class BlokusBlock {
         }
 
         if (onBoard == false) {
-            piece16.moveTo(40 + x,320 + y);
-            piece16.lineTo(40 + x,410 + y);
-            piece16.lineTo(100 + x,410 + y);
-            piece16.lineTo(100 + x,380 + y);
+            piece16.moveTo(10 + x,320 + y);
+            piece16.lineTo(10 + x,410 + y);
+            piece16.lineTo(70 + x,410 + y);
             piece16.lineTo(70 + x,380 + y);
+            piece16.lineTo(40 + x,380 + y);
+            piece16.lineTo(40 + x,350 + y);
             piece16.lineTo(70 + x,350 + y);
-            piece16.lineTo(100 + x,350 + y);
-            piece16.lineTo(100 + x,320 + y);
-            piece16.lineTo(40 + x,320 + y);
+            piece16.lineTo(70 + x,320 + y);
+            piece16.lineTo(10 + x,320 + y);
         }
         else if (onBoard == true) {
 
@@ -842,8 +928,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 140;
-            y = this.getY(player) + 350;
+            x = this.getX(player);
+            y = this.getY(player);
         }
         else {
             x = 0;
@@ -851,15 +937,15 @@ public class BlokusBlock {
         }
 
         if (onBoard == false) {
-            piece17.moveTo(140 + x,350 + y);
-            piece17.lineTo(200 + x,350 + y);
+            piece17.moveTo(110 + x,350 + y);
+            piece17.lineTo(170 + x,350 + y);
+            piece17.lineTo(170 + x,320 + y);
             piece17.lineTo(200 + x,320 + y);
-            piece17.lineTo(230 + x,320 + y);
-            piece17.lineTo(230 + x,410 + y);
             piece17.lineTo(200 + x,410 + y);
-            piece17.lineTo(200 + x,380 + y);
-            piece17.lineTo(140 + x,380 + y);
-            piece17.lineTo(140 + x,350 + y);
+            piece17.lineTo(170 + x,410 + y);
+            piece17.lineTo(170 + x,380 + y);
+            piece17.lineTo(110 + x,380 + y);
+            piece17.lineTo(110 + x,350 + y);
         }
         else if (onBoard == true) {
 
@@ -882,8 +968,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 270;
-            y = this.getY(player) + 320;
+            x = this.getX(player) + 240;
+            y = this.getY(player) + 350;
         }
         else {
             x = 0;
@@ -920,8 +1006,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player) + 300;
-            y = this.getY(player) + 320;
+            x = this.getX(player) + 360;
+            y = this.getY(player) + 350;
         }
         else {
             x = 0;
@@ -956,8 +1042,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player);
-            y = this.getY(player);
+            x = this.getX(player) + 360;
+            y = this.getY(player) + 410;
         }
         else {
             x = 0;
@@ -992,8 +1078,8 @@ public class BlokusBlock {
         int y;
 
         if (onBoard == false) {
-            x = this.getX(player);
-            y = this.getY(player);
+            x = this.getX(player) + 520;
+            y = this.getY(player) + 350;
         }
         else {
             x = 0;
@@ -1001,7 +1087,14 @@ public class BlokusBlock {
         }
 
         if (onBoard == false) {
-            //piece21.
+            piece21.moveTo(x, y);
+            piece21.lineTo(x, (DrawBoard.GRIDBOX_SIZE * 3) + y);
+            piece21.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, (DrawBoard.GRIDBOX_SIZE * 3) + y);
+            piece21.lineTo((DrawBoard.GRIDBOX_SIZE * 3) + x, (DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece21.lineTo((DrawBoard.GRIDBOX_SIZE * 1) + x, (DrawBoard.GRIDBOX_SIZE * 2) + y);
+            piece21.lineTo((DrawBoard.GRIDBOX_SIZE * 1) + x, y);
+            piece21.lineTo(x, y);
+
         }
         else if (onBoard == true) {
 

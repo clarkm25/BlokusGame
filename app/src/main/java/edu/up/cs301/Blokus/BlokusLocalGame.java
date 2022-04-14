@@ -2,7 +2,9 @@ package edu.up.cs301.Blokus;
 
 import android.util.Log;
 
+import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
@@ -126,33 +128,26 @@ public class BlokusLocalGame extends LocalGame {
         int playerId; //Current player's ID
 
         /* Checks to see what the action was and takes the appropriate actions */
-        if(action instanceof BlokusSelectAction)
-        {
+        if(action instanceof BlokusSelectAction) {
            BlokusSelectAction bs = (BlokusSelectAction) action;
            playerId = getPlayerIdx(bs.getPlayer()); //Sets player ID as seen here and below
            state.setSelectedType(bs.getBlockType()); //Sets the selected type after the selection action happens
            state.calcLegalMoves(state.getBoard(), playerId); //Calculate legal moves after selecting the piece
            return true;
         }
-        else if(action instanceof BlokusRotateAction)
-        {
+        else if(action instanceof BlokusRotateAction) {
           BlokusRotateAction br = (BlokusRotateAction) action;
           playerId = getPlayerIdx(br.getPlayer());
           state.rotatePiece(state.getBlockArray()[playerId][state.getSelectedType()]);//Gets the appropriate piece based off the selected type and ID
           return true;
         }
-        else if(action instanceof BlokusPlaceAction)
-        {
+        else if(action instanceof BlokusPlaceAction) {
             BlokusPlaceAction bp = (BlokusPlaceAction) action;
             playerId = getPlayerIdx(bp.getPlayer());
             state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()]);
             /* Sets the appropriate player's turn based on whose turn it currently is */
             switch (playerId)
             {
-                case 0:
-                    state.setPlayerTurn(1);
-                    break;
-
                 case 1:
                     state.setPlayerTurn(2);
                     break;
@@ -162,10 +157,22 @@ public class BlokusLocalGame extends LocalGame {
                     break;
 
                 case 3:
-                    state.setPlayerTurn(0);
+                    state.setPlayerTurn(4);
+                    break;
+
+                case 4:
+                    state.setPlayerTurn(1);
                     break;
             }
+            //Clears legal spots from board as it is no longer given player's turn
+            state.clearBoard(state.getBoard());
             return true;
+        }
+        else if(action instanceof BlokusQuitAction) {
+            state.quitGame(true);
+        }
+        else if(action instanceof BlokusHelpMenuAction) {
+
         }
 
         //Other action, return false

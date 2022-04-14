@@ -56,12 +56,14 @@ public class BlokusGameState extends GameState {
                 this.board[i][j] = tileState.EMPTY;
             }
         }
-        /* Sets "random" places on the board to see if they draw correctly in onDraw */
+        /**
+        //Sets "random" places on the board to see if they draw correctly in onDraw
         this.board[10][2] = tileState.LEGAL;
         this.board[9][19] = tileState.YELLOW;
         this.board[1][1] = tileState.GREEN;
         this.board[5][4] = tileState.BLUE;
         this.board[19][19] = tileState.RED;
+        */
 
         this.gameOn = true;
     }
@@ -115,7 +117,7 @@ public class BlokusGameState extends GameState {
      */
     public boolean quitGame(boolean initGameOn) {
         this.gameOn = initGameOn;
-        if (gameOn = false) {
+        if (gameOn == false) {
             return true;
         }
         else {
@@ -191,8 +193,8 @@ public class BlokusGameState extends GameState {
                         }
                     }
                 }
-                this.playerScore[playerTurn-1] += this.blockArray[playerTurn-1][piece.getType()].getBlockScore();
-                this.blockArray[playerTurn-1][piece.getType()] = null;
+                this.playerScore[playerTurn - 1] += this.blockArray[playerTurn - 1][piece.getType()].getBlockScore();
+                this.blockArray[playerTurn - 1][piece.getType()] = null;
                 for(int i = 0; i<20; i++)
                 {
                     for(int j = 0; j<20; j++)
@@ -446,7 +448,7 @@ public class BlokusGameState extends GameState {
     public tileState[][] getBoard() { return this.board; }
     public int getPlayerTurn() { return this.playerTurn; }
     public int getPlayerScore(int player) {
-        return this.playerScore[player - 1];
+        return this.playerScore[player];
     }
 
     public void setRow(int initRow) {
@@ -459,6 +461,33 @@ public class BlokusGameState extends GameState {
     public int getSelectedType() { return this.selectedType; }
     public int[] getPlayerScore() { return this.playerScore; }
     public boolean getGameOn() { return this.gameOn; }
+
+    /**
+     * Gets color based on given player
+     *
+     * @param player
+     * @return Player's color
+     */
+    public String getPlayerColor(int player) {
+        String playerColor = "";
+
+        switch(player) {
+            case 1:
+                playerColor = "Red";
+                break;
+            case 2:
+                playerColor = "Blue";
+                break;
+            case 3:
+                playerColor = "Green";
+                break;
+            case 4:
+                playerColor = "Yellow";
+                break;
+        }
+
+        return playerColor;
+    }
 
     /**
      * Setter methods for the game state

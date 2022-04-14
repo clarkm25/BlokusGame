@@ -3,10 +3,13 @@ package edu.up.cs301.Blokus.BlokusPlayer;
 import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
@@ -33,8 +36,12 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
 
     //Surface View being drawn on
     private DrawBoard drawBoard;
-    private int layoutId; //ID
     protected BlokusGameState blokusState;
+    private int layoutId; //ID
+    private int selectedPiece;
+    private Button quitButton;
+    private Button helpButton;
+    private Button rotateButton;
 
     /**
      * BlokusHumanPlayer
@@ -61,15 +68,18 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     public void onClick(View view) {
         if (game == null) return;
 
-        GameAction action = null;
+        //Switches through each button ID and makes an action based on the button
         if (view.getId() == R.id.rotateButton) {
-            action = new BlokusRotateAction(this);
+            BlokusRotateAction blokusRA = new BlokusRotateAction(this);
+            game.sendAction(blokusRA);
         }
         else if (view.getId() == R.id.quitButton) {
-            action = new BlokusQuitAction(this);
+            BlokusQuitAction blokusQA = new BlokusQuitAction(this);
+            game.sendAction(blokusQA);
         }
         else if (view.getId() == R.id.helpButton) {
-            action = new BlokusHelpMenuAction(this);
+            BlokusHelpMenuAction blokusHMA = new BlokusHelpMenuAction(this);
+            game.sendAction(blokusHMA);
         }
     } //onClick
 
@@ -87,61 +97,27 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int x = (int)motionEvent.getX();
         int y = (int)motionEvent.getY();
-        int spaceX = 0;
-        int spaceY = 0;
+        int spaceX = 10;
+        int spaceY = 10;
 
         //Player 1's box
         if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
+
+            //Sets piece back to beginning
+            selectedPiece = 1;
+
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 6; j++) {
-                    if((x > (spaceX + 10 + (DrawBoard.LEFT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
-                            (y > (spaceY + 10 + (DrawBoard.TOP_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.TOP_BOXES * (j + 1))))) {
-
-
+                    //Iterates through every piece to find selected piece
+                    if((x > (spaceX + (DrawBoard.LEFT_BOXES * j))) && (x < (spaceX + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
+                            (y > (spaceY + (DrawBoard.TOP_BOXES * j))) && (y < (spaceY + (DrawBoard.TOP_BOXES * (j + 1))))) {
+                        BlokusSelectAction blokusSA = new BlokusSelectAction(this, selectedPiece);
+                        game.sendAction(blokusSA);
                     }
                     spaceX += 90; //Horizontal space between pieces
                     spaceY += 90; //Vertical space between pieces
-                }
-            }
-        } //Player 2's box
-        else if ((x > DrawBoard.RIGHT_BOXES) && (x < DrawBoard.RIGHT_BOXES + DrawBoard.PBOX_WIDTH)
-                && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
-                    if((x > (spaceX + 10 + (DrawBoard.RIGHT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.RIGHT_BOXES * (j + 1)))) &&
-                            (y > (spaceY + 10 + (DrawBoard.TOP_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.TOP_BOXES * (j + 1))))) {
-                        spaceX += 90; //Horizontal space between pieces
-                        spaceY += 90; //Vertical space between pieces
-                        /** Does not need to do anything as of now as this is an AI box */
-                    }
-
-                }
-            }
-        } //Player 3's box
-        else if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
-                && (y > DrawBoard.BOTTOM_BOXES) && (y < DrawBoard.BOTTOM_BOXES + DrawBoard.PBOX_HEIGHT)) {
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
-                    if((x > (spaceX + 10 + (DrawBoard.LEFT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
-                            (y > (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * (j + 1))))) {
-                        spaceX += 90; //Horizontal space between pieces
-                        spaceY += 90; //Vertical space between pieces
-                        /** Does not need to do anything as of now as this is an AI box */
-                    }
-                }
-            }
-        } //Player 4's box
-        else if ((x > DrawBoard.RIGHT_BOXES) && (x < DrawBoard.RIGHT_BOXES + DrawBoard.PBOX_WIDTH)
-                && (y > DrawBoard.BOTTOM_BOXES) && (y < DrawBoard.BOTTOM_BOXES + DrawBoard.PBOX_HEIGHT)) {
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
-                    if((x > (spaceX + 10 + (DrawBoard.RIGHT_BOXES * j))) && (x < (spaceX + 10 + (DrawBoard.RIGHT_BOXES * (j + 1)))) &&
-                            (y > (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * j))) && (y < (spaceY + 10 + (DrawBoard.BOTTOM_BOXES * (j + 1))))) {
-                        spaceX += 90; //Horizontal space between pieces
-                        spaceY += 90; //Vertical space between pieces
-                        /** Does not need to do anything as of now as this is an AI box */
-                    }
+                    selectedPiece++; //Increases piece until selected area.
                 }
             }
         }
@@ -150,10 +126,11 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         if ((x > 700) && (x < 1300) && (y > 50) && (y < 650)) {
             for (int i = 0; i < 19; i++) {
                 for (int j = 0; j < 19; j++) {
+                    //Iterates through ever spot on the grid in order to find where user presses.
                     if ((x > ((j * DrawBoard.GRIDBOX_SIZE) + 700)) && (x < (((j+1) * DrawBoard.GRIDBOX_SIZE) + 700))
                             && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
-                        blokusState.setCol(j);
-                        blokusState.setRow(i);
+                        BlokusPlaceAction blokusPA = new BlokusPlaceAction(this, selectedPiece, i, j);
+                        game.sendAction(blokusPA);
                     }
                 }
             }
@@ -192,5 +169,16 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         drawBoard = (DrawBoard)myActivity.findViewById(R.id.drawBoard);
         Logger.log("set logger", "OnTouch");
         drawBoard.setOnTouchListener(this);
+
+
+        //Initializes the button variables
+        this.quitButton = (Button)activity.findViewById(R.id.quitButton);
+        this.helpButton = (Button)activity.findViewById(R.id.helpButton);
+        this.rotateButton = (Button)activity.findViewById(R.id.rotateButton);
+
+        //Listens for button presses on this GUI
+        quitButton.setOnClickListener(this);
+        helpButton.setOnClickListener(this);
+        rotateButton.setOnClickListener(this);
     } //setAsGui
 }

@@ -22,7 +22,7 @@ public class BlokusPlaceAction extends GameAction {
      * @param row the given row
      * @param col the given column
      */
-    public BlokusPlaceAction(GamePlayer player, int row, int col)
+    public BlokusPlaceAction(GamePlayer player, int selectedPiece, int row, int col)
     {
         super(player);
 
