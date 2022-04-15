@@ -2,6 +2,7 @@ package edu.up.cs301.Blokus.BlokusPlayer;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
@@ -20,7 +21,7 @@ import java.util.ArrayList;
 public class BlokusDumbAi extends GameComputerPlayer {
 
     //21 pieces
-    ArrayList<BlokusBlock> playerPieces = new ArrayList<>();
+    BlokusGameState myState;
 
     /**
      * BlokusDumbAi
@@ -46,9 +47,34 @@ public class BlokusDumbAi extends GameComputerPlayer {
 
         Logger.log("BlokusDumbAi", "My turn!");
 
+        myState = (BlokusGameState)info;
+
+        /* Picks a random piece number and sets both selected row and columns to zero */
+        int pickedPiece = (int) Math.random()*20;
+        int selectedRow = 0;
+        int selectedColumn = 0;
+
+        /* Iterates through the board to find the first legal position */
+        for(int i = 0; i<20; i++)
+        {
+            for(int j = 0; j<20; j++)
+            {
+                if(myState.getBoard()[i][j]== BlokusGameState.tileState.LEGAL)
+                {
+                    selectedRow = i;
+                    selectedColumn = j;
+                }
+            }
+        }
+
         //Allow for AI to take time between plays
         sleep(1);
 
+        /* With everything calculated, selects the randomly selected piece */
+        game.sendAction(new BlokusSelectAction(this, pickedPiece));
+
+        /* Then, sends an action to place the currently selected piece */
+        game.sendAction(new BlokusPlaceAction(this,selectedRow, selectedColumn));
         Logger.log("BlokusDumbAi", "Sending move");
         game.sendAction(new BlokusPassAction(this));
     } //receiveInfo

@@ -41,7 +41,7 @@ public class BlokusGameState extends GameState implements Serializable {
         this.selectedType = -1;
 
         /* Array for holding player scores */
-        this.playerScore = new int[] {-89,-89,-89,-89};
+        this.playerScore = new int[] {0,0,0,0};
 
         /* Array containing the block objects within each player box and each player's box will be populated with the appropriate blocks */
         blockArray = new BlokusBlock[4][21];
@@ -49,7 +49,7 @@ public class BlokusGameState extends GameState implements Serializable {
             for (int j = 0; j<21; j++) {
                 this.blockArray[i][j] = new BlokusBlock();
                 //TODO: CHANGE setType(4) BACK TO setType(j) WHEN USING ALL PIECES OPPOSED TO JUST 2x2s.
-                this.blockArray[i][j].setType(4);
+                this.blockArray[i][j].setType(j);
             }
         }
 
@@ -97,7 +97,14 @@ public class BlokusGameState extends GameState implements Serializable {
         this.blockArray = new BlokusBlock[4][21];
         for (int i = 0; i<4; i++) {
             for (int j = 0; j<21; j++) {
-                this.blockArray[i][j] = new BlokusBlock(toCopy.blockArray[i][j]);
+                if(toCopy.blockArray[i][j] == null)
+                {
+                    this.blockArray[i][j] = null;
+                }
+                else
+                {
+                    this.blockArray[i][j] = new BlokusBlock(toCopy.blockArray[i][j]);
+                }
             }
         }
 
@@ -125,11 +132,19 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece)
+    public boolean placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece, int rotateInt)
     {
         /* Variables to represent the relative x and y coords as well as the current playerState*/
         int relX = 0;
         int relY = 0;
+
+        int rotateCount = rotateInt;
+        /* If the piece has been rotated four times, returns false */
+        if(rotateCount == 4)
+        {
+            return false;
+        }
+
         tileState playerState = getTileStateForId(playerTurn);
 
         if(piece == null) //If passed piece is null (already placed or none selected) returns false
@@ -138,7 +153,7 @@ public class BlokusGameState extends GameState implements Serializable {
         }
 
         /* Iterates through the board to find the relative x and y coordinates */
-        if (this.board[xPos][yPos] == tileState.LEGAL)
+        if (this.board[yPos][xPos] == tileState.LEGAL)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -174,20 +189,16 @@ public class BlokusGameState extends GameState implements Serializable {
                 }
                 this.playerScore[playerTurn] += this.blockArray[playerTurn][piece.getType()].getBlockScore();
                 this.blockArray[playerTurn][piece.getType()] = null;
-                for(int i = 0; i<20; i++)
-                {
-                    for(int j = 0; j<20; j++)
-                    {
-                        if(board[i][j] == tileState.LEGAL)
-                        {
-                            board[i][j] = tileState.EMPTY;
-                        }
-                    }
-                }
+                clearBoard(this.getBoard());
                 return true;
             }
             catch (ArrayIndexOutOfBoundsException e)
             {
+                /* Recursive case just in case the piece in its current rotation does not fit */
+                rotatePiece(piece);
+                rotateCount++;
+                board[yPos][xPos] = tileState.LEGAL;//Resets the current position to a legal position for the time being
+                placePiece(playerTurn,xPos,yPos,piece,rotateCount);
                 return false;
             }
         }
