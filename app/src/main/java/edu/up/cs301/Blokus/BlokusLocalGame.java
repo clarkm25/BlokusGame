@@ -99,18 +99,16 @@ public class BlokusLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         BlokusGameState blokusState = (BlokusGameState) super.state;
-
-        /**
-        if (blokusState.getLegalMoves() == false) {
-            return "Game is over!"
+        int outOfMoves = 0;
+        if (blokusState.calcLegalMoves(blokusState.getBoard(),blokusState.getPlayerTurn()) == false) {
+            outOfMoves++;
         }
         else {
             return null;
         }
-        if (blokusState.getScore(0) > 100) {
-            return "Player 1 has won!";
+        if (blokusState.getPlayerScore(blokusState.getPlayerTurn()) > 100) {
+            return "Player " + blokusState.getPlayerTurn() + " has won!";
         }
-         */
 
         return null;
     } //checkIfGameOver
@@ -134,7 +132,10 @@ public class BlokusLocalGame extends LocalGame {
            BlokusSelectAction bs = (BlokusSelectAction) action;
            playerId = getPlayerIdx(bs.getPlayer()); //Sets player ID as seen here and below
            state.setSelectedType(bs.getBlockType()); //Sets the selected type after the selection action happens
-           state.calcLegalMoves(state.getBoard(), playerId); //Calculate legal moves after selecting the piece
+           if(!state.calcLegalMoves(state.getBoard(), playerId))//Calculate legal moves after selecting the piece
+           {
+
+           }
            return true;
         }
         else if(action instanceof BlokusRotateAction) {
@@ -146,7 +147,7 @@ public class BlokusLocalGame extends LocalGame {
         else if(action instanceof BlokusPlaceAction) {
             BlokusPlaceAction bp = (BlokusPlaceAction) action;
             playerId = getPlayerIdx(bp.getPlayer());
-            state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()]);
+            state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()],0);
             /* Sets the appropriate player's turn based on whose turn it currently is */
             switch (playerId)
             {
