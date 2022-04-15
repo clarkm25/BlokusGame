@@ -49,6 +49,9 @@ public class BlokusDumbAi extends GameComputerPlayer {
 
         myState = (BlokusGameState)info;
 
+        //Allow for AI to take time between plays
+        sleep(3);
+
         /* Picks a random piece number and sets both selected row and columns to zero */
         int pickedPiece = (int) Math.random()*20;
         int selectedRow = 0;
@@ -66,9 +69,6 @@ public class BlokusDumbAi extends GameComputerPlayer {
                 }
             }
         }
-
-        //Allow for AI to take time between plays
-        sleep(1);
 
         /* With everything calculated, selects the randomly selected piece */
         game.sendAction(new BlokusSelectAction(this, pickedPiece));

@@ -15,6 +15,27 @@ import java.util.ArrayList;
 /**
  * Primary Activity for Blokus
  *
+ * PROJECT #I INFO:
+ * Game crashes due to an array out of bounds error from the Computer Player class. Our thoughts are
+ * that the game is crashing due to recursive placePiece method failing to account for this error
+ * which is causing it to crash when iterating through the AI turns. The method to check for legal
+ * moves is also having problems finding legal moves once a piece has already been placed. However,
+ * network play is available and multiple users are able to place at least one piece on the board.
+ * The action for selecting a piece is also working well for both local players and WiFi players.
+ * Finally, all of the buttons are working correctly and performing their required actions. The
+ * "Help" button is opening a help menu (no matter who's turn it is) that describes the game and
+ * point system as well as provides explanation for the buttons. The "Rotate" button properly
+ * rotates a selected piece for the given user as long as it is the given user's turn. The "Pass"
+ * button properly skips the user's turn given that it is the user's turn. Finally, the "Quit"
+ * button properly closes the game (using System.exit()) no matter who's turn it is.
+ *
+ * ADDED: The main thing that was added was the pass method/button. This is both for the AI (in
+ * order to make the AI have a chance of passing if they don't have any legal moves) and for the
+ * user.
+ *
+ * REMOVED: BlokusHelpMenuAction class was removed as there was a problem with TextView having to
+ * be sent across for the Help Menu and TextView is not serializable.
+ *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
  * @version March 31st, 2022
  */

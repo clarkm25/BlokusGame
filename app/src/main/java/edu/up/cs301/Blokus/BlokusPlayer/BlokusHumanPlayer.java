@@ -6,9 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import java.io.Serializable;
-
-import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
@@ -17,7 +14,6 @@ import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
-import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.IllegalMoveInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
@@ -85,8 +81,23 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             game.sendAction(blokusQA);
         }
         else if (view.getId() == R.id.helpButton) {
-            BlokusHelpMenuAction blokusHMA = new BlokusHelpMenuAction(this, helpView);
-            game.sendAction(blokusHMA);
+            /**
+             * External Citation
+             * Date: 13 April 2022
+             * Problem: Didn't know how to hide and show a TextView.
+             * Resource:
+             * https://stackoverflow.com/questions/29470875/how-to-make-a-textview-show-after-
+             * the-button-click-how-to-hide-the-textview-agai
+             *
+             * Solution: I used this source to figure out how to use setVisibility() to remove and
+             * show TextViews. This is part of a code stub from the source.
+             */
+            if (helpView.getVisibility() == View.GONE) {
+                helpView.setVisibility(View.VISIBLE);
+            }
+            else {
+                helpView.setVisibility(View.GONE);
+            }
         }
         else if (view.getId() == R.id.passButton) {
             BlokusPassAction blokusPA = new BlokusPassAction(this);
@@ -109,21 +120,54 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         int x = (int)motionEvent.getX();
         int y = (int)motionEvent.getY();
 
-        //Player 1's box
-        if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
-                && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
+        //Switched based on which player's turn it is.
+        int playerBoxX = 0;
+        int playerBoxY = 0;
+
+
+        //Finds which player box the pieces that are being selected are in
+        switch (blokusState.getPlayerTurn()) {
+            case 0:
+                playerBoxX = DrawBoard.LEFT_BOXES;
+                playerBoxY = DrawBoard.TOP_BOXES;
+                break;
+
+            case 1:
+                playerBoxX = DrawBoard.RIGHT_BOXES;
+                playerBoxY = DrawBoard.TOP_BOXES;
+                break;
+
+            case 2:
+                playerBoxX = DrawBoard.LEFT_BOXES;
+                playerBoxY = DrawBoard.BOTTOM_BOXES;
+                break;
+
+            case 3:
+                playerBoxX = DrawBoard.RIGHT_BOXES;
+                playerBoxY = DrawBoard.BOTTOM_BOXES;
+                break;
+        }
+
+
+        //Player boxes
+        if ((x > playerBoxX) && (x < playerBoxX + DrawBoard.PBOX_WIDTH)
+                && (y > playerBoxY) && (y < playerBoxY + DrawBoard.PBOX_HEIGHT)) {
 
             //Sets piece back to beginning
             selectedPiece = 0;
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 4; i++) {
                 for (int j = 0; j < 6; j++) {
                     //Sets space between each piece
-                    int spaceX = 10 + DrawBoard.LEFT_BOXES;
-                    int spaceY = 10 + DrawBoard.TOP_BOXES;
+                    int spaceX = 10 + playerBoxX;
+                    int spaceY = 10 + playerBoxY;
 
+                    //Makes sure that the user is selecting pieces that do not exist.
+                    if (selectedPiece > 21) {
+                        //Do nothing
+                    }
                     //Iterates through every piece to find selected piece
-                    if((x > (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * j))) && (x < (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * (j+1)))) &&
+                    else if ((x > (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * j))) && (x < (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * (j + 1)))) &&
                             (y > (spaceY + (DrawBoard.GRIDBOX_SIZE * 3) * i)) && (y < (spaceY + (DrawBoard.GRIDBOX_SIZE * 3) * (i + 1)))) {
                         BlokusSelectAction blokusSA = new BlokusSelectAction(this, selectedPiece);
                         game.sendAction(blokusSA);
@@ -132,6 +176,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                 }
             }
         }
+
 
         //Size of grid
         if ((x > 700) && (x < 1300) && (y > 50) && (y < 650)) {
