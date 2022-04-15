@@ -9,6 +9,7 @@ import android.widget.TextView;
 import java.io.Serializable;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
@@ -45,6 +46,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     private Button quitButton;
     private Button helpButton;
     private Button rotateButton;
+    private Button passButton;
     private TextView helpView;
 
     /**
@@ -78,12 +80,17 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             game.sendAction(blokusRA);
         }
         else if (view.getId() == R.id.quitButton) {
+            System.exit(1);
             BlokusQuitAction blokusQA = new BlokusQuitAction(this);
             game.sendAction(blokusQA);
         }
         else if (view.getId() == R.id.helpButton) {
             BlokusHelpMenuAction blokusHMA = new BlokusHelpMenuAction(this, helpView);
             game.sendAction(blokusHMA);
+        }
+        else if (view.getId() == R.id.passButton) {
+            BlokusPassAction blokusPA = new BlokusPassAction(this);
+            game.sendAction(blokusPA);
         }
     } //onClick
 
@@ -135,6 +142,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                             && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
                         BlokusPlaceAction blokusPA = new BlokusPlaceAction(this, selectedPiece, i, j);
                         game.sendAction(blokusPA);
+                        drawBoard.invalidate();
                     }
                 }
             }
@@ -178,11 +186,13 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         this.quitButton = (Button)activity.findViewById(R.id.quitButton);
         this.helpButton = (Button)activity.findViewById(R.id.helpButton);
         this.rotateButton = (Button)activity.findViewById(R.id.rotateButton);
+        this.passButton = (Button)activity.findViewById(R.id.passButton);
         this.helpView = (TextView)activity.findViewById(R.id.helpMenu);
 
         //Listens for button presses on this GUI
         quitButton.setOnClickListener(this);
         helpButton.setOnClickListener(this);
         rotateButton.setOnClickListener(this);
+        passButton.setOnClickListener(this);
     } //setAsGui
 }

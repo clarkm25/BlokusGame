@@ -1,7 +1,10 @@
 package edu.up.cs301.Blokus.BlokusPlayer;
 
+import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
+import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
 import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
+import edu.up.cs301.game.GameFramework.utilities.Logger;
 
 /**
  * Smart computer player for Blokus Game. Computer Player rotates pieces if there is no legal moves
@@ -26,12 +29,20 @@ public class BlokusSmartAi extends GameComputerPlayer {
     /**
      * recieveInfo
      *
-     *
+     * Method that makes action for the dumb computer player.
      *
      * @param info
      */
     @Override
     protected void receiveInfo(GameInfo info) {
+        if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
 
-    } //recieveInfo
+        Logger.log("BlokusSmartAi", "My turn!");
+
+        //Allow for AI to take time between plays
+        sleep(1);
+
+        Logger.log("BlokusSmartAi", "Sending move");
+        game.sendAction(new BlokusPassAction(this));
+    } //receiveInfo
 }

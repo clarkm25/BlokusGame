@@ -5,6 +5,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
@@ -197,6 +198,28 @@ public class BlokusLocalGame extends LocalGame {
             }
 
             return true;
+        }
+        else if (action instanceof BlokusPassAction) {
+            BlokusPassAction bpa = (BlokusPassAction) action;
+            playerId = getPlayerIdx(bpa.getPlayer());
+
+            switch(playerId) {
+                case 0:
+                    state.setPlayerTurn(1);
+                    break;
+
+                case 1:
+                    state.setPlayerTurn(2);
+                    break;
+
+                case 2:
+                    state.setPlayerTurn(3);
+                    break;
+
+                case 3:
+                    state.setPlayerTurn(0);
+                    break;
+            }
         }
 
         //Other action, return false

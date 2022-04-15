@@ -1,7 +1,9 @@
 package edu.up.cs301.Blokus.BlokusPlayer;
 
+import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
+import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
 import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
@@ -41,11 +43,13 @@ public class BlokusDumbAi extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
+
         Logger.log("BlokusDumbAi", "My turn!");
 
         //Allow for AI to take time between plays
         sleep(1);
 
         Logger.log("BlokusDumbAi", "Sending move");
-    }
+        game.sendAction(new BlokusPassAction(this));
+    } //receiveInfo
 }

@@ -48,6 +48,17 @@
             android:text="Rotate" />
 
         <Button
+            android:id="@+id/passButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginRight="20dp"
+            android:layout_weight="2"
+            android:text="Pass" />
+
+
+        <Button
             android:id="@+id/quitButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

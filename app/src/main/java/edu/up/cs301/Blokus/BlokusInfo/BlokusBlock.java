@@ -25,7 +25,7 @@ public class BlokusBlock implements Serializable {
     /** No param ctor */
     public BlokusBlock()
     {
-        this.type = 5;
+        this.type = 4;
         this.blockScore = 4;
         this.pieceArr = new int[5][5];
         for(int i = 0; i<5; i++)
