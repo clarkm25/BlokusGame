@@ -8,6 +8,8 @@ import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
 
+import java.io.Serializable;
+
 import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
@@ -19,10 +21,12 @@ import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
  * @version March 31st 2022
  */
-public class DrawBoard extends FlashSurfaceView {
+public class DrawBoard extends FlashSurfaceView implements Serializable{
+
+    //For Serializable interface
+    public static final long serialVersionUID = 2398472938471L;
 
     /* Instance variables */
-    public static final int ROWS_AND_COLS = 20;
     public static final int GRIDBOX_SIZE = 30;
     public static final int BOARD_START_HEIGHT = 50;
     public static final int BOARD_START_WIDTH = 700;
@@ -202,191 +206,191 @@ public class DrawBoard extends FlashSurfaceView {
 
         /** PLAYER ONE BOX -- RED */
         //Red 4 piece - 1st piece
-        c.drawPath(pieces.block4(1, false, 0, 0), red);
+        c.drawPath(pieces.block4(0, false, 0, 0), red);
 
         //Red 4 piece - 2nd piece
-        c.drawPath(pieces.block4(1, false, 0, 1), red);
+        c.drawPath(pieces.block4(0, false, 0, 1), red);
 
         //Red 4 piece - 3rd piece
-        c.drawPath(pieces.block4(1, false, 0, 2), red);
+        c.drawPath(pieces.block4(0, false, 0, 2), red);
 
         //Red 4 piece - 4th piece
-        c.drawPath(pieces.block4(1, false, 0, 3), red);
+        c.drawPath(pieces.block4(0, false, 0, 3), red);
 
         //Red 4 piece - 5th piece
-        c.drawPath(pieces.block4(1, false, 0, 4), red);
+        c.drawPath(pieces.block4(0, false, 0, 4), red);
 
         //Red 4 piece - 6th piece
-        c.drawPath(pieces.block4(1, false, 0, 5), red);
+        c.drawPath(pieces.block4(0, false, 0, 5), red);
 
         //Red 4 piece - 7th piece
-        c.drawPath(pieces.block4(1, false, 1, 0), red);
+        c.drawPath(pieces.block4(0, false, 1, 0), red);
 
         //Red 4 piece - 8th piece
-        c.drawPath(pieces.block4(1, false, 1, 1), red);
+        c.drawPath(pieces.block4(0, false, 1, 1), red);
 
         //Red 4 piece - 9th piece
-        c.drawPath(pieces.block4(1, false, 1, 2), red);
+        c.drawPath(pieces.block4(0, false, 1, 2), red);
 
         //Red 4 piece - 10th piece
-        c.drawPath(pieces.block4(1, false, 1, 3), red);
+        c.drawPath(pieces.block4(0, false, 1, 3), red);
 
         //Red 4 piece - 11th piece
-        c.drawPath(pieces.block4(1, false, 1, 4), red);
+        c.drawPath(pieces.block4(0, false, 1, 4), red);
 
         //Red 4 piece - 12th piece
-        c.drawPath(pieces.block4(1, false, 1, 5), red);
+        c.drawPath(pieces.block4(0, false, 1, 5), red);
 
         //Red 4 piece - 13th piece
-        c.drawPath(pieces.block4(1, false, 2, 0), red);
+        c.drawPath(pieces.block4(0, false, 2, 0), red);
 
         //Red 4 piece - 14th piece
-        c.drawPath(pieces.block4(1, false, 2, 1), red);
+        c.drawPath(pieces.block4(0, false, 2, 1), red);
 
         //Red 4 piece - 15th piece
-        c.drawPath(pieces.block4(1, false, 2, 2), red);
+        c.drawPath(pieces.block4(0, false, 2, 2), red);
 
         //Red 4 piece - 16th piece
-        c.drawPath(pieces.block4(1, false, 2, 3), red);
+        c.drawPath(pieces.block4(0, false, 2, 3), red);
 
         //Red 4 piece - 17th piece
-        c.drawPath(pieces.block4(1, false, 2, 4), red);
+        c.drawPath(pieces.block4(0, false, 2, 4), red);
 
         //Red 4 piece - 18th piece
-        c.drawPath(pieces.block4(1, false, 2, 5), red);
+        c.drawPath(pieces.block4(0, false, 2, 5), red);
 
         //Red 4 piece - 19th piece
-        c.drawPath(pieces.block4(1, false, 3, 0), red);
+        c.drawPath(pieces.block4(0, false, 3, 0), red);
 
         //Red 4 piece - 20st piece
-        c.drawPath(pieces.block4(1, false, 3, 1), red);
+        c.drawPath(pieces.block4(0, false, 3, 1), red);
 
         //Red 4 piece - 21st piece
-        c.drawPath(pieces.block4(1, false, 3, 2), red);
+        c.drawPath(pieces.block4(0, false, 3, 2), red);
 
 
         /** PLAYER TWO BOX -- GREEN */
         //Green 4 piece - 1st piece
-        c.drawPath(pieces.block4(2, false, 0, 0), green);
+        c.drawPath(pieces.block4(1, false, 0, 0), green);
 
         //Green 4 piece - 2nd piece
-        c.drawPath(pieces.block4(2, false, 0, 1), green);
+        c.drawPath(pieces.block4(1, false, 0, 1), green);
 
         //Green 4 piece - 3rd piece
-        c.drawPath(pieces.block4(2, false, 0, 2), green);
+        c.drawPath(pieces.block4(1, false, 0, 2), green);
 
         //Green 4 piece - 4th piece
-        c.drawPath(pieces.block4(2, false, 0, 3), green);
+        c.drawPath(pieces.block4(1, false, 0, 3), green);
 
         //Green 4 piece - 5th piece
-        c.drawPath(pieces.block4(2, false, 0, 4), green);
+        c.drawPath(pieces.block4(1, false, 0, 4), green);
 
         //Green 4 piece - 6th piece
-        c.drawPath(pieces.block4(2, false, 0, 5), green);
+        c.drawPath(pieces.block4(1, false, 0, 5), green);
 
         //Green 4 piece - 7th piece
-        c.drawPath(pieces.block4(2, false, 1, 0), green);
+        c.drawPath(pieces.block4(1, false, 1, 0), green);
 
         //Green 4 piece - 8th piece
-        c.drawPath(pieces.block4(2, false, 1, 1), green);
+        c.drawPath(pieces.block4(1, false, 1, 1), green);
 
         //Green 4 piece - 9th piece
-        c.drawPath(pieces.block4(2, false, 1, 2), green);
+        c.drawPath(pieces.block4(1, false, 1, 2), green);
 
         //Green 4 piece - 10th piece
-        c.drawPath(pieces.block4(2, false, 1, 3), green);
+        c.drawPath(pieces.block4(1, false, 1, 3), green);
 
         //Green 4 piece - 11th piece
-        c.drawPath(pieces.block4(2, false, 1, 4), green);
+        c.drawPath(pieces.block4(1, false, 1, 4), green);
 
         //Green 4 piece - 12th piece
-        c.drawPath(pieces.block4(2, false, 1, 5), green);
+        c.drawPath(pieces.block4(1, false, 1, 5), green);
 
         //Green 4 piece - 13th piece
-        c.drawPath(pieces.block4(2, false, 2, 0), green);
+        c.drawPath(pieces.block4(1, false, 2, 0), green);
 
         //Green 4 piece - 14th piece
-        c.drawPath(pieces.block4(2, false, 2, 1), green);
+        c.drawPath(pieces.block4(1, false, 2, 1), green);
 
         //Green 4 piece - 15th piece
-        c.drawPath(pieces.block4(2, false, 2, 2), green);
+        c.drawPath(pieces.block4(1, false, 2, 2), green);
 
         //Green 4 piece - 16th piece
-        c.drawPath(pieces.block4(2, false, 2, 3), green);
+        c.drawPath(pieces.block4(1, false, 2, 3), green);
 
         //Green 4 piece - 17th piece
-        c.drawPath(pieces.block4(2, false, 2, 4), green);
+        c.drawPath(pieces.block4(1, false, 2, 4), green);
 
         //Green 4 piece - 18th piece
-        c.drawPath(pieces.block4(2, false, 2, 5), green);
+        c.drawPath(pieces.block4(1, false, 2, 5), green);
 
         //Green 4 piece - 19th piece
-        c.drawPath(pieces.block4(2, false, 3, 0), green);
+        c.drawPath(pieces.block4(1, false, 3, 0), green);
 
         //Green 4 piece - 20st piece
-        c.drawPath(pieces.block4(2, false, 3, 1), green);
+        c.drawPath(pieces.block4(1, false, 3, 1), green);
 
         //Green 4 piece - 21st piece
-        c.drawPath(pieces.block4(2, false, 3, 2), green);
+        c.drawPath(pieces.block4(1, false, 3, 2), green);
 
 
         /** PLAYER THREE BOX -- BLUE */
         //Blue 4 piece - 1st piece
-        c.drawPath(pieces.block4(3, false, 0, 0), blue);
+        c.drawPath(pieces.block4(2, false, 0, 0), blue);
 
         //Blue 4 piece - 2nd piece
-        c.drawPath(pieces.block4(3, false, 0, 1), blue);
+        c.drawPath(pieces.block4(2, false, 0, 1), blue);
 
         //Blue 4 piece - 3rd piece
-        c.drawPath(pieces.block4(3, false, 0, 2), blue);
+        c.drawPath(pieces.block4(2, false, 0, 2), blue);
 
         //Blue 4 piece - 4th piece
-        c.drawPath(pieces.block4(3, false, 0, 3), blue);
+        c.drawPath(pieces.block4(2, false, 0, 3), blue);
 
         //Blue 4 piece - 5th piece
-        c.drawPath(pieces.block4(3, false, 0, 4), blue);
+        c.drawPath(pieces.block4(2, false, 0, 4), blue);
 
         //Blue 4 piece - 6th piece
-        c.drawPath(pieces.block4(3, false, 0, 5), blue);
+        c.drawPath(pieces.block4(2, false, 0, 5), blue);
 
         //Green 4 piece - 7th piece
-        c.drawPath(pieces.block4(3, false, 1, 0), blue);
+        c.drawPath(pieces.block4(2, false, 1, 0), blue);
 
         //Green 4 piece - 8th piece
-        c.drawPath(pieces.block4(3, false, 1, 1), blue);
+        c.drawPath(pieces.block4(2, false, 1, 1), blue);
 
         //Green 4 piece - 9th piece
-        c.drawPath(pieces.block4(3, false, 1, 2), blue);
+        c.drawPath(pieces.block4(2, false, 1, 2), blue);
 
         //Green 4 piece - 10th piece
-        c.drawPath(pieces.block4(3, false, 1, 3), blue);
+        c.drawPath(pieces.block4(2, false, 1, 3), blue);
 
         //Green 4 piece - 11th piece
-        c.drawPath(pieces.block4(3, false, 1, 4), blue);
+        c.drawPath(pieces.block4(2, false, 1, 4), blue);
 
         //Green 4 piece - 12th piece
-        c.drawPath(pieces.block4(3, false, 1, 5), blue);
+        c.drawPath(pieces.block4(2, false, 1, 5), blue);
 
         //Green 4 piece - 13th piece
-        c.drawPath(pieces.block4(3, false, 2, 0), blue);
+        c.drawPath(pieces.block4(2, false, 2, 0), blue);
 
         //Green 4 piece - 14th piece
-        c.drawPath(pieces.block4(3, false, 2, 1), blue);
+        c.drawPath(pieces.block4(2, false, 2, 1), blue);
 
         //Green 4 piece - 15th piece
-        c.drawPath(pieces.block4(3, false, 2, 2), blue);
+        c.drawPath(pieces.block4(2, false, 2, 2), blue);
 
         //Green 4 piece - 16th piece
-        c.drawPath(pieces.block4(3, false, 2, 3), blue);
+        c.drawPath(pieces.block4(2, false, 2, 3), blue);
 
         //Green 4 piece - 17th piece
-        c.drawPath(pieces.block4(3, false, 2, 4), blue);
+        c.drawPath(pieces.block4(2, false, 2, 4), blue);
 
         //Green 4 piece - 18th piece
-        c.drawPath(pieces.block4(3, false, 2, 5), blue);
+        c.drawPath(pieces.block4(2, false, 2, 5), blue);
 
         //Green 4 piece - 19th piece
-        c.drawPath(pieces.block4(3, false, 3, 0), blue);
+        c.drawPath(pieces.block4(2, false, 3, 0), blue);
 
         //Green 4 piece - 20st piece
         c.drawPath(pieces.block4(3, false, 3, 1), blue);
@@ -397,71 +401,71 @@ public class DrawBoard extends FlashSurfaceView {
 
         /** PLAYER ONE BOX -- Yellow */
         //Yellow 4 piece - 1st piece
-        c.drawPath(pieces.block4(4, false, 0, 0), yellow);
+        c.drawPath(pieces.block4(3, false, 0, 0), yellow);
 
         //Yellow 4 piece - 2nd piece
-        c.drawPath(pieces.block4(4, false, 0, 1), yellow);
+        c.drawPath(pieces.block4(3, false, 0, 1), yellow);
 
         //Yellow 4 piece - 3rd piece
-        c.drawPath(pieces.block4(4, false, 0, 2), yellow);
+        c.drawPath(pieces.block4(3, false, 0, 2), yellow);
 
         //Yellow 4 piece - 4th piece
-        c.drawPath(pieces.block4(4, false, 0, 3), yellow);
+        c.drawPath(pieces.block4(3, false, 0, 3), yellow);
 
         //Yellow 4 piece - 5th piece
-        c.drawPath(pieces.block4(4, false, 0, 4), yellow);
+        c.drawPath(pieces.block4(3, false, 0, 4), yellow);
 
         //Yellow 4 piece - 6th piece
-        c.drawPath(pieces.block4(4, false, 0, 5), yellow);
+        c.drawPath(pieces.block4(3, false, 0, 5), yellow);
 
         //Yellow 4 piece - 7th piece
-        c.drawPath(pieces.block4(4, false, 1, 0), yellow);
+        c.drawPath(pieces.block4(3, false, 1, 0), yellow);
 
         //Yellow 4 piece - 8th piece
-        c.drawPath(pieces.block4(4, false, 1, 1), yellow);
+        c.drawPath(pieces.block4(3, false, 1, 1), yellow);
 
         //Yellow 4 piece - 9th piece
-        c.drawPath(pieces.block4(4, false, 1, 2), yellow);
+        c.drawPath(pieces.block4(3, false, 1, 2), yellow);
 
         //Yellow 4 piece - 10th piece
-        c.drawPath(pieces.block4(4, false, 1, 3), yellow);
+        c.drawPath(pieces.block4(3, false, 1, 3), yellow);
 
         //Yellow 4 piece - 11th piece
-        c.drawPath(pieces.block4(4, false, 1, 4), yellow);
+        c.drawPath(pieces.block4(3, false, 1, 4), yellow);
 
         //Yellow 4 piece - 12th piece
-        c.drawPath(pieces.block4(4, false, 1, 5), yellow);
+        c.drawPath(pieces.block4(3, false, 1, 5), yellow);
 
         //Yellow 4 piece - 13th piece
-        c.drawPath(pieces.block4(4, false, 2, 0), yellow);
+        c.drawPath(pieces.block4(3, false, 2, 0), yellow);
 
         //Yellow 4 piece - 14th piece
-        c.drawPath(pieces.block4(4, false, 2, 1), yellow);
+        c.drawPath(pieces.block4(3, false, 2, 1), yellow);
 
         //Yellow 4 piece - 15th piece
-        c.drawPath(pieces.block4(4, false, 2, 2), yellow);
+        c.drawPath(pieces.block4(3, false, 2, 2), yellow);
 
         //Yellow 4 piece - 16th piece
-        c.drawPath(pieces.block4(4, false, 2, 3), yellow);
+        c.drawPath(pieces.block4(3, false, 2, 3), yellow);
 
         //Yellow 4 piece - 17th piece
-        c.drawPath(pieces.block4(4, false, 2, 4), yellow);
+        c.drawPath(pieces.block4(3, false, 2, 4), yellow);
 
         //Yellow 4 piece - 18th piece
-        c.drawPath(pieces.block4(4, false, 2, 5), yellow);
+        c.drawPath(pieces.block4(3, false, 2, 5), yellow);
 
         //Yellow 4 piece - 19th piece
-        c.drawPath(pieces.block4(4, false, 3, 0), yellow);
+        c.drawPath(pieces.block4(3, false, 3, 0), yellow);
 
         //Yellow 4 piece - 20st piece
-        c.drawPath(pieces.block4(4, false, 3, 1), yellow);
+        c.drawPath(pieces.block4(3, false, 3, 1), yellow);
 
         //Yellow 4 piece - 21st piece
-        c.drawPath(pieces.block4(4, false, 3, 2), yellow);
+        c.drawPath(pieces.block4(3, false, 3, 2), yellow);
 
 
         //Player & Score
-        this.drawPlayerInfo(c, blokusState.getPlayerScore(blokusState.getPlayerTurn() - 1),
+        this.drawPlayerInfo(c, blokusState.getPlayerScore(blokusState.getPlayerTurn()),
                 blokusState.getPlayerColor(blokusState.getPlayerTurn()));
     } //onDraw
 

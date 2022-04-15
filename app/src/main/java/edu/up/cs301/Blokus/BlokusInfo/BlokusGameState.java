@@ -1,5 +1,7 @@
 package edu.up.cs301.Blokus.BlokusInfo;
 
+import java.io.Serializable;
+
 import edu.up.cs301.game.GameFramework.infoMessage.GameState;
 
 /**
@@ -9,7 +11,10 @@ import edu.up.cs301.game.GameFramework.infoMessage.GameState;
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
  * @version March 31st 2022
  */
-public class BlokusGameState extends GameState {
+public class BlokusGameState extends GameState implements Serializable {
+
+    //For Serializable interface
+    public static final long serialVersionUID = 3819873219821L;
 
     /** Declaration of an enum type representing the states a certain tile can have */
     public enum tileState{
@@ -30,20 +35,21 @@ public class BlokusGameState extends GameState {
     public BlokusGameState() {
 
         /* int containing the current player's turn*/
-        this.playerTurn = 1;
+        this.playerTurn = 0;
 
         /* int containing the currently selected block type */
         this.selectedType = -1;
 
         /* Array for holding player scores */
-        this.playerScore = new int[] {0,0,0,0};
+        this.playerScore = new int[] {-89,-89,-89,-89};
 
         /* Array containing the block objects within each player box and each player's box will be populated with the appropriate blocks */
         blockArray = new BlokusBlock[4][21];
         for(int i = 0; i<4; i++) {
             for (int j = 0; j<21; j++) {
                 this.blockArray[i][j] = new BlokusBlock();
-                this.blockArray[i][j].setType(j);
+                //TODO: CHANGE setType(4) BACK TO setType(j) WHEN USING ALL PIECES OPPOSED TO JUST 2x2s.
+                this.blockArray[i][j].setType(4);
             }
         }
 
@@ -108,33 +114,6 @@ public class BlokusGameState extends GameState {
     }
 
     /**
-     *  This will change the gameOn boolean to take steps to quit
-     *  the game
-     *
-     * @param initGameOn given boolean to quit game
-     *
-     * @return boolean
-     */
-    public boolean quitGame(boolean initGameOn) {
-        this.gameOn = initGameOn;
-        if (gameOn == false) {
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
-    /**
-     *  This method will be responsible for handling the display of the help menu once the
-     *  game has access to the game framework and will return false for now
-     *
-     * @return boolean
-     */
-    public boolean helpMenu() {
-        return false;
-    }
-    /**
      *  This will check to see if a legal move is at the current touch position
      *  and then will increment the appropriate players score based on the
      *  piece placed
@@ -193,8 +172,8 @@ public class BlokusGameState extends GameState {
                         }
                     }
                 }
-                this.playerScore[playerTurn - 1] += this.blockArray[playerTurn - 1][piece.getType()].getBlockScore();
-                this.blockArray[playerTurn - 1][piece.getType()] = null;
+                this.playerScore[playerTurn] += this.blockArray[playerTurn][piece.getType()].getBlockScore();
+                this.blockArray[playerTurn][piece.getType()] = null;
                 for(int i = 0; i<20; i++)
                 {
                     for(int j = 0; j<20; j++)
@@ -428,13 +407,13 @@ public class BlokusGameState extends GameState {
     public tileState getTileStateForId(int playerTurn) {
         //Based on playerTurn, returns specific tileStates where red is associated with 1 and so on
         switch(playerTurn) {
-            case 1:
+            case 0:
                 return tileState.RED;
-            case 2:
+            case 1:
                 return tileState.BLUE;
-            case 3:
+            case 2:
                 return tileState.GREEN;
-            case 4:
+            case 3:
                 return tileState.YELLOW;
             default: //Something invalid passed in, returning null
                 return null;
@@ -472,16 +451,16 @@ public class BlokusGameState extends GameState {
         String playerColor = "";
 
         switch(player) {
-            case 1:
+            case 0:
                 playerColor = "Red";
                 break;
-            case 2:
+            case 1:
                 playerColor = "Blue";
                 break;
-            case 3:
+            case 2:
                 playerColor = "Green";
                 break;
-            case 4:
+            case 3:
                 playerColor = "Yellow";
                 break;
         }
@@ -494,7 +473,7 @@ public class BlokusGameState extends GameState {
      */
     public void setPlayerTurn(int toSet) { this.playerTurn = toSet; }
     public void setSelectedType(int toSet) { this.selectedType = toSet; }
-    public void setPlayerScore(int idx, int toSet){ this.playerScore[idx] = toSet; }
+    public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] = toAdd; }
     public void setGameOn(boolean toSet) { this.gameOn = toSet; }
 
     /**

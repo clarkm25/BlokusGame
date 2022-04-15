@@ -12,6 +12,9 @@ import edu.up.cs301.game.GameFramework.players.GamePlayer;
  */
 public class BlokusRotateAction extends GameAction {
 
+    //For Serializable interface
+    public static final long serialVersionUID = 123129837127312L;
+
     /**
      * constructor for BlokusRotateAction
      *

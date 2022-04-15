@@ -4,6 +4,9 @@ import android.graphics.Color;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
+
+import java.io.Serializable;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
@@ -42,6 +45,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     private Button quitButton;
     private Button helpButton;
     private Button rotateButton;
+    private TextView helpView;
 
     /**
      * BlokusHumanPlayer
@@ -78,7 +82,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             game.sendAction(blokusQA);
         }
         else if (view.getId() == R.id.helpButton) {
-            BlokusHelpMenuAction blokusHMA = new BlokusHelpMenuAction(this);
+            BlokusHelpMenuAction blokusHMA = new BlokusHelpMenuAction(this, helpView);
             game.sendAction(blokusHMA);
         }
     } //onClick
@@ -97,26 +101,26 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     public boolean onTouch(View view, MotionEvent motionEvent) {
         int x = (int)motionEvent.getX();
         int y = (int)motionEvent.getY();
-        int spaceX = 10;
-        int spaceY = 10;
 
         //Player 1's box
         if ((x > DrawBoard.LEFT_BOXES) && (x < DrawBoard.LEFT_BOXES + DrawBoard.PBOX_WIDTH)
                 && (y > DrawBoard.TOP_BOXES) && (y < DrawBoard.TOP_BOXES + DrawBoard.PBOX_HEIGHT)) {
 
             //Sets piece back to beginning
-            selectedPiece = 1;
+            selectedPiece = 0;
 
             for (int i = 0; i < 3; i++) {
                 for (int j = 0; j < 6; j++) {
+                    //Sets space between each piece
+                    int spaceX = 10 + DrawBoard.LEFT_BOXES;
+                    int spaceY = 10 + DrawBoard.TOP_BOXES;
+
                     //Iterates through every piece to find selected piece
-                    if((x > (spaceX + (DrawBoard.LEFT_BOXES * j))) && (x < (spaceX + (DrawBoard.LEFT_BOXES * (j + 1)))) &&
-                            (y > (spaceY + (DrawBoard.TOP_BOXES * j))) && (y < (spaceY + (DrawBoard.TOP_BOXES * (j + 1))))) {
+                    if((x > (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * j))) && (x < (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * (j+1)))) &&
+                            (y > (spaceY + (DrawBoard.GRIDBOX_SIZE * 3) * i)) && (y < (spaceY + (DrawBoard.GRIDBOX_SIZE * 3) * (i + 1)))) {
                         BlokusSelectAction blokusSA = new BlokusSelectAction(this, selectedPiece);
                         game.sendAction(blokusSA);
                     }
-                    spaceX += 90; //Horizontal space between pieces
-                    spaceY += 90; //Vertical space between pieces
                     selectedPiece++; //Increases piece until selected area.
                 }
             }
@@ -124,8 +128,8 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
 
         //Size of grid
         if ((x > 700) && (x < 1300) && (y > 50) && (y < 650)) {
-            for (int i = 0; i < 19; i++) {
-                for (int j = 0; j < 19; j++) {
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
                     //Iterates through ever spot on the grid in order to find where user presses.
                     if ((x > ((j * DrawBoard.GRIDBOX_SIZE) + 700)) && (x < (((j+1) * DrawBoard.GRIDBOX_SIZE) + 700))
                             && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
@@ -170,11 +174,11 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         Logger.log("set logger", "OnTouch");
         drawBoard.setOnTouchListener(this);
 
-
         //Initializes the button variables
         this.quitButton = (Button)activity.findViewById(R.id.quitButton);
         this.helpButton = (Button)activity.findViewById(R.id.helpButton);
         this.rotateButton = (Button)activity.findViewById(R.id.rotateButton);
+        this.helpView = (TextView)activity.findViewById(R.id.helpMenu);
 
         //Listens for button presses on this GUI
         quitButton.setOnClickListener(this);

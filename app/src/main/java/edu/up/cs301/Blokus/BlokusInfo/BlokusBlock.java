@@ -2,6 +2,8 @@ package edu.up.cs301.Blokus.BlokusInfo;
 
 import android.graphics.Path;
 
+import java.io.Serializable;
+
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 
 /**
@@ -10,7 +12,12 @@ import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
  * @version March 31st 2022
  */
-public class BlokusBlock {
+public class BlokusBlock implements Serializable {
+
+    //For Serializable interface
+    public static final long serialVersionUID = 7210794871L;
+
+    //Instance Variables
     private int type;
     private int blockScore;
     private int[][] pieceArr;
@@ -92,15 +99,28 @@ public class BlokusBlock {
         }
     }
 
-    public int[][] getPiece(int piece) {
-        switch(piece) {
+    /**
+     * getPiece
+     *
+     * Takes the type supplied in the setType() method above and sends back the piece array for
+     * the given piece.
+     *
+     * Also sets the piece's score based on how many tiles there are.
+     *
+     * @return The array of a given piece
+     */
+    public int[][] getPiece() {
+        switch(type) {
             case 1:
                 this.pieceArr[0][0] = 2;
+
+                this.setBlockScore(1);
             case 2:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[0][2] = 1;
 
+                this.setBlockScore(3);
             case 3:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -108,16 +128,22 @@ public class BlokusBlock {
                 this.pieceArr[1][1] = 1;
                 this.pieceArr[1][2] = 1;
 
+                this.setBlockScore(1);
+
             case 4:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[1][0] = 1;
                 this.pieceArr[1][1] = 1;
 
+                this.setBlockScore(4)
+                ;
             case 5:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[1][1] = 1;
+
+                this.setBlockScore(3);
 
             case 6:
                 this.pieceArr[1][0] = 2;
@@ -126,9 +152,13 @@ public class BlokusBlock {
                 this.pieceArr[2][1] = 1;
                 this.pieceArr[1][2] = 1;
 
+                this.setBlockScore(5);
+
             case 7:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
+
+                this.setBlockScore(2);
 
             case 8:
                 this.pieceArr[0][0] = 2;
@@ -136,11 +166,15 @@ public class BlokusBlock {
                 this.pieceArr[1][1] = 1;
                 this.pieceArr[1][2] = 1;
 
+                this.setBlockScore(4);
+
             case 9:
                 this.pieceArr[1][0] = 2;
                 this.pieceArr[1][1] = 1;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[1][2] = 1;
+
+                this.setBlockScore(4);
 
             case 10:
                 this.pieceArr[0][0] = 2;
@@ -149,12 +183,16 @@ public class BlokusBlock {
                 this.pieceArr[1][2] = 1;
                 this.pieceArr[1][3] = 1;
 
+                this.setBlockScore(5);
+
             case 11:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[1][0] = 1;
                 this.pieceArr[1][1] = 1;
                 this.pieceArr[1][2] = 1;
                 this.pieceArr[2][2] = 1;
+
+                this.setBlockScore(5);
 
             case 12:
                 this.pieceArr[0][0] = 2;
@@ -163,12 +201,16 @@ public class BlokusBlock {
                 this.pieceArr[0][3] = 1;
                 this.pieceArr[1][3] = 1;
 
+                this.setBlockScore(5);
+
             case 13:
                 this.pieceArr[1][0] = 2;
                 this.pieceArr[1][1] = 1;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[1][2] = 1;
                 this.pieceArr[1][3] = 1;
+
+                this.setBlockScore(5);
 
             case 14:
                 this.pieceArr[2][0] = 2;
@@ -177,12 +219,16 @@ public class BlokusBlock {
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[0][2] = 1;
 
+                this.setBlockScore(5);
+
             case 15:
                 this.pieceArr[2][0] = 2;
                 this.pieceArr[2][1] = 1;
                 this.pieceArr[1][1] = 1;
                 this.pieceArr[1][2] = 1;
                 this.pieceArr[0][1] = 1;
+
+                this.setBlockScore(5);
 
             case 16:
                 this.pieceArr[0][0] = 2;
@@ -191,6 +237,8 @@ public class BlokusBlock {
                 this.pieceArr[2][0] = 1;
                 this.pieceArr[2][1] = 1;
 
+                this.setBlockScore(5);
+
             case 17:
                 this.pieceArr[1][0] = 2;
                 this.pieceArr[1][1] = 1;
@@ -198,11 +246,15 @@ public class BlokusBlock {
                 this.pieceArr[0][2] = 1;
                 this.pieceArr[2][2] = 1;
 
+                this.setBlockScore(5);
+
             case 18:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[0][2] = 1;
                 this.pieceArr[1][2] = 1;
+
+                this.setBlockScore(4);
 
             case 19:
                 this.pieceArr[0][0] = 2;
@@ -211,12 +263,15 @@ public class BlokusBlock {
                 this.pieceArr[0][3] = 1;
                 this.pieceArr[0][4] = 1;
 
+                this.setBlockScore(5);
+
             case 20:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[0][2] = 1;
                 this.pieceArr[0][3] = 1;
 
+                this.setBlockScore(4);
 
             case 21:
                 this.pieceArr[0][0] = 2;
@@ -225,7 +280,7 @@ public class BlokusBlock {
                 this.pieceArr[2][1] = 1;
                 this.pieceArr[2][2] = 1;
 
-
+                this.setBlockScore(5);
         }
 
         return this.pieceArr;
@@ -242,16 +297,16 @@ public class BlokusBlock {
     public int getX(int player) {
         int x = 0;
 
-        if (player == 1) {
+        if (player == 0) {
+            x = DrawBoard.LEFT_BOXES; //Left boxes
+        }
+        else if (player == 1) {
             x = DrawBoard.LEFT_BOXES; //Left boxes
         }
         else if (player == 2) {
-            x = DrawBoard.LEFT_BOXES; //Left boxes
-        }
-        else if (player == 3) {
             x = DrawBoard.RIGHT_BOXES; //Right boxes
         }
-        else if (player == 4) {
+        else if (player == 3) {
             x = DrawBoard.RIGHT_BOXES; //Right boxes
         }
 
@@ -269,16 +324,16 @@ public class BlokusBlock {
     public int getY(int player) {
         int y = 0;
 
-        if (player == 1) {
+        if (player == 0) {
             y = DrawBoard.TOP_BOXES; //Top boxes
         }
-        else if (player == 2) {
+        else if (player == 1) {
             y = DrawBoard.BOTTOM_BOXES; //Bottom boxes
         }
-        else if (player == 3) {
+        else if (player == 2) {
             y = DrawBoard.TOP_BOXES; //Top Boxes
         }
-        else if (player == 4) {
+        else if (player == 3) {
             y = DrawBoard.BOTTOM_BOXES; //Bottom boxes
         }
 

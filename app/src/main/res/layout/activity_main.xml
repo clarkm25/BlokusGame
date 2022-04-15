@@ -59,4 +59,33 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/helpMenu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="200dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="20sp"
+        android:background="#D6EAEA"
+        android:text="                                                                          Help Menu:
+\n\nBlokus Rules:\n         Each player gets a color and 21 pieces in their given color.
+To start, each player must place a piece in their respective corner, and from there they must then
+place each piece against a corner of their respective color. This means that a piece can not be
+touching an edge of their color or overlapping with any another piece. Each player will place as many
+of their pieces as they can until it is no longer possible for them to place any pieces even when
+they are rotated. \n         For scoring, every square in a single piece is worth 1 point. Therefore if a
+player is planning on placing a 4 block piece, it will be worth 4 points. Each players score starts
+at -89 and goes up when a piece is placed as the score is subtracted from the overall score. If a
+player is able to place all 21 of their pieces, they will end up with a score equalling 0. However,
+for placing all 21 pieces, a 15 point bonus is given to the player for a total score of 15. There is
+yet another bonus that players can get though which is achieved from placing the 1 block piece
+last. By doing so an additional bonus of 5 points will be given to the player for a total of 20
+points. \n          When placing a piece, the corner that is placed in a legal spot defaults to the top left
+corner. Therefore, if needed the piece can be rotated so that it does not overlap other pieces.
+\n\nButtons: \nHelp - Opens and closes this menu. \nRotate - Rotates a selected piece 90 degrees
+clockwise. \nQuit - Closes the game. "/>
+
 </RelativeLayout>

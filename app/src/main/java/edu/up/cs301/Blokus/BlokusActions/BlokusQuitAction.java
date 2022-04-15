@@ -10,6 +10,10 @@ import edu.up.cs301.game.GameFramework.players.GamePlayer;
  * @version March 31st 2022
  */
 public class BlokusQuitAction extends GameAction {
+
+    //For Serializable interface
+    public static final long serialVersionUID = 324789172912398L;
+
     /**
      * constructor for BlokusQuitAction
      *

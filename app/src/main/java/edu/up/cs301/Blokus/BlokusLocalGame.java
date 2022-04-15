@@ -1,6 +1,8 @@
 package edu.up.cs301.Blokus;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusHelpMenuAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
@@ -148,6 +150,10 @@ public class BlokusLocalGame extends LocalGame {
             /* Sets the appropriate player's turn based on whose turn it currently is */
             switch (playerId)
             {
+                case 0:
+                    state.setPlayerTurn(1);
+                    break;
+
                 case 1:
                     state.setPlayerTurn(2);
                     break;
@@ -157,11 +163,7 @@ public class BlokusLocalGame extends LocalGame {
                     break;
 
                 case 3:
-                    state.setPlayerTurn(4);
-                    break;
-
-                case 4:
-                    state.setPlayerTurn(1);
+                    state.setPlayerTurn(0);
                     break;
             }
             //Clears legal spots from board as it is no longer given player's turn
@@ -169,10 +171,32 @@ public class BlokusLocalGame extends LocalGame {
             return true;
         }
         else if(action instanceof BlokusQuitAction) {
-            state.quitGame(true);
+            System.exit(1); //Sends a non-zero value to system which is what triggers exit.
+            return true;
         }
         else if(action instanceof BlokusHelpMenuAction) {
+            BlokusHelpMenuAction bhm = (BlokusHelpMenuAction) action;
+            TextView helpMenu = bhm.getHelpMenu();
 
+            /**
+             * External Citation
+             * Date: 13 April 2022
+             * Problem: Didn't know how to hide and show a TextView.
+             * Resource:
+             * https://stackoverflow.com/questions/29470875/how-to-make-a-textview-show-after-
+             * the-button-click-how-to-hide-the-textview-agai
+             *
+             * Solution: I used this source to figure out how to use setVisibility() to remove and
+             * show TextViews. This is part of a code stub from the source.
+             */
+            if (helpMenu.getVisibility() == View.GONE) {
+                helpMenu.setVisibility(View.VISIBLE);
+            }
+            else {
+                helpMenu.setVisibility(View.GONE);
+            }
+
+            return true;
         }
 
         //Other action, return false

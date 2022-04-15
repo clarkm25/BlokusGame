@@ -11,6 +11,9 @@ import edu.up.cs301.game.GameFramework.players.GamePlayer;
  */
 public class BlokusPlaceAction extends GameAction {
 
+    //For Serializable interface
+    public static final long serialVersionUID = 81237812936718L;
+
     /* Instance variables */
     private int row;
     private int col;
