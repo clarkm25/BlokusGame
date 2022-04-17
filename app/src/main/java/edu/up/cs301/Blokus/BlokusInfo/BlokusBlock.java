@@ -109,18 +109,27 @@ public class BlokusBlock implements Serializable {
      *
      * @return The array of a given piece
      */
-    public int[][] getPiece() {
-        switch(type) {
+    public int[][] getPiece(int pieceNum) {
+        //Goes through and sets all pieces
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                this.pieceArr[i][j] = 0;
+            }
+        }
+
+        switch(pieceNum) {
             case 1:
                 this.pieceArr[0][0] = 2;
 
                 this.setBlockScore(1);
+                break;
             case 2:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[0][2] = 1;
 
                 this.setBlockScore(3);
+                break;
             case 3:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -129,22 +138,22 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][2] = 1;
 
                 this.setBlockScore(1);
-
+                break;
             case 4:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[1][0] = 1;
                 this.pieceArr[1][1] = 1;
 
-                this.setBlockScore(4)
-                ;
+                this.setBlockScore(4);
+                break;
             case 5:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
                 this.pieceArr[1][1] = 1;
 
                 this.setBlockScore(3);
-
+                break;
             case 6:
                 this.pieceArr[1][0] = 2;
                 this.pieceArr[1][1] = 1;
@@ -153,13 +162,13 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][2] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 7:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
 
                 this.setBlockScore(2);
-
+                break;
             case 8:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -167,7 +176,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][2] = 1;
 
                 this.setBlockScore(4);
-
+                break;
             case 9:
                 this.pieceArr[1][0] = 2;
                 this.pieceArr[1][1] = 1;
@@ -175,7 +184,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][2] = 1;
 
                 this.setBlockScore(4);
-
+                break;
             case 10:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -184,7 +193,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][3] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 11:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[1][0] = 1;
@@ -193,7 +202,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[2][2] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 12:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -202,7 +211,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][3] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 13:
                 this.pieceArr[1][0] = 2;
                 this.pieceArr[1][1] = 1;
@@ -211,7 +220,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][3] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 14:
                 this.pieceArr[2][0] = 2;
                 this.pieceArr[1][0] = 1;
@@ -220,7 +229,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[0][2] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 15:
                 this.pieceArr[2][0] = 2;
                 this.pieceArr[2][1] = 1;
@@ -229,7 +238,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[0][1] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 16:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -238,7 +247,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[2][1] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 17:
                 this.pieceArr[1][0] = 2;
                 this.pieceArr[1][1] = 1;
@@ -247,7 +256,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[2][2] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 18:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -255,7 +264,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[1][2] = 1;
 
                 this.setBlockScore(4);
-
+                break;
             case 19:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -264,7 +273,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[0][4] = 1;
 
                 this.setBlockScore(5);
-
+                break;
             case 20:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[0][1] = 1;
@@ -272,7 +281,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[0][3] = 1;
 
                 this.setBlockScore(4);
-
+                break;
             case 21:
                 this.pieceArr[0][0] = 2;
                 this.pieceArr[1][0] = 1;
@@ -281,6 +290,7 @@ public class BlokusBlock implements Serializable {
                 this.pieceArr[2][2] = 1;
 
                 this.setBlockScore(5);
+                break;
         }
 
         return this.pieceArr;
@@ -301,10 +311,10 @@ public class BlokusBlock implements Serializable {
             x = DrawBoard.LEFT_BOXES; //Left boxes
         }
         else if (player == 1) {
-            x = DrawBoard.LEFT_BOXES; //Left boxes
+            x = DrawBoard.RIGHT_BOXES; //Left boxes
         }
         else if (player == 2) {
-            x = DrawBoard.RIGHT_BOXES; //Right boxes
+            x = DrawBoard.LEFT_BOXES; //Right boxes
         }
         else if (player == 3) {
             x = DrawBoard.RIGHT_BOXES; //Right boxes
@@ -328,10 +338,10 @@ public class BlokusBlock implements Serializable {
             y = DrawBoard.TOP_BOXES; //Top boxes
         }
         else if (player == 1) {
-            y = DrawBoard.BOTTOM_BOXES; //Bottom boxes
+            y = DrawBoard.TOP_BOXES; //Bottom boxes
         }
         else if (player == 2) {
-            y = DrawBoard.TOP_BOXES; //Top Boxes
+            y = DrawBoard.BOTTOM_BOXES; //Top Boxes
         }
         else if (player == 3) {
             y = DrawBoard.BOTTOM_BOXES; //Bottom boxes
@@ -339,7 +349,6 @@ public class BlokusBlock implements Serializable {
 
         return y;
     } //getY
-
 
     /**
      * block1

@@ -11,6 +11,7 @@ import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.utilities.Logger;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * Dumb computer player for Blokus that places first piece in first legal spot.
@@ -53,7 +54,10 @@ public class BlokusDumbAi extends GameComputerPlayer {
         sleep(3);
 
         /* Picks a random piece number and sets both selected row and columns to zero */
-        int pickedPiece = (int) Math.random()*20;
+        //TODO: Might need a do while loop in order to make sure that the picked piece has not
+        //TODO: already been placed.
+        Random r = new Random();
+        int pickedPiece = r.nextInt(21);
         int selectedRow = 0;
         int selectedColumn = 0;
 

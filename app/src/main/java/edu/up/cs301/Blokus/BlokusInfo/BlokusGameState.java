@@ -1,7 +1,11 @@
 package edu.up.cs301.Blokus.BlokusInfo;
 
+import android.graphics.Canvas;
+import android.graphics.Path;
+
 import java.io.Serializable;
 
+import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.infoMessage.GameState;
 
 /**
@@ -49,7 +53,7 @@ public class BlokusGameState extends GameState implements Serializable {
             for (int j = 0; j<21; j++) {
                 this.blockArray[i][j] = new BlokusBlock();
                 //TODO: CHANGE setType(4) BACK TO setType(j) WHEN USING ALL PIECES OPPOSED TO JUST 2x2s.
-                this.blockArray[i][j].setType(j);
+                this.blockArray[i][j].setType(4);
             }
         }
 

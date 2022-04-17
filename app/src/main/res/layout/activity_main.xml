@@ -97,6 +97,6 @@ last. By doing so an additional bonus of 5 points will be given to the player fo
 points. \n          When placing a piece, the corner that is placed in a legal spot defaults to the top left
 corner. Therefore, if needed the piece can be rotated so that it does not overlap other pieces.
 \n\nButtons: \nHelp - Opens and closes this menu. \nRotate - Rotates a selected piece 90 degrees
-clockwise. \nQuit - Closes the game. "/>
+clockwise. \nQuit - Closes the game. \nPass - Passes the user's turn without placing a piece."/>
 
 </RelativeLayout>
