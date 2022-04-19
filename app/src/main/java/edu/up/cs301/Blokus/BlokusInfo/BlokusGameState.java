@@ -210,32 +210,22 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public boolean rotatePiece(BlokusBlock piece)
     {
-        /* First, will perform a swap along a diagonal line like y=-x where 2,2 is the "origin" */
+        /* First, creates a temporary array to store the "rotation" in */
+        int[][] tempArr = new int[5][5];
         for(int i = 0; i<5; i++)
-        {
-            for (int j = 1; j<5; j++)
-            {
-                int temp = piece.getPieceArr()[i][j];
-                piece.getPieceArr()[i][j] = piece.getPieceArr()[j][i];
-                piece.getPieceArr()[j][i] = temp;
-            }
-        }
-
-        /* Then, will swap the array elements across a vertical line going down the middle of the array */
-        int n = 4;
-        for (int i = 0; i<5; i++)
         {
             for(int j = 0; j<5; j++)
             {
-                int temp = piece.getPieceArr()[i][j];
-                piece.getPieceArr()[i][j] = piece.getPieceArr()[i][n];
-                piece.getPieceArr()[i][n] = temp;
-                n--;
-                if(n==2)
-                {
-                    n=4;
-                    break;
-                }
+                tempArr[j][4-i] = piece.getPieceArr()[i][j];
+            }
+        }
+
+        /* Then, will copy over the rotated array into the piece array without the need for swapping or temp ints */
+        for(int i = 0; i<5; i++)
+        {
+            for (int j = 0; j<5; j++)
+            {
+                piece.getPieceArr()[i][j] = tempArr[i][j];
             }
         }
         return true;

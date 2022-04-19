@@ -41,6 +41,7 @@ public class BlokusBlock implements Serializable {
     public BlokusBlock(BlokusBlock toCopy) {
         this.type = toCopy.type;
         this.blockScore = toCopy.blockScore;
+        this.onBoard = toCopy.onBoard;
         this.pieceArr = new int[5][5];
         this.onBoard = toCopy.onBoard;
         for (int i = 0; i < 5; i++) {
