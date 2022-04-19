@@ -43,7 +43,6 @@ public class BlokusSmartAi extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
-
         if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
 
         Logger.log("BlokusSmartAi", "My turn!");
