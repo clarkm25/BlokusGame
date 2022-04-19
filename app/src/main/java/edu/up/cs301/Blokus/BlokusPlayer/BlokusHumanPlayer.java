@@ -172,20 +172,25 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
 
                     //Makes sure that the user is selecting pieces that do not exist.
                     if (selectedPiece > 21) {
-                        //Do nothing
+                        drawBoard.flash(Color.RED, 50);
                     }
                     //Iterates through every piece to find selected piece
                     else if ((x > spaceXL) && (x < spaceXR) &&
                             (y > spaceYL) && (y < spaceYR)) {
-                        BlokusSelectAction blokusSA = new BlokusSelectAction(this, selectedPiece);
-                        game.sendAction(blokusSA);
+                        if(blokusState.getBlockArray()[playerNum][selectedPiece].getOnBoard())
+                        {
+                            drawBoard.flash(Color.RED, 50);
+                        }
+                        else
+                        {
+                            BlokusSelectAction blokusSA = new BlokusSelectAction(this, selectedPiece);
+                            game.sendAction(blokusSA);
+                        }
                     }
                     selectedPiece++; //Increases piece until selected area.
                 }
             }
         }
-
-
         //Size of grid
         if ((x > 700) && (x < 1300) && (y > 50) && (y < 650)) {
             for (int i = 0; i < 20; i++) {

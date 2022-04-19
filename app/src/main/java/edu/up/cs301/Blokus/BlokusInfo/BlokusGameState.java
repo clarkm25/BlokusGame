@@ -128,28 +128,38 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece, int rotateInt)
+    public int placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece, int rotateInt)
     {
         /* Variables to represent the relative x and y coords as well as the current playerState*/
         int relX = 0;
         int relY = 0;
 
+        /* New temp board to make sure no piece overwrites another*/
+        tileState[][] tempBoard = new tileState[20][20];
+        for(int i = 0; i<20; i++)
+        {
+            for(int j = 0; j<20; j++)
+            {
+               tempBoard[i][j] = this.board[i][j];
+            }
+        }
+
         int rotateCount = rotateInt;
         /* If the piece has been rotated four times, returns false */
         if(rotateCount == 4)
         {
-            return false;
+            return 1;
         }
 
         tileState playerState = getTileStateForId(playerTurn);
 
-        if(piece.getOnBoard() == true) //If passed piece is null (already placed or none selected) returns false
+        if(piece.getOnBoard()) //If passed piece is null (already placed or none selected) returns false
         {
-            return false;
+            return 1;
         }
 
         /* Iterates through the board to find the relative x and y coordinates */
-        if (this.board[yPos][xPos] == tileState.LEGAL)
+        if (tempBoard[yPos][xPos] == tileState.LEGAL)
         {
             for (int i = 0; i < 5; i++)
             {
@@ -179,25 +189,40 @@ public class BlokusGameState extends GameState implements Serializable {
                         }
                         else
                         {
-                            board[yPos + i - relY][xPos + j - relX] = playerState;
+                            if(tempBoard[yPos + i - relY][xPos + j - relX] != tileState.EMPTY && tempBoard[yPos + i - relY][xPos + j - relX] != tileState.LEGAL)
+                            {
+                                rotatePiece(piece);
+                                rotateCount++;
+                                placePiece(playerTurn,xPos,yPos,piece,rotateCount);
+                            }
+                            else
+                            {
+                                tempBoard[yPos + i - relY][xPos + j - relX] = playerState;
+                            }
+
                         }
+                    }
+                }
+                for(int i = 0; i<20; i++)
+                {
+                    for(int j = 0; j<20; j++)
+                    {
+                        this.board[i][j] = tempBoard[i][j];
                     }
                 }
                 this.blockArray[playerTurn][piece.getType()].setOnBoard(true);
                 clearBoard(this.getBoard());
-                return true;
+                return 0;
             }
             catch (ArrayIndexOutOfBoundsException e)
             {
                 /* Recursive case just in case the piece in its current rotation does not fit */
                 rotatePiece(piece);
                 rotateCount++;
-                board[yPos][xPos] = tileState.LEGAL;//Resets the current position to a legal position for the time being
                 placePiece(playerTurn,xPos,yPos,piece,rotateCount);
-                return false;
             }
         }
-        return false;
+        return 2;
     }
 
     /**
@@ -210,6 +235,14 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public boolean rotatePiece(BlokusBlock piece)
     {
+       /**
+        * External Citation
+        * Date: 18 April 2022
+        * Problem: Could not rotate pieces correctly
+        * Resource:
+        * https://stackoverflow.com/questions/45847027/trying-to-rotate-a-2d-array-90-degrees-clockwise-but-it-is-going-counter-clockw
+        * Solution: I used code from a user named alirabiee
+        */
         /* First, creates a temporary array to store the "rotation" in */
         int[][] tempArr = new int[5][5];
         for(int i = 0; i<5; i++)
