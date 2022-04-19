@@ -24,7 +24,6 @@ public class BlokusDumbAi extends GameComputerPlayer {
 
     //21 pieces
     BlokusGameState myState;
-    DrawBoard drawBoard;
 
     /**
      * BlokusDumbAi
@@ -53,39 +52,9 @@ public class BlokusDumbAi extends GameComputerPlayer {
         myState = (BlokusGameState)info;
 
         //Allow for AI to take time between plays
-        sleep(3);
+        sleep(1);
 
-        /* Picks a random piece number and sets both selected row and columns to zero */
-        //TODO: Might need a do while loop in order to make sure that the picked piece has not
-        //TODO: already been placed.
-        Random r = new Random();
-        int pickedPiece = r.nextInt(21);
-        if(myState.getBlockArray()[playerNum][pickedPiece] == null)
-        {
-            pickedPiece = r.nextInt(21);
-        }
-        int selectedRow = 0;
-        int selectedColumn = 0;
-
-        /* Iterates through the board to find the first legal position */
-        for(int i = 0; i<20; i++)
-        {
-            for(int j = 0; j<20; j++)
-            {
-                if(myState.getBoard()[i][j] == BlokusGameState.tileState.LEGAL)
-                {
-                    selectedRow = i;
-                    selectedColumn = j;
-                }
-            }
-        }
-
-        /* With everything calculated, selects the randomly selected piece */
-       // game.sendAction(new BlokusSelectAction(this, pickedPiece));
-
-        /* Then, sends an action to place the currently selected piece */
-       // game.sendAction(new BlokusPlaceAction(this,selectedRow, selectedColumn));
         Logger.log("BlokusDumbAi", "Sending move");
-        game.sendAction(new BlokusPassAction(this));
+        game.sendAction(new BlokusPassAction(this)); //Passes its turn
     } //receiveInfo
 }

@@ -1,7 +1,5 @@
 package edu.up.cs301.Blokus.BlokusInfo;
 
-import android.graphics.Path;
-
 import java.io.Serializable;
 
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;

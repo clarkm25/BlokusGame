@@ -3,6 +3,7 @@ package edu.up.cs301.Blokus;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.Blokus.BlokusPlayer.BlokusDumbAi;
 import edu.up.cs301.Blokus.BlokusPlayer.BlokusHumanPlayer;
+import edu.up.cs301.Blokus.BlokusPlayer.BlokusSmartAi;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
 import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.gameConfiguration.GameConfig;
@@ -69,14 +70,13 @@ public class BlokusMainActivity extends GameMainActivity {
             }
         });
 
-        /**
-        //Dumb Computer Player #2 (Will be changed to Smart Computer Player later)
+
+        //Dumb Computer Player #2
         playerTypes.add(new GamePlayerType("Smart Computer Player") {
             public GamePlayer createPlayer(String name) {
-                return new BlokusDumbAi(name);
+                return new BlokusSmartAi(name);
             }
         });
-         */
 
         // Create a game configuration class for Blokus
         GameConfig defaultConfig = new GameConfig(playerTypes, 4,4, "Blokus", PORT_NUMBER);
