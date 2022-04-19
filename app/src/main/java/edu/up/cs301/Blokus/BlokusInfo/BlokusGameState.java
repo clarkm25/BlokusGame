@@ -145,7 +145,7 @@ public class BlokusGameState extends GameState implements Serializable {
         }
 
         int rotateCount = rotateInt;
-        /* If the piece has been rotated four times, returns false */
+        /* If the piece has been rotated four times, returns 1 */
         if(rotateCount == 4)
         {
             return 1;
@@ -153,7 +153,7 @@ public class BlokusGameState extends GameState implements Serializable {
 
         tileState playerState = getTileStateForId(playerTurn);
 
-        if(piece.getOnBoard()) //If passed piece is null (already placed or none selected) returns false
+        if(piece.getOnBoard()) //If passed piece is null (already placed or none selected) returns 1
         {
             return 1;
         }
@@ -222,7 +222,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 placePiece(playerTurn,xPos,yPos,piece,rotateCount);
             }
         }
-        return 2;
+        return 0;
     }
 
     /**
