@@ -308,6 +308,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         /** PLAYER THREE BOX -- GREEN */
         //Draws all 21 pieces for Green
+        pieceNum = 0;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 this.drawPieces(c, 2, pieceNum, i, j);
