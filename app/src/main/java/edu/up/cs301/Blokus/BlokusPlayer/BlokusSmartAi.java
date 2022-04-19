@@ -43,11 +43,12 @@ public class BlokusSmartAi extends GameComputerPlayer {
      */
     @Override
     protected void receiveInfo(GameInfo info) {
+
         if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
 
-        Logger.log("BlokusDumbAi", "My turn!");
+        Logger.log("BlokusSmartAi", "My turn!");
 
-        myState = (BlokusGameState)info;
+        myState = (BlokusGameState) info;
 
         //Allow for AI to take time between plays
         sleep(1);
@@ -60,18 +61,20 @@ public class BlokusSmartAi extends GameComputerPlayer {
         int selectedColumn = 0;
         int piecesLeft = 0;
 
+        //Checks whether or not all the pieces are in player boxes or on the board
         for (int i = 0; i < 21; i++) {
-            if (myState.getBlockArray()[playerNum][i] != null) {
+            if (myState.getBlockArray()[playerNum][i].getOnBoard() == false) {
                 piecesLeft++;
             }
         }
 
+
+        //As long as there are pieces left in the AI's box, will continue getting random pieces
+        //until it finds one not on the board
         if (piecesLeft != 0) {
             do {
                 pickedPiece = r.nextInt(21);
-            } while (myState.getBlockArray()[playerNum][pickedPiece] == null);
-
-
+            } while (myState.getBlockArray()[playerNum][pickedPiece].getOnBoard() == true);
 
             /* Iterates through the board to find the first legal position */
             for (int i = 0; i < 20; i++) {
@@ -89,10 +92,12 @@ public class BlokusSmartAi extends GameComputerPlayer {
             Logger.log("BlokusSmartAi", "Sending move");
             /* Then, sends an action to place the currently selected piece */
             game.sendAction(new BlokusPlaceAction(this, selectedRow, selectedColumn));
-        }
-        else {
+            myState.clearBoard(myState.getBoard());
+        } else {
             Logger.log("BlokusSmartAi", "Sending move");
             game.sendAction(new BlokusPassAction(this));
+            myState.clearBoard(myState.getBoard());
         }
+
     } //receiveInfo
 }

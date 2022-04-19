@@ -45,7 +45,7 @@ public class BlokusGameState extends GameState implements Serializable {
         this.selectedType = -1;
 
         /* Array for holding player scores */
-        this.playerScore = new int[] {-89,-89,-89,-89};
+        this.playerScore = new int[] {-85,-85,-85,-85};
 
         /* Array containing the block objects within each player box and each player's box will be populated with the appropriate blocks */
         blockArray = new BlokusBlock[4][21];
@@ -54,15 +54,29 @@ public class BlokusGameState extends GameState implements Serializable {
                 this.blockArray[i][j] = new BlokusBlock();
                 this.blockArray[i][j].setType(j);
                 this.blockArray[i][j].setPiece(j);
+
+                switch (i) {
+                    case 1:
+                        this.rotatePiece(this.blockArray[i][j]);
+                        break;
+                    case 2:
+                        for (int k = 0; k < 2; k++) {
+                            this.rotatePiece(this.blockArray[i][j]);
+                        }
+                        break;
+                    case 3:
+                        for (int k = 0; k < 3; k++) {
+                            this.rotatePiece(this.blockArray[i][j]);
+                        }
+                        break;
+                }
             }
         }
 
         /* Array representing the board and the legal moves within it and all values are initially set to EMPTY */
         this.board = new tileState[20][20];
-        for(int i = 0; i<20; i++)
-        {
-            for(int j = 0; j<20; j++)
-            {
+        for(int i = 0; i<20; i++) {
+            for(int j = 0; j<20; j++) {
                 this.board[i][j] = tileState.EMPTY;
             }
         }
@@ -93,12 +107,10 @@ public class BlokusGameState extends GameState implements Serializable {
         this.blockArray = new BlokusBlock[4][21];
         for (int i = 0; i<4; i++) {
             for (int j = 0; j<21; j++) {
-                if(toCopy.blockArray[i][j] == null)
-                {
+                if(toCopy.blockArray[i][j] == null) {
                     this.blockArray[i][j] = null;
                 }
-                else
-                {
+                else {
                     this.blockArray[i][j] = new BlokusBlock(toCopy.blockArray[i][j]);
                 }
             }
@@ -106,10 +118,8 @@ public class BlokusGameState extends GameState implements Serializable {
 
         /* Copies array over from orig state by going cell by cell to set the values */
         this.board = new tileState[20][20];
-        for(int i = 0; i<20; i++)
-        {
-            for(int j = 0; j<20; j++)
-            {
+        for(int i = 0; i<20; i++) {
+            for(int j = 0; j<20; j++) {
                 this.board[i][j] = toCopy.board[i][j];
             }
         }
@@ -128,8 +138,7 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public int placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece, int rotateInt)
-    {
+    public int placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece, int rotateInt) {
         /* Variables to represent the relative x and y coords as well as the current playerState*/
         int relX = 0;
         int relY = 0;
@@ -140,18 +149,15 @@ public class BlokusGameState extends GameState implements Serializable {
 
         /* New temp board to make sure no piece overwrites another*/
         tileState[][] tempBoard = new tileState[20][20];
-        for(int i = 0; i<20; i++)
-        {
-            for(int j = 0; j<20; j++)
-            {
+        for(int i = 0; i<20; i++) {
+            for(int j = 0; j<20; j++) {
                tempBoard[i][j] = this.board[i][j];
             }
         }
 
         int rotateCount = rotateInt;
         /* If the piece has been rotated four times, returns 1 */
-        if(rotateCount == 4)
-        {
+        if(rotateCount == 4) {
             return 1;
         }
 
@@ -163,57 +169,43 @@ public class BlokusGameState extends GameState implements Serializable {
         }
 
         /* Iterates through the board to find the relative x and y coordinates */
-        if (tempBoard[yPos][xPos] == tileState.LEGAL)
-        {
-            for (int i = 0; i < 5; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    if (piece.getPieceArr()[i][j] == 2)
-                    {
+        if (tempBoard[yPos][xPos] == tileState.LEGAL) {
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    if (piece.getPieceArr()[i][j] == 2) {
                         relX = j;
                         relY = i;
                     }
-                    else
-                    {
+                    else {
                         continue;
                     }
                 }
             }
-            try
-            {
+            try {
                 /* Then, iterates through the board again to place the piece on the board according to the playerNum*/
-                for (int i = 0; i < 5; i++)
-                {
-                    for (int j = 0; j < 5; j++)
-                    {
-                        if (piece.getPieceArr()[i][j] == 0)
-                        {
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        if (piece.getPieceArr()[i][j] == 0) {
                             continue;
                         }
-                        else
-                        {
+                        else {
                             currRow = yPos + i - relY;
                             currCol = xPos + j - relX;
 
-                            if(tempBoard[currRow][currCol] != tileState.EMPTY && tempBoard[currRow][currCol] != tileState.LEGAL)
-                            {
+                            if(tempBoard[currRow][currCol] != tileState.EMPTY && tempBoard[currRow][currCol] != tileState.LEGAL) {
                                 rotatePiece(piece);
                                 rotateCount++;
                                 placePiece(playerTurn,xPos,yPos,piece,rotateCount);
                             }
-                            else
-                            {
+                            else {
                                 tempBoard[currRow][currCol] = playerState;
                             }
 
                         }
                     }
                 }
-                for(int i = 0; i<20; i++)
-                {
-                    for(int j = 0; j<20; j++)
-                    {
+                for(int i = 0; i<20; i++) {
+                    for(int j = 0; j<20; j++) {
                         this.board[i][j] = tempBoard[i][j];
                     }
                 }
@@ -222,8 +214,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 clearBoard(this.getBoard());
                 return 0;
             }
-            catch (ArrayIndexOutOfBoundsException e)
-            {
+            catch (ArrayIndexOutOfBoundsException e) {
                 /* Recursive case just in case the piece in its current rotation does not fit */
                 rotatePiece(piece);
                 rotateCount++;
@@ -244,18 +235,14 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean checkMyNeighbor(tileState[][] currBoard, int row, int col, int yDelta, int xDelta)
-    {
+    public boolean checkMyNeighbor(tileState[][] currBoard, int row, int col, int yDelta, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
-        try
-        {
-            if(currBoard[row+yDelta][col+xDelta] == playerState)
-            {
+        try {
+            if(currBoard[row+yDelta][col+xDelta] == playerState) {
                 return true;
             }
         }
-        catch(ArrayIndexOutOfBoundsException e)
-        {
+        catch(ArrayIndexOutOfBoundsException e) {
             return false;
         }
         return false;
@@ -269,8 +256,7 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean rotatePiece(BlokusBlock piece)
-    {
+    public boolean rotatePiece(BlokusBlock piece) {
        /**
         * External Citation
         * Date: 18 April 2022
@@ -281,19 +267,15 @@ public class BlokusGameState extends GameState implements Serializable {
         */
         /* First, creates a temporary array to store the "rotation" in */
         int[][] tempArr = new int[5][5];
-        for(int i = 0; i<5; i++)
-        {
-            for(int j = 0; j<5; j++)
-            {
+        for(int i = 0; i<5; i++) {
+            for(int j = 0; j<5; j++) {
                 tempArr[j][4-i] = piece.getPieceArr()[i][j];
             }
         }
 
         /* Then, will copy over the rotated array into the piece array without the need for swapping or temp ints */
-        for(int i = 0; i<5; i++)
-        {
-            for (int j = 0; j<5; j++)
-            {
+        for(int i = 0; i<5; i++) {
+            for (int j = 0; j<5; j++) {
                 piece.getPieceArr()[i][j] = tempArr[i][j];
             }
         }
@@ -309,55 +291,41 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean calcLegalMoves(tileState[][] board, int playerTurn)
-    {
+    public boolean calcLegalMoves(tileState[][] board, int playerTurn) {
         int numChanged = 0; //int representing the number of legal moves successfully calculated and changed
         tileState playerState = getTileStateForId(playerTurn);
-        if(beginningGameCheck(playerTurn))
-        {
+        if(beginningGameCheck(playerTurn)) {
             numChanged++;
         }
-        for(int i = 0; i<20; i++)
-        {
-            for(int j = 0; j<20; j++)
-            {
-                if (i < 19) //This check will run as long as i is to the left of the right most column
-                {
-                    if(checkNeighbor(board,playerTurn,i,j,1,1)) //If successful increment numChanged
-                    {
+        for(int i = 0; i<20; i++) {
+            for(int j = 0; j<20; j++) {
+                if (i < 19) { //This check will run as long as i is to the left of the right most column
+                    if(checkNeighbor(board,playerTurn,i,j,1,1)) { //If successful increment numChanged
                         numChanged++;
                     }
                 }
-                if (i > 0) //This check will run as long as i is to the right of the left most column
-                {
-                    if(checkNeighbor(board,playerTurn,i,j,1,-1))
-                    {
+                if (i > 0) { //This check will run as long as i is to the right of the left most column
+                    if(checkNeighbor(board,playerTurn,i,j,1,-1)) {
                         numChanged++;
                     }
                 }
-                if(j < 19) //This check will run as long as j is to the left of the right most column
-                {
-                    if(checkNeighbor(board,playerTurn,i,j,-1,1))
-                    {
+                if(j < 19) { //This check will run as long as j is to the left of the right most column
+                    if(checkNeighbor(board,playerTurn,i,j,-1,1)) {
                         numChanged++;
                     }
                 }
-                if(j > 0) //This check will run as long as j is to the right of the left most column
-                {
-                    if(checkNeighbor(board,playerTurn,i,j,-1,-1))
-                    {
+                if(j > 0) { //This check will run as long as j is to the right of the left most column
+                    if(checkNeighbor(board,playerTurn,i,j,-1,-1)) {
                         numChanged++;
                     }
                 }
             }
         }
 
-        if(numChanged > 0)
-        {
+        if(numChanged > 0) {
             return true;
         }
-        else
-        {
+        else {
             return false;
         }
     }
@@ -367,14 +335,10 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @param board given board
      */
-    public void clearBoard(tileState[][] board)
-    {
-        for(int i = 0; i<20; i++)
-        {
-            for(int j = 0; j<20; j++)
-            {
-                if(board[i][j] == tileState.LEGAL) //If tile is legal, set to empty
-                {
+    public void clearBoard(tileState[][] board) {
+        for(int i = 0; i<20; i++) {
+            for(int j = 0; j<20; j++) {
+                if(board[i][j] == tileState.LEGAL) { //If tile is legal, set to empty
                     board[i][j] = tileState.EMPTY;
                 }
             }
@@ -421,38 +385,32 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean beginningGameCheck(int playerTurn)
-    {
+    public boolean beginningGameCheck(int playerTurn) {
         tileState playerState = getTileStateForId(playerTurn);
-        switch(playerState) //Checks the appropriate playerState to set the needed corner to a legal tile
-        {
+        switch(playerState) { //Checks the appropriate playerState to set the needed corner to a legal tile
             case RED:
-                if(this.board[0][0] == tileState.EMPTY)
-                {
+                if(this.board[0][0] == tileState.EMPTY) {
                     this.board[0][0] = tileState.LEGAL;
                     return true;
                 }
                 break;
 
             case BLUE:
-                if(this.board[0][19] == tileState.EMPTY)
-                {
+                if(this.board[0][19] == tileState.EMPTY) {
                     this.board[0][19] = tileState.LEGAL;
                     return true;
                 }
                 break;
 
             case GREEN:
-                if(this.board[19][0] == tileState.EMPTY)
-                {
+                if(this.board[19][0] == tileState.EMPTY) {
                     this.board[19][0] = tileState.LEGAL;
                     return true;
                 }
                 break;
 
             case YELLOW:
-                if(this.board[19][19] == tileState.EMPTY)
-                {
+                if(this.board[19][19] == tileState.EMPTY) {
                     this.board[19][19] = tileState.LEGAL;
                     return true;
                 }
@@ -564,12 +522,10 @@ public class BlokusGameState extends GameState implements Serializable {
         /* Concatenates gameStateInfo with the string versions of each block */
         for(int i = 0; i<4; i++) {
             for(int j = 0; j<21; j++) {
-                if(this.blockArray[i][j] != null)
-                {
+                if(this.blockArray[i][j] != null) {
                     gameStateInfo += this.blockArray[i][j].toString() + "\n";
                 }
-                else
-                {
+                else {
                     gameStateInfo += "This block is null!\n\n";
                 }
             }

@@ -80,7 +80,6 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             drawBoard.invalidate(); //Redraws in order to show piece rotated
         }
         else if (view.getId() == R.id.quitButton) {
-            System.exit(1);
             BlokusQuitAction blokusQA = new BlokusQuitAction(this);
             game.sendAction(blokusQA);
         }

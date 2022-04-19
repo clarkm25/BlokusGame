@@ -88,8 +88,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 21; j++) {
-
-                isRotated[i][j] = 0;
+                isRotated[i][j] = i;
             }
         }
     } //initialize
@@ -144,7 +143,7 @@ public class DrawBoard extends FlashSurfaceView {
 
         //Piece has rotated back to original position so reset back to 0
         if (isRotated[player][pieceNum] == 4) {
-            isRotated[player][pieceNum] = 0;
+            this.isRotated[player][pieceNum] = 0;
         }
 
         //Rotates the array of pieces so that the new array can be drawn
@@ -202,10 +201,8 @@ public class DrawBoard extends FlashSurfaceView {
      *
      * @return paint object
      */
-    public Paint getPaint(BlokusGameState.tileState currState)
-    {
-        switch (currState)
-        {
+    public Paint getPaint(BlokusGameState.tileState currState) {
+        switch (currState) {
             case EMPTY:
                 return gridPaint;
 
@@ -348,75 +345,6 @@ public class DrawBoard extends FlashSurfaceView {
         this.drawPlayerInfo(c, blokusState.getPlayerScore(blokusState.getPlayerTurn()),
                 blokusState.getPlayerColor(blokusState.getPlayerTurn()));
     } //onDraw
-
-
-
-    /**
-     * This method will convert the coordinated of a touch event to a certain grid square
-     *
-     * @param x given x coord
-     * @param y given y coord
-     *
-     * @return Point
-     */
-    public Point mapPixelToGridSquare(int x, int y)
-    {
-    /**
-     * External Citation
-     * Date: 31 March 2022
-     * Problem: Could not map the pixels of a touch event to the board
-     * Resource:
-     * https://github.com/cs301up/TicTacToeSpr22
-     * Solution: I used the mapPixelToSquare method as a guide for the this method
-     * and the other method below
-     */
-     /* For loop to iterate through the possible locations for each grid square */
-        for(int i = 0; i<20; i++)
-        {
-            for(int j = 0; j<20; j++)
-            {
-                float left = GRIDBOX_SIZE*j + BOARD_START_WIDTH;
-                float right = GRIDBOX_SIZE*j + GRIDBOX_SIZE + BOARD_START_WIDTH;
-                float top = GRIDBOX_SIZE*i + BOARD_START_HEIGHT;
-                float bottom = GRIDBOX_SIZE*i + GRIDBOX_SIZE + BOARD_START_HEIGHT;
-                if((x > left) != (x> right) && (y > top) != (y> bottom)) //If it is within bounds, return the point
-                {
-                    return new Point(i,j);
-                }
-            }
-        }
-        return null;
-    }
-
-    /**
-     * This method will map a touch event to a certain BlokusPiece so the type is set appropriately
-     *
-     * @param x given x coord
-     * @param y given y coord
-     *
-     * @return the translated point
-     */
-    public Point mapPixelToBlokusPiece(int x, int y)
-    {
-    /* For loop to account for the number of pieces to draw within the player box */
-    for(int i = 0; i<6; i++)
-    {
-        for (int j = 0; j < 3; j++)
-        {
-            float left = 10 + LEFT_BOXES + ((GRIDBOX_SIZE * 3)*i);
-            float right = 10 + LEFT_BOXES + ((GRIDBOX_SIZE * 3)*i) + (GRIDBOX_SIZE*2);
-            float top = 10 + TOP_BOXES + ((GRIDBOX_SIZE * 3)*j);
-            float bottom = 10 + TOP_BOXES + ((GRIDBOX_SIZE * 3)*j) + (GRIDBOX_SIZE*2);
-            if((x > left) != (x> right) && (y > top) != (y> bottom)) //If it is within bounds, return the point
-            {
-                return new Point(i,j);
-            }
-        }
-    }
-
-    //Nothing has been matched
-    return null;
-    }
 
     /**
      * drawPlayerInfo

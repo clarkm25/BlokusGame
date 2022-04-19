@@ -75,27 +75,9 @@ public class BlokusBlock implements Serializable {
         this.blockScore = toSet;
     }
 
+    /** Setter and Getter method onBoard boolean */
     public void setOnBoard(boolean toSet) { this.onBoard = toSet; }
-
     public boolean getOnBoard() { return this.onBoard; }
-
-    public void setPieceArr(int[][] toSet)
-    {
-        if(toSet == null)
-        {
-            return;
-        }
-        else
-        {
-            for(int i = 0; i<5; i++)
-            {
-                for(int j = 0; j<5; j++)
-                {
-                    this.pieceArr[i][j] = toSet[i][j];
-                }
-            }
-        }
-    }
 
     /**
      * setPiece
@@ -358,13 +340,10 @@ public class BlokusBlock implements Serializable {
      *  Returns a string version of the BlokusBlock
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         String toReturn = "Type: " + this.type + " Score: " + this.blockScore + "\n";
-        for(int i = 0; i<5; i++)
-        {
-            for(int j = 0; j<5; j++)
-            {
+        for(int i = 0; i<5; i++) {
+            for(int j = 0; j<5; j++) {
                 toReturn += this.pieceArr[i][j] + " ";
             }
             toReturn += "\n";

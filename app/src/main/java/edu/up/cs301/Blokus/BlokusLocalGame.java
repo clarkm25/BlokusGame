@@ -115,6 +115,9 @@ public class BlokusLocalGame extends LocalGame {
             return "Player " + blokusState.getPlayerTurn() + " has won with a score of " +
                     blokusState.getPlayerScore(blokusState.getPlayerTurn()) + "! ";
         }
+        else if (blokusState.getGameOn() == false) {
+            return "Game Quit! ";
+        }
         else {
             return null;
         }
@@ -182,7 +185,7 @@ public class BlokusLocalGame extends LocalGame {
             return true;
         }
         else if(action instanceof BlokusQuitAction) {
-            System.exit(1); //Sends a non-zero value to system which is what triggers exit.
+            state.setGameOn(false); //Quits game if its player's turn
             return true;
         }
         else if (action instanceof BlokusPassAction) {
