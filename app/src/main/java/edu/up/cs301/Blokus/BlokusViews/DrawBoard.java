@@ -29,12 +29,12 @@ public class DrawBoard extends FlashSurfaceView {
     public static final int TILE_SIZE = 20;
     public static final int BOARD_START_HEIGHT = 50;
     public static final int BOARD_START_WIDTH = 700;
-    public static final int LEFT_BOXES = 50;
-    public static final int RIGHT_BOXES = 1350;
+    public static final int LEFT_BOXES = 10;
+    public static final int RIGHT_BOXES = 1310;
     public static final int TOP_BOXES = 10;
     public static final int BOTTOM_BOXES = 465;
     public static final int PBOX_HEIGHT = 450;
-    public static final int PBOX_WIDTH = 600;
+    public static final int PBOX_WIDTH = 665;
 
     /* Paint objects representing drawings on the canvas */
     Paint gridPaint = new Paint();
@@ -162,8 +162,8 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         //Creates an X and Y variable that indicate which player box a piece should go into
-        int playerX = pieces.getX(player) + ((TILE_SIZE * 5) * col) + 10; //Extra 10 for margin
-        int playerY = pieces.getY(player) + ((TILE_SIZE * 5) * row) + 10; //Extra 10 for margin
+        int playerX = pieces.getX(player) + ((TILE_SIZE * 5) * col) + 10 + (col * 10); //Extra 10 for margin
+        int playerY = pieces.getY(player) + ((TILE_SIZE * 5) * row) + 10 + (row * 10); //Extra 10 for margin
 
         //Initialize and set color based on player
         Paint pColor = new Paint();
@@ -288,9 +288,14 @@ public class DrawBoard extends FlashSurfaceView {
         int pieceNum = 0;
         //Draws all 21 pieces for Red
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                this.drawPieces(c, 0, pieceNum, i, j);
-                pieceNum++;
+            for (int j = 0; j < 6; j++) {
+                if (pieceNum < 21) {
+                    this.drawPieces(c, 0, pieceNum, i, j);
+                    pieceNum++;
+                }
+                else {
+                    break; //No more pieces in array
+                }
             }
         }
 
@@ -298,9 +303,14 @@ public class DrawBoard extends FlashSurfaceView {
         pieceNum = 0;
         //Draws all 21 pieces for Blue
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                this.drawPieces(c, 1, pieceNum, i, j);
-                pieceNum++;
+            for (int j = 0; j < 6; j++) {
+                if (pieceNum < 21) {
+                    this.drawPieces(c, 1, pieceNum, i, j);
+                    pieceNum++;
+                }
+                else {
+                    break; //No more pieces in array
+                }
             }
         }
 
@@ -308,9 +318,14 @@ public class DrawBoard extends FlashSurfaceView {
         //Draws all 21 pieces for Green
         pieceNum = 0;
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                this.drawPieces(c, 2, pieceNum, i, j);
-                pieceNum++;
+            for (int j = 0; j < 6; j++) {
+                if (pieceNum < 21) {
+                    this.drawPieces(c, 2, pieceNum, i, j);
+                    pieceNum++;
+                }
+                else {
+                    break; //No more pieces in array
+                }
             }
         }
 
@@ -318,9 +333,14 @@ public class DrawBoard extends FlashSurfaceView {
         pieceNum = 0;
         //Draws all 21 pieces for Yellow
         for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 5; j++) {
-                this.drawPieces(c, 3, pieceNum, i, j);
-                pieceNum++;
+            for (int j = 0; j < 6; j++) {
+                if (pieceNum < 21) {
+                    this.drawPieces(c, 3, pieceNum, i, j);
+                    pieceNum++;
+                }
+                else {
+                    break; //No more pieces in array
+                }
             }
         }
 
