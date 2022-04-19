@@ -161,14 +161,14 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             selectedPiece = 0;
 
             for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 5; j++) {
+                for (int j = 0; j < 6; j++) {
                     //Left side of the piece array
-                    int spaceXL = playerBoxX + ((DrawBoard.TILE_SIZE * 5) * j) + 10;
-                    int spaceYL = playerBoxY + ((DrawBoard.TILE_SIZE * 5) * i) + 10;
+                    int spaceXL = playerBoxX + ((DrawBoard.TILE_SIZE * 5) * j) + 10 + (10 * j);
+                    int spaceYL = playerBoxY + ((DrawBoard.TILE_SIZE * 5) * i) + 10 + (10 * i);
 
                     //Right side of the piece array
-                    int spaceXR = playerBoxX + ((DrawBoard.TILE_SIZE * 5) * (j + 1)) + 10;
-                    int spaceYR = playerBoxY + ((DrawBoard.TILE_SIZE * 5) * (i + 1)) + 10;
+                    int spaceXR = playerBoxX + ((DrawBoard.TILE_SIZE * 5) * (j + 1)) + 10 + (10 * j);
+                    int spaceYR = playerBoxY + ((DrawBoard.TILE_SIZE * 5) * (i + 1)) + 10 + (10 * i);
 
                     //Makes sure that the user is selecting pieces that do not exist.
                     if (selectedPiece > 21) {
