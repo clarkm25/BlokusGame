@@ -134,6 +134,10 @@ public class BlokusGameState extends GameState implements Serializable {
         int relX = 0;
         int relY = 0;
 
+        /* Variables to represent the currently selected row a columns for brevity*/
+        int currRow = 0;
+        int currCol = 0;
+
         /* New temp board to make sure no piece overwrites another*/
         tileState[][] tempBoard = new tileState[20][20];
         for(int i = 0; i<20; i++)
@@ -189,7 +193,10 @@ public class BlokusGameState extends GameState implements Serializable {
                         }
                         else
                         {
-                            if(tempBoard[yPos + i - relY][xPos + j - relX] != tileState.EMPTY && tempBoard[yPos + i - relY][xPos + j - relX] != tileState.LEGAL)
+                            currRow = yPos + i - relY;
+                            currCol = xPos + j - relX;
+
+                            if(tempBoard[currRow][currCol] != tileState.EMPTY && tempBoard[currRow][currCol] != tileState.LEGAL)
                             {
                                 rotatePiece(piece);
                                 rotateCount++;
@@ -197,7 +204,7 @@ public class BlokusGameState extends GameState implements Serializable {
                             }
                             else
                             {
-                                tempBoard[yPos + i - relY][xPos + j - relX] = playerState;
+                                tempBoard[currRow][currCol] = playerState;
                             }
 
                         }
@@ -210,6 +217,7 @@ public class BlokusGameState extends GameState implements Serializable {
                         this.board[i][j] = tempBoard[i][j];
                     }
                 }
+
                 this.blockArray[playerTurn][piece.getType()].setOnBoard(true);
                 clearBoard(this.getBoard());
                 return 0;
@@ -223,6 +231,34 @@ public class BlokusGameState extends GameState implements Serializable {
             }
         }
         return 0;//If we get here, ends the player's turn
+    }
+
+    /**
+     * This will check the neighbors of a currently placed tile to make sure they do not overlap
+     *
+     * @param currBoard current board to check
+     * @param row current row
+     * @param col current col
+     * @param yDelta row offset
+     * @param xDelta column offset
+     *
+     * @return boolean
+     */
+    public boolean checkMyNeighbor(tileState[][] currBoard, int row, int col, int yDelta, int xDelta)
+    {
+        tileState playerState = getTileStateForId(playerTurn);
+        try
+        {
+            if(currBoard[row+yDelta][col+xDelta] == playerState)
+            {
+                return true;
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e)
+        {
+            return false;
+        }
+        return false;
     }
 
     /**
