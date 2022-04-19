@@ -49,7 +49,6 @@ public class DrawBoard extends FlashSurfaceView {
     protected BlokusGameState blokusState;
     private BlokusBlock pieces = new BlokusBlock();
     int[][] pieceArray = new int[5][5];
-    int[][] onBoard = new int[4][21];
     int[][] isRotated = new int[4][21];
 
     /**
@@ -89,7 +88,6 @@ public class DrawBoard extends FlashSurfaceView {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 21; j++) {
-                onBoard[i][j] = 0;
 
                 isRotated[i][j] = 0;
             }
@@ -185,16 +183,15 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         //Iterates through array of each piece and draws it in the player box
-        if (this.onBoard[player][pieceNum] == 1) {
-            //Do nothing - do not draw the piece
-        }
-        else {
-            for (int i = 0; i < 5; i++) {
-                for (int j = 0; j < 5; j++) {
-                    if ((pieceArray[i][j] == 2) || (pieceArray[i][j] == 1)) {
-                        c.drawRect(playerX + (TILE_SIZE * j), playerY + (TILE_SIZE * i),
-                                playerX + (TILE_SIZE * (j + 1)), playerY + (TILE_SIZE * (i + 1)), pColor);
-                    }
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if(pieces.getOnBoard() == true)
+                {
+                    pColor.setColor(Color.GRAY);
+                }
+                if ((pieceArray[i][j] == 2) || (pieceArray[i][j] == 1)) {
+                    c.drawRect(playerX + (TILE_SIZE * j), playerY + (TILE_SIZE * i),
+                            playerX + (TILE_SIZE * (j + 1)), playerY + (TILE_SIZE * (i + 1)), pColor);
                 }
             }
         }
@@ -241,17 +238,6 @@ public class DrawBoard extends FlashSurfaceView {
     public void setState(BlokusGameState initBlokusState) {
         this.blokusState = initBlokusState;
     } //setState
-
-    /**
-     * setOnBoard
-     *
-     * Sets whether or not a piece is on the board or in the player box (0 = in player box
-     * and 1 = on the board)
-     *
-     */
-    public void setOnBoard(int player, int pieceNum) {
-        this.onBoard[player][pieceNum] = 1;
-    }
 
     public void setIsRotated(int player, int pieceNum) {
         this.isRotated[player][pieceNum] += 1;
@@ -310,10 +296,9 @@ public class DrawBoard extends FlashSurfaceView {
             }
         }
 
-
         /** PLAYER TWO BOX -- BLUE */
         pieceNum = 0;
-        //Draws all 21 pieces for Green
+        //Draws all 21 pieces for Blue
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 this.drawPieces(c, 1, pieceNum, i, j);
@@ -322,8 +307,7 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         /** PLAYER THREE BOX -- GREEN */
-        pieceNum = 0;
-        //Draws all 21 pieces for Blue
+        //Draws all 21 pieces for Green
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 5; j++) {
                 this.drawPieces(c, 2, pieceNum, i, j);

@@ -32,6 +32,8 @@ public class BlokusGameState extends GameState implements Serializable {
     private BlokusBlock [][] blockArray; //Represents each players collection of pieces
     private tileState[][] board;
     private boolean gameOn;
+    private int row = 0;
+    private int col = 0;
 
     /** Default ctor */
     public BlokusGameState() {
@@ -64,6 +66,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 this.board[i][j] = tileState.EMPTY;
             }
         }
+
         this.gameOn = true;
     }
 
@@ -140,7 +143,7 @@ public class BlokusGameState extends GameState implements Serializable {
 
         tileState playerState = getTileStateForId(playerTurn);
 
-        if(piece == null) //If passed piece is null (already placed or none selected) returns false
+        if(piece.getOnBoard() == true) //If passed piece is null (already placed or none selected) returns false
         {
             return false;
         }
@@ -163,23 +166,29 @@ public class BlokusGameState extends GameState implements Serializable {
                     }
                 }
             }
-            try {
+            try
+            {
                 /* Then, iterates through the board again to place the piece on the board according to the playerNum*/
-                for (int i = 0; i < 5; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        if (piece.getPieceArr()[i][j] == 0) {
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (piece.getPieceArr()[i][j] == 0)
+                        {
                             continue;
                         }
-                        else {
+                        else
+                        {
                             board[yPos + i - relY][xPos + j - relX] = playerState;
                         }
                     }
                 }
-                this.blockArray[playerTurn][piece.getType()] = null;
+                this.blockArray[playerTurn][piece.getType()].setOnBoard(true);
                 clearBoard(this.getBoard());
                 return true;
             }
-            catch (ArrayIndexOutOfBoundsException e) {
+            catch (ArrayIndexOutOfBoundsException e)
+            {
                 /* Recursive case just in case the piece in its current rotation does not fit */
                 rotatePiece(piece);
                 rotateCount++;
@@ -267,14 +276,14 @@ public class BlokusGameState extends GameState implements Serializable {
                         numChanged++;
                     }
                 }
-                if(j< 19) //This check will run as long as j is to the left of the right most column
+                if(j < 19) //This check will run as long as j is to the left of the right most column
                 {
                     if(checkNeighbor(board,playerTurn,i,j,-1,1))
                     {
                         numChanged++;
                     }
                 }
-                if(j>0) //This check will run as long as j is to the right of the left most column
+                if(j > 0) //This check will run as long as j is to the right of the left most column
                 {
                     if(checkNeighbor(board,playerTurn,i,j,-1,-1))
                     {
@@ -327,16 +336,19 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public boolean checkNeighbor(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
-
-        if ((board[yPos][xPos] == playerState //Checks to see if specified tile matches playerState
-                && board[yPos + yDelta][xPos]!=playerState && board[yPos][xPos + xDelta]!=playerState)//Checks the tile below and tile to the right to see if they are not equal to the playerState
-                && board[yPos + yDelta][xPos + xDelta] == tileState.EMPTY) //Finally, tile to the bottom right must be empty
-        {
-            board[yPos+yDelta][xPos+xDelta] = tileState.LEGAL;
-            return true;
+        try {
+            if ((board[yPos][xPos] == playerState //Checks to see if specified tile matches playerState
+                    && board[yPos + yDelta][xPos]!=playerState && board[yPos][xPos + xDelta]!=playerState)//Checks the tile below and tile to the right to see if they are not equal to the playerState
+                    && board[yPos + yDelta][xPos + xDelta] == tileState.EMPTY) //Finally, tile to the bottom right must be empty
+            {
+                board[yPos+yDelta][xPos+xDelta] = tileState.LEGAL;
+                return true;
+            }
+            else {
+                return false;
+            }
         }
-        else
-        {
+        catch(ArrayIndexOutOfBoundsException e) {
             return false;
         }
     }
@@ -426,8 +438,17 @@ public class BlokusGameState extends GameState implements Serializable {
     public int getPlayerScore(int player) {
         return this.playerScore[player];
     }
+
+    public void setRow(int initRow) {
+        row = initRow;
+    }
+
+    public void setCol(int initCol) {
+        col = initCol;
+    }
     public int getSelectedType() { return this.selectedType; }
     public int[] getPlayerScore() { return this.playerScore; }
+    public boolean getGameOn() { return this.gameOn; }
 
     /**
      * Gets color based on given player
@@ -461,9 +482,8 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public void setPlayerTurn(int toSet) { this.playerTurn = toSet; }
     public void setSelectedType(int toSet) { this.selectedType = toSet; }
-    public void setPlayerScore(int idx, int toAdd){
-        this.playerScore[idx] += toAdd;
-    }
+    public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] = toAdd; }
+    public void setGameOn(boolean toSet) { this.gameOn = toSet; }
 
     /**
      * This will return a string version of the entire BlokusGameState

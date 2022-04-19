@@ -20,61 +20,79 @@ public class BlokusBlock implements Serializable {
     //Instance Variables
     private int type;
     private int blockScore;
+    private boolean onBoard;
     private int[][] pieceArr;
 
-    /** No param ctor */
-    public BlokusBlock()
-    {
+    /**
+     * No param ctor
+     */
+    public BlokusBlock() {
         this.type = 4;
         this.blockScore = 4;
         this.pieceArr = new int[5][5];
-        for(int i = 0; i<5; i++)
-        {
-            for(int j = 0; j<5; j++)
-            {
+        this.onBoard = false;
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 this.pieceArr[i][j] = 0;
             }
         }
     }
 
-    public BlokusBlock(BlokusBlock toCopy)
-    {
+    public BlokusBlock(BlokusBlock toCopy) {
         this.type = toCopy.type;
         this.blockScore = toCopy.blockScore;
         this.pieceArr = new int[5][5];
-        for(int i = 0; i<5; i++)
-        {
-            for(int j = 0; j<5; j++)
-            {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 this.pieceArr[i][j] = toCopy.pieceArr[i][j];
             }
         }
     }
-    /** Getters of BlokusBlock variables */
-    public int getType()
-    {
+
+    /**
+     * Getters of BlokusBlock variables
+     */
+    public int getType() {
         return this.type;
     }
 
-    public int getBlockScore()
-    {
+    public int getBlockScore() {
         return this.blockScore;
     }
 
-    public int[][] getPieceArr()
-    {
+    public int[][] getPieceArr() {
         return this.pieceArr;
     }
 
-    /** Setters of BlokusBlock variables */
-    public void setType(int toSet)
-    {
+    /**
+     * Setters of BlokusBlock variables
+     */
+    public void setType(int toSet) {
         this.type = toSet;
     }
 
-    public void setBlockScore(int toSet)
-    {
+    public void setBlockScore(int toSet) {
         this.blockScore = toSet;
+    }
+
+    public void setOnBoard(boolean toSet) { this.onBoard = toSet; }
+
+    public void setPieceArr(int[][] toSet)
+    {
+        if(toSet == null)
+        {
+            return;
+        }
+        else
+        {
+            for(int i = 0; i<5; i++)
+            {
+                for(int j = 0; j<5; j++)
+                {
+                    this.pieceArr[i][j] = toSet[i][j];
+                }
+            }
+        }
     }
 
     /**
@@ -92,7 +110,7 @@ public class BlokusBlock implements Serializable {
             }
         }
 
-        switch(pieceNum) {
+        switch (pieceNum) {
             case 0:
                 this.pieceArr[0][0] = 2;
 
