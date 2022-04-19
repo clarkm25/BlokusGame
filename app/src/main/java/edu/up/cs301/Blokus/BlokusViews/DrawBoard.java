@@ -183,15 +183,13 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         //Iterates through array of each piece and draws it in the player box
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                if(pieces.getOnBoard() == true)
-                {
-                    pColor.setColor(Color.GRAY);
-                }
-                if ((pieceArray[i][j] == 2) || (pieceArray[i][j] == 1)) {
-                    c.drawRect(playerX + (TILE_SIZE * j), playerY + (TILE_SIZE * i),
-                            playerX + (TILE_SIZE * (j + 1)), playerY + (TILE_SIZE * (i + 1)), pColor);
+        if (blokusState.getBlockArray()[player][pieceNum].getOnBoard() == false) {
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    if ((pieceArray[i][j] == 2) || (pieceArray[i][j] == 1)) {
+                        c.drawRect(playerX + (TILE_SIZE * j), playerY + (TILE_SIZE * i),
+                                playerX + (TILE_SIZE * (j + 1)), playerY + (TILE_SIZE * (i + 1)), pColor);
+                    }
                 }
             }
         }

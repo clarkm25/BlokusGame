@@ -99,7 +99,7 @@ public class BlokusLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         BlokusGameState blokusState = (BlokusGameState) super.state;
         int outOfMoves = 0;
-        if (blokusState.getPlayerScore(blokusState.getPlayerTurn()) > 50) {
+        if (blokusState.getPlayerScore(blokusState.getPlayerTurn()) > 0) {
             return "Player " + blokusState.getPlayerTurn() + " has won!";
         }
         else {

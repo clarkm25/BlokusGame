@@ -482,7 +482,7 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public void setPlayerTurn(int toSet) { this.playerTurn = toSet; }
     public void setSelectedType(int toSet) { this.selectedType = toSet; }
-    public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] = toAdd; }
+    public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] += toAdd; }
     public void setGameOn(boolean toSet) { this.gameOn = toSet; }
 
     /**

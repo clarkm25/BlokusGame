@@ -37,7 +37,6 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
 
     //Surface View being drawn on
     private DrawBoard drawBoard;
-    private BlokusBlock pieces;
     protected BlokusGameState blokusState;
     private int layoutId; //ID
     private int selectedPiece;
@@ -196,8 +195,6 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                             && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
                         BlokusPlaceAction blokusPA = new BlokusPlaceAction(this, i, j);
                         game.sendAction(blokusPA);
-                        //Removes pieces from player box when placed on board
-                        //drawBoard.setOnBoard(blokusState.getPlayerTurn(), blokusState.getSelectedType());
                         drawBoard.invalidate(); //Redraws board in order to show the piece was removed
                     }
                 }
