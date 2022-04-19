@@ -53,7 +53,7 @@ public class BlokusGameState extends GameState implements Serializable {
             for (int j = 0; j<21; j++) {
                 this.blockArray[i][j] = new BlokusBlock();
                 //TODO: CHANGE setType(4) BACK TO setType(j) WHEN USING ALL PIECES OPPOSED TO JUST 2x2s.
-                this.blockArray[i][j].setType(4);
+                this.blockArray[i][j].setType(j);
             }
         }
 
@@ -151,7 +151,7 @@ public class BlokusGameState extends GameState implements Serializable {
 
         tileState playerState = getTileStateForId(playerTurn);
 
-        if(piece == null) //If passed piece is null (already placed or none selected) returns false
+        if(piece.getOnBoard() == true) //If passed piece is null (already placed or none selected) returns false
         {
             return false;
         }
@@ -192,7 +192,7 @@ public class BlokusGameState extends GameState implements Serializable {
                     }
                 }
                 this.playerScore[playerTurn] += this.blockArray[playerTurn][piece.getType()].getBlockScore();
-                this.blockArray[playerTurn][piece.getType()] = null;
+                this.blockArray[playerTurn][piece.getType()].setOnBoard(true);
                 clearBoard(this.getBoard());
                 return true;
             }
@@ -285,7 +285,7 @@ public class BlokusGameState extends GameState implements Serializable {
                         numChanged++;
                     }
                 }
-                if(j< 19) //This check will run as long as j is to the left of the right most column
+                if(j < 19) //This check will run as long as j is to the left of the right most column
                 {
                     if(checkNeighbor(board,playerTurn,i,j,-1,1))
                     {
@@ -345,15 +345,21 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public boolean checkNeighbor(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
-
-        if ((board[yPos][xPos] == playerState //Checks to see if specified tile matches playerState
-                && board[yPos + yDelta][xPos]!=playerState && board[yPos][xPos + xDelta]!=playerState)//Checks the tile below and tile to the right to see if they are not equal to the playerState
-                && board[yPos + yDelta][xPos + xDelta] == tileState.EMPTY) //Finally, tile to the bottom right must be empty
+        try
         {
-            board[yPos+yDelta][xPos+xDelta] = tileState.LEGAL;
-            return true;
+            if ((board[yPos][xPos] == playerState //Checks to see if specified tile matches playerState
+                    && board[yPos + yDelta][xPos]!=playerState && board[yPos][xPos + xDelta]!=playerState)//Checks the tile below and tile to the right to see if they are not equal to the playerState
+                    && board[yPos + yDelta][xPos + xDelta] == tileState.EMPTY) //Finally, tile to the bottom right must be empty
+            {
+                board[yPos+yDelta][xPos+xDelta] = tileState.LEGAL;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
-        else
+        catch(ArrayIndexOutOfBoundsException e)
         {
             return false;
         }

@@ -58,6 +58,10 @@ public class BlokusDumbAi extends GameComputerPlayer {
         //TODO: already been placed.
         Random r = new Random();
         int pickedPiece = r.nextInt(21);
+        if(myState.getBlockArray()[playerNum][pickedPiece] == null)
+        {
+            pickedPiece = r.nextInt(21);
+        }
         int selectedRow = 0;
         int selectedColumn = 0;
 
@@ -66,7 +70,7 @@ public class BlokusDumbAi extends GameComputerPlayer {
         {
             for(int j = 0; j<20; j++)
             {
-                if(myState.getBoard()[i][j]== BlokusGameState.tileState.LEGAL)
+                if(myState.getBoard()[i][j] == BlokusGameState.tileState.LEGAL)
                 {
                     selectedRow = i;
                     selectedColumn = j;
@@ -75,10 +79,10 @@ public class BlokusDumbAi extends GameComputerPlayer {
         }
 
         /* With everything calculated, selects the randomly selected piece */
-        game.sendAction(new BlokusSelectAction(this, pickedPiece));
+       // game.sendAction(new BlokusSelectAction(this, pickedPiece));
 
         /* Then, sends an action to place the currently selected piece */
-        game.sendAction(new BlokusPlaceAction(this,selectedRow, selectedColumn));
+       // game.sendAction(new BlokusPlaceAction(this,selectedRow, selectedColumn));
         Logger.log("BlokusDumbAi", "Sending move");
         game.sendAction(new BlokusPassAction(this));
     } //receiveInfo

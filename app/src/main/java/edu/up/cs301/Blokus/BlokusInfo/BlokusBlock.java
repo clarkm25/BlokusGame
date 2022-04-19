@@ -20,6 +20,7 @@ public class BlokusBlock implements Serializable {
     //Instance Variables
     private int type;
     private int blockScore;
+    private boolean onBoard;
     private int[][] pieceArr;
 
     /** No param ctor */
@@ -28,6 +29,7 @@ public class BlokusBlock implements Serializable {
         this.type = 4;
         this.blockScore = 4;
         this.pieceArr = new int[5][5];
+        this.onBoard = false;
         for(int i = 0; i<5; i++)
         {
             for(int j = 0; j<5; j++)
@@ -65,6 +67,8 @@ public class BlokusBlock implements Serializable {
         return this.blockScore;
     }
 
+    public boolean getOnBoard() { return this.onBoard; }
+
     public int[][] getPieceArr()
     {
         return this.pieceArr;
@@ -80,6 +84,8 @@ public class BlokusBlock implements Serializable {
     {
         this.blockScore = toSet;
     }
+
+    public void setOnBoard(boolean toSet) { this.onBoard = toSet; }
 
     public void setPieceArr(int[][] toSet)
     {

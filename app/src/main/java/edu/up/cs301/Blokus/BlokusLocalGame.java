@@ -98,17 +98,12 @@ public class BlokusLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         BlokusGameState blokusState = (BlokusGameState) super.state;
         int outOfMoves = 0;
-        if (blokusState.calcLegalMoves(blokusState.getBoard(),blokusState.getPlayerTurn()) == false) {
-            outOfMoves++;
+        if (blokusState.getPlayerScore(blokusState.getPlayerTurn()) > 50) {
+            return "Player " + blokusState.getPlayerTurn() + " has won!";
         }
         else {
             return null;
         }
-        if (blokusState.getPlayerScore(blokusState.getPlayerTurn()) > 100) {
-            return "Player " + blokusState.getPlayerTurn() + " has won!";
-        }
-
-        return null;
     } //checkIfGameOver
 
     /**
@@ -194,6 +189,7 @@ public class BlokusLocalGame extends LocalGame {
                     state.setPlayerTurn(0);
                     break;
             }
+            return true;
         }
 
         //Other action, return false
