@@ -11,6 +11,7 @@ import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
+import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
@@ -36,6 +37,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
 
     //Surface View being drawn on
     private DrawBoard drawBoard;
+    private BlokusBlock pieces;
     protected BlokusGameState blokusState;
     private int layoutId; //ID
     private int selectedPiece;
@@ -74,6 +76,9 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         if (view.getId() == R.id.rotateButton) {
             BlokusRotateAction blokusRA = new BlokusRotateAction(this);
             game.sendAction(blokusRA);
+            //Rotates piece in player box
+            drawBoard.setIsRotated(blokusState.getPlayerTurn(), blokusState.getSelectedType());
+            drawBoard.invalidate(); //Redraws in order to show piece rotated
         }
         else if (view.getId() == R.id.quitButton) {
             System.exit(1);
@@ -157,18 +162,22 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             selectedPiece = 0;
 
             for (int i = 0; i < 4; i++) {
-                for (int j = 0; j < 6; j++) {
-                    //Sets space between each piece
-                    int spaceX = 10 + playerBoxX;
-                    int spaceY = 10 + playerBoxY;
+                for (int j = 0; j < 5; j++) {
+                    //Left side of the piece array
+                    int spaceXL = playerBoxX + ((DrawBoard.TILE_SIZE * 5) * j) + 10;
+                    int spaceYL = playerBoxY + ((DrawBoard.TILE_SIZE * 5) * i) + 10;
+
+                    //Right side of the piece array
+                    int spaceXR = playerBoxX + ((DrawBoard.TILE_SIZE * 5) * (j + 1)) + 10;
+                    int spaceYR = playerBoxY + ((DrawBoard.TILE_SIZE * 5) * (i + 1)) + 10;
 
                     //Makes sure that the user is selecting pieces that do not exist.
                     if (selectedPiece > 21) {
                         //Do nothing
                     }
                     //Iterates through every piece to find selected piece
-                    else if ((x > (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * j))) && (x < (spaceX + ((DrawBoard.GRIDBOX_SIZE * 3) * (j + 1)))) &&
-                            (y > (spaceY + (DrawBoard.GRIDBOX_SIZE * 3) * i)) && (y < (spaceY + (DrawBoard.GRIDBOX_SIZE * 3) * (i + 1)))) {
+                    else if ((x > spaceXL) && (x < spaceXR) &&
+                            (y > spaceYL) && (y < spaceYR)) {
                         BlokusSelectAction blokusSA = new BlokusSelectAction(this, selectedPiece);
                         game.sendAction(blokusSA);
                     }
@@ -187,7 +196,9 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                             && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
                         BlokusPlaceAction blokusPA = new BlokusPlaceAction(this, i, j);
                         game.sendAction(blokusPA);
-                        drawBoard.invalidate();
+                        //Removes pieces from player box when placed on board
+                        drawBoard.setOnBoard(blokusState.getPlayerTurn(), blokusState.getSelectedType());
+                        drawBoard.invalidate(); //Redraws board in order to show the piece was removed
                     }
                 }
             }

@@ -32,8 +32,6 @@ public class BlokusGameState extends GameState implements Serializable {
     private BlokusBlock [][] blockArray; //Represents each players collection of pieces
     private tileState[][] board;
     private boolean gameOn;
-    private int row = 0;
-    private int col = 0;
 
     /** Default ctor */
     public BlokusGameState() {
@@ -45,15 +43,15 @@ public class BlokusGameState extends GameState implements Serializable {
         this.selectedType = -1;
 
         /* Array for holding player scores */
-        this.playerScore = new int[] {0,0,0,0};
+        this.playerScore = new int[] {-89,-89,-89,-89};
 
         /* Array containing the block objects within each player box and each player's box will be populated with the appropriate blocks */
         blockArray = new BlokusBlock[4][21];
         for(int i = 0; i<4; i++) {
             for (int j = 0; j<21; j++) {
                 this.blockArray[i][j] = new BlokusBlock();
-                //TODO: CHANGE setType(4) BACK TO setType(j) WHEN USING ALL PIECES OPPOSED TO JUST 2x2s.
-                this.blockArray[i][j].setType(4);
+                this.blockArray[i][j].setType(j);
+                this.blockArray[i][j].setPiece(j);
             }
         }
 
@@ -66,15 +64,6 @@ public class BlokusGameState extends GameState implements Serializable {
                 this.board[i][j] = tileState.EMPTY;
             }
         }
-        /**
-        //Sets "random" places on the board to see if they draw correctly in onDraw
-        this.board[10][2] = tileState.LEGAL;
-        this.board[9][19] = tileState.YELLOW;
-        this.board[1][1] = tileState.GREEN;
-        this.board[5][4] = tileState.BLUE;
-        this.board[19][19] = tileState.RED;
-        */
-
         this.gameOn = true;
     }
 
@@ -174,30 +163,23 @@ public class BlokusGameState extends GameState implements Serializable {
                     }
                 }
             }
-            try
-            {
+            try {
                 /* Then, iterates through the board again to place the piece on the board according to the playerNum*/
-                for (int i = 0; i < 5; i++)
-                {
-                    for (int j = 0; j < 5; j++)
-                    {
-                        if (piece.getPieceArr()[i][j] == 0)
-                        {
+                for (int i = 0; i < 5; i++) {
+                    for (int j = 0; j < 5; j++) {
+                        if (piece.getPieceArr()[i][j] == 0) {
                             continue;
                         }
-                        else
-                        {
+                        else {
                             board[yPos + i - relY][xPos + j - relX] = playerState;
                         }
                     }
                 }
-                this.playerScore[playerTurn] += this.blockArray[playerTurn][piece.getType()].getBlockScore();
                 this.blockArray[playerTurn][piece.getType()] = null;
                 clearBoard(this.getBoard());
                 return true;
             }
-            catch (ArrayIndexOutOfBoundsException e)
-            {
+            catch (ArrayIndexOutOfBoundsException e) {
                 /* Recursive case just in case the piece in its current rotation does not fit */
                 rotatePiece(piece);
                 rotateCount++;
@@ -444,17 +426,8 @@ public class BlokusGameState extends GameState implements Serializable {
     public int getPlayerScore(int player) {
         return this.playerScore[player];
     }
-
-    public void setRow(int initRow) {
-        row = initRow;
-    }
-
-    public void setCol(int initCol) {
-        col = initCol;
-    }
     public int getSelectedType() { return this.selectedType; }
     public int[] getPlayerScore() { return this.playerScore; }
-    public boolean getGameOn() { return this.gameOn; }
 
     /**
      * Gets color based on given player
@@ -488,8 +461,9 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public void setPlayerTurn(int toSet) { this.playerTurn = toSet; }
     public void setSelectedType(int toSet) { this.selectedType = toSet; }
-    public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] = toAdd; }
-    public void setGameOn(boolean toSet) { this.gameOn = toSet; }
+    public void setPlayerScore(int idx, int toAdd){
+        this.playerScore[idx] += toAdd;
+    }
 
     /**
      * This will return a string version of the entire BlokusGameState

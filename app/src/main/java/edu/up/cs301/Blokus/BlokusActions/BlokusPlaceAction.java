@@ -1,5 +1,6 @@
 package edu.up.cs301.Blokus.BlokusActions;
 
+import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.game.GameFramework.players.GamePlayer;
 
@@ -47,5 +48,4 @@ public class BlokusPlaceAction extends GameAction {
      * @return the current column
      */
     public int getCol(){ return this.col; }
-
 }

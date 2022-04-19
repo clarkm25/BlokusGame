@@ -49,6 +49,8 @@ public class DrawBoard extends FlashSurfaceView {
     protected BlokusGameState blokusState;
     private BlokusBlock pieces = new BlokusBlock();
     int[][] pieceArray = new int[5][5];
+    int[][] onBoard = new int[4][21];
+    int[][] isRotated = new int[4][21];
 
     /**
      * default ctor for DrawBoard method
@@ -82,6 +84,14 @@ public class DrawBoard extends FlashSurfaceView {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 pieceArray[i][j] = 0;
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 21; j++) {
+                onBoard[i][j] = 0;
+
+                isRotated[i][j] = 0;
             }
         }
     } //initialize
@@ -126,17 +136,30 @@ public class DrawBoard extends FlashSurfaceView {
      *
      * @param c
      * @param player
-     * @param onBoard
      * @param pieceNum
      * @param row
      * @param col
      */
-    public void drawPieces(Canvas c, int player, boolean onBoard, int pieceNum, int row, int col) {
+    public void drawPieces(Canvas c, int player, int pieceNum, int row, int col) {
+        //Sets piece to a certain array based on given piece
+        pieces.setPiece(pieceNum);
+
+        //Piece has rotated back to original position so reset back to 0
+        if (isRotated[player][pieceNum] == 4) {
+            isRotated[player][pieceNum] = 0;
+        }
+
+        //Rotates the array of pieces so that the new array can be drawn
+        if (isRotated[player][pieceNum] != 0) {
+            for (int i = 0; i < isRotated[player][pieceNum]; i++) {
+                blokusState.rotatePiece(pieces);
+            }
+        }
 
         //Sets a 5x5 2d array equal to the 5x5 2d array of a given piece (given by a param)
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                pieceArray[i][j] = pieces.getPiece(pieceNum)[i][j];
+                pieceArray[i][j] = pieces.getPiece()[i][j];
             }
         }
 
@@ -162,7 +185,10 @@ public class DrawBoard extends FlashSurfaceView {
         }
 
         //Iterates through array of each piece and draws it in the player box
-        if (onBoard == false) {
+        if (this.onBoard[player][pieceNum] == 1) {
+            //Do nothing - do not draw the piece
+        }
+        else {
             for (int i = 0; i < 5; i++) {
                 for (int j = 0; j < 5; j++) {
                     if ((pieceArray[i][j] == 2) || (pieceArray[i][j] == 1)) {
@@ -171,8 +197,6 @@ public class DrawBoard extends FlashSurfaceView {
                     }
                 }
             }
-        } else {
-            //Do Nothing -- does not display the piece if its on the board
         }
     } //drawPieces
 
@@ -219,6 +243,21 @@ public class DrawBoard extends FlashSurfaceView {
     } //setState
 
     /**
+     * setOnBoard
+     *
+     * Sets whether or not a piece is on the board or in the player box (0 = in player box
+     * and 1 = on the board)
+     *
+     */
+    public void setOnBoard(int player, int pieceNum) {
+        this.onBoard[player][pieceNum] = 1;
+    }
+
+    public void setIsRotated(int player, int pieceNum) {
+        this.isRotated[player][pieceNum] += 1;
+    }
+
+    /**
      * onDraw
      *
      * Draws the grid, player boxes, and pieces for all players
@@ -262,92 +301,43 @@ public class DrawBoard extends FlashSurfaceView {
                 BOTTOM_BOXES + PBOX_HEIGHT, gridPaint);
 
         /** PLAYER ONE BOX -- RED */
-
-        //Red 4 piece - 1st piece
-        c.drawPath(pieces.block4(0, false, 0, 0), red);
-
-        //Red 4 piece - 2nd piece
-        c.drawPath(pieces.block4(0, false, 0, 1), red);
-
-        //Red 4 piece - 3rd piece
-        c.drawPath(pieces.block4(0, false, 0, 2), red);
-
-        //Red 4 piece - 4th piece
-        c.drawPath(pieces.block4(0, false, 0, 3), red);
-
-        //Red 4 piece - 5th piece
-        c.drawPath(pieces.block4(0, false, 0, 4), red);
-
-        //Red 4 piece - 6th piece
-        c.drawPath(pieces.block4(0, false, 0, 5), red);
-
-        //Red 4 piece - 7th piece
-        c.drawPath(pieces.block4(0, false, 1, 0), red);
-
-        //Red 4 piece - 8th piece
-        c.drawPath(pieces.block4(0, false, 1, 1), red);
-
-        //Red 4 piece - 9th piece
-        c.drawPath(pieces.block4(0, false, 1, 2), red);
-
-        //Red 4 piece - 10th piece
-        c.drawPath(pieces.block4(0, false, 1, 3), red);
-
-        //Red 4 piece - 11th piece
-        c.drawPath(pieces.block4(0, false, 1, 4), red);
-
-        //Red 4 piece - 12th piece
-        c.drawPath(pieces.block4(0, false, 1, 5), red);
-
-        //Red 4 piece - 13th piece
-        c.drawPath(pieces.block4(0, false, 2, 0), red);
-
-        //Red 4 piece - 14th piece
-        c.drawPath(pieces.block4(0, false, 2, 1), red);
-
-        //Red 4 piece - 15th piece
-        c.drawPath(pieces.block4(0, false, 2, 2), red);
-
-        //Red 4 piece - 16th piece
-        c.drawPath(pieces.block4(0, false, 2, 3), red);
-
-        //Red 4 piece - 17th piece
-        c.drawPath(pieces.block4(0, false, 2, 4), red);
-
-        //Red 4 piece - 18th piece
-        c.drawPath(pieces.block4(0, false, 2, 5), red);
-
-        //Red 4 piece - 19th piece
-        c.drawPath(pieces.block4(0, false, 3, 0), red);
-
-        //Red 4 piece - 20st piece
-        c.drawPath(pieces.block4(0, false, 3, 1), red);
-
-        //Red 4 piece - 21st piece
-        c.drawPath(pieces.block4(0, false, 3, 2), red);
+        int pieceNum = 0;
+        //Draws all 21 pieces for Red
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                this.drawPieces(c, 0, pieceNum, i, j);
+                pieceNum++;
+            }
+        }
 
 
         /** PLAYER TWO BOX -- BLUE */
+        pieceNum = 0;
         //Draws all 21 pieces for Green
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
-                this.drawPieces(c, 1, false, 4, j, i);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                this.drawPieces(c, 1, pieceNum, i, j);
+                pieceNum++;
             }
         }
 
         /** PLAYER THREE BOX -- GREEN */
+        pieceNum = 0;
         //Draws all 21 pieces for Blue
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
-                this.drawPieces(c, 2, false, 4, j, i);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                this.drawPieces(c, 2, pieceNum, i, j);
+                pieceNum++;
             }
         }
 
         /** PLAYER FOUR BOX -- YELLOW */
+        pieceNum = 0;
         //Draws all 21 pieces for Yellow
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 4; j++) {
-                this.drawPieces(c, 3, false, 4, j, i);
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                this.drawPieces(c, 3, pieceNum, i, j);
+                pieceNum++;
             }
         }
 

@@ -5,6 +5,7 @@ import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
+import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
 import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
@@ -23,6 +24,7 @@ public class BlokusDumbAi extends GameComputerPlayer {
 
     //21 pieces
     BlokusGameState myState;
+    DrawBoard drawBoard;
 
     /**
      * BlokusDumbAi

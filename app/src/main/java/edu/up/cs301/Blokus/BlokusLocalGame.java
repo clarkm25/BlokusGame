@@ -8,6 +8,7 @@ import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
+import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.game.GameFramework.players.GamePlayer;
@@ -145,6 +146,7 @@ public class BlokusLocalGame extends LocalGame {
         else if(action instanceof BlokusPlaceAction) {
             BlokusPlaceAction bp = (BlokusPlaceAction) action;
             playerId = getPlayerIdx(bp.getPlayer());
+            state.setPlayerScore(playerId, state.getBlockArray()[playerId][state.getSelectedType()].getBlockScore());
             state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()],0);
             /* Sets the appropriate player's turn based on whose turn it currently is */
             switch (playerId)
@@ -165,8 +167,6 @@ public class BlokusLocalGame extends LocalGame {
                     state.setPlayerTurn(0);
                     break;
             }
-            //Clears legal spots from board as it is no longer given player's turn
-            state.clearBoard(state.getBoard());
             return true;
         }
         else if(action instanceof BlokusQuitAction) {
