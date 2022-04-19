@@ -197,7 +197,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                         BlokusPlaceAction blokusPA = new BlokusPlaceAction(this, i, j);
                         game.sendAction(blokusPA);
                         //Removes pieces from player box when placed on board
-                        drawBoard.setOnBoard(blokusState.getPlayerTurn(), blokusState.getSelectedType());
+                        //drawBoard.setOnBoard(blokusState.getPlayerTurn(), blokusState.getSelectedType());
                         drawBoard.invalidate(); //Redraws board in order to show the piece was removed
                     }
                 }

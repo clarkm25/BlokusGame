@@ -77,6 +77,8 @@ public class BlokusBlock implements Serializable {
 
     public void setOnBoard(boolean toSet) { this.onBoard = toSet; }
 
+    public boolean getOnBoard() { return this.onBoard; }
+
     public void setPieceArr(int[][] toSet)
     {
         if(toSet == null)
