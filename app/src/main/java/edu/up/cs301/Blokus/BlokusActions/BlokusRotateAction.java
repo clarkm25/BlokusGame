@@ -1,6 +1,5 @@
 package edu.up.cs301.Blokus.BlokusActions;
 
-import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.game.GameFramework.players.GamePlayer;
 

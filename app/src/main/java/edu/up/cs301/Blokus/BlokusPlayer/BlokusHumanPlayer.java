@@ -11,7 +11,6 @@ import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
-import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.GameMainActivity;
@@ -29,7 +28,7 @@ import edu.up.cs301.game.R;
  * are set up within this class. GUI is only set to landscape mode.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version March 31st 2022
+ * @version April 19th 2022
  */
 public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchListener, View.OnClickListener {
 
@@ -63,7 +62,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
      * onClick
      *
      * Method for the different buttons that can be used by user. Allows user to quit game, rotate
-     * pieces, place pieces, and accessing the help menu.
+     * pieces, pass their turn, and access the help menu.
      *
      * @param view
      */
@@ -83,7 +82,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             BlokusQuitAction blokusQA = new BlokusQuitAction(this);
             game.sendAction(blokusQA);
         }
-        else if (view.getId() == R.id.helpButton) {
+        else if (view.getId() == R.id.helpButton) { //Help Menu shown regardless of player turn
             /**
              * External Citation
              * Date: 13 April 2022
@@ -127,8 +126,6 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         int playerBoxX = 0;
         int playerBoxY = 0;
 
-
-        //Finds which player box the pieces that are being selected are in
         switch (blokusState.getPlayerTurn()) {
             case 0:
                 playerBoxX = DrawBoard.LEFT_BOXES;
@@ -156,7 +153,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         if ((x > playerBoxX) && (x < playerBoxX + DrawBoard.PBOX_WIDTH)
                 && (y > playerBoxY) && (y < playerBoxY + DrawBoard.PBOX_HEIGHT)) {
 
-            //Sets piece back to beginning
+            //Sets piece back to beginning of array
             selectedPiece = 0;
 
             for (int i = 0; i < 4; i++) {

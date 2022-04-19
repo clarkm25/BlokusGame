@@ -1,11 +1,7 @@
 package edu.up.cs301.Blokus.BlokusInfo;
 
-import android.graphics.Canvas;
-import android.graphics.Path;
-
 import java.io.Serializable;
 
-import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.infoMessage.GameState;
 
 /**
@@ -13,7 +9,7 @@ import edu.up.cs301.game.GameFramework.infoMessage.GameState;
  * and deep copy constructor for all of the information being supplied and initialized.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version March 31st 2022
+ * @version April 19th 2022
  */
 public class BlokusGameState extends GameState implements Serializable {
 

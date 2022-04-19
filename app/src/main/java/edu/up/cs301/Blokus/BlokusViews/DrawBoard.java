@@ -4,12 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Path;
-import android.graphics.Point;
 import android.util.AttributeSet;
-import android.view.View;
-
-import java.io.Serializable;
 
 import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
@@ -20,7 +15,7 @@ import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
  * pieces, player boxes, grid, and score/ player turn.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version March 31st 2022
+ * @version April 19th 2022
  */
 public class DrawBoard extends FlashSurfaceView {
 

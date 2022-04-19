@@ -1,24 +1,17 @@
 package edu.up.cs301.Blokus.BlokusPlayer;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
-import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
-import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
-import edu.up.cs301.Blokus.BlokusInfo.BlokusBlock;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
-import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
 import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.utilities.Logger;
 
-import java.util.ArrayList;
-import java.util.Random;
-
 /**
  * Dumb computer player for Blokus that places first piece in first legal spot.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version March 31st 2022
+ * @version April 19th 2022
  */
 public class BlokusDumbAi extends GameComputerPlayer {
 

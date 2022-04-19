@@ -38,7 +38,7 @@ import java.util.ArrayList;
  * be sent across for the Help Menu and TextView is not serializable.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version March 31st, 2022
+ * @version April 19th 2022
  */
 public class BlokusMainActivity extends GameMainActivity {
 
@@ -88,7 +88,7 @@ public class BlokusMainActivity extends GameMainActivity {
         defaultConfig.addPlayer("Computer Player #3", 1); //Default is Dumb AI
 
         // Set the initial information for the remote player
-        defaultConfig.setRemoteData("Remote Player", "", 1);
+        defaultConfig.setRemoteData("Remote Player", "", 0);
 
         return defaultConfig;
     } //createDefaultConfig

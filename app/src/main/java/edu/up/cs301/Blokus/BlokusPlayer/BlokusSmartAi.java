@@ -16,7 +16,7 @@ import edu.up.cs301.game.GameFramework.utilities.Logger;
  * without rotation.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version March 31st 2022
+ * @version April 19th 2022
  */
 public class BlokusSmartAi extends GameComputerPlayer {
 
@@ -50,7 +50,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
         myState = (BlokusGameState) info;
 
         //Allow for AI to take time between plays
-        sleep(1);
+        sleep(1.0);
 
         /* Picks a random piece number and sets both selected row and columns to zero */
         Random r = new Random();
@@ -81,6 +81,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
                     if (myState.getBoard()[i][j] == BlokusGameState.tileState.LEGAL) {
                         selectedRow = i;
                         selectedColumn = j;
+                        break;
                     }
                 }
             }
@@ -92,10 +93,10 @@ public class BlokusSmartAi extends GameComputerPlayer {
             /* Then, sends an action to place the currently selected piece */
             game.sendAction(new BlokusPlaceAction(this, selectedRow, selectedColumn));
             myState.clearBoard(myState.getBoard());
-        } else {
+        }
+        else {
             Logger.log("BlokusSmartAi", "Sending move");
             game.sendAction(new BlokusPassAction(this));
-            myState.clearBoard(myState.getBoard());
         }
 
     } //receiveInfo

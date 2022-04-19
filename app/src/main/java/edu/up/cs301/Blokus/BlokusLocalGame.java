@@ -8,7 +8,6 @@ import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
-import edu.up.cs301.Blokus.BlokusViews.DrawBoard;
 import edu.up.cs301.game.GameFramework.LocalGame;
 import edu.up.cs301.game.GameFramework.actionMessage.GameAction;
 import edu.up.cs301.game.GameFramework.players.GamePlayer;
@@ -17,10 +16,9 @@ import edu.up.cs301.game.GameFramework.players.GamePlayer;
  * LocalGame for Blokus which handles interactions between players.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version March 31st 2022
+ * @version April 19th 2022
  */
 public class BlokusLocalGame extends LocalGame {
-
 
     /**
      * BlokusLocalGame
@@ -91,7 +89,8 @@ public class BlokusLocalGame extends LocalGame {
     /**
      * checkIfGameOver
      *
-     * Checks if the game is over and returns the winner if it is
+     * Checks if the game is over and returns the winner if it is. Also adds score to a player's
+     * score given they managed to place all their pieces.
      *
      * @return a string stating who the winner is based on their score
      */
