@@ -45,7 +45,7 @@ public class BlokusDumbAi extends GameComputerPlayer {
         myState = (BlokusGameState)info;
 
         //Allow for AI to take time between plays
-        sleep(1);
+        sleep(3);
 
         Logger.log("BlokusDumbAi", "Sending move");
         game.sendAction(new BlokusPassAction(this)); //Passes its turn

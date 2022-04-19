@@ -50,7 +50,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
         myState = (BlokusGameState) info;
 
         //Allow for AI to take time between plays
-        sleep(1.0);
+        sleep(3);
 
         /* Picks a random piece number and sets both selected row and columns to zero */
         Random r = new Random();
