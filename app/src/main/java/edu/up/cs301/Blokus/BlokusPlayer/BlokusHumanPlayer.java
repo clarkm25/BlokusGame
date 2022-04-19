@@ -198,7 +198,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                     //Iterates through ever spot on the grid in order to find where user presses.
                     if ((x > ((j * DrawBoard.GRIDBOX_SIZE) + 700)) && (x < (((j+1) * DrawBoard.GRIDBOX_SIZE) + 700))
                             && (y > ((i * DrawBoard.GRIDBOX_SIZE) + 50)) && (y < (((i+1) * DrawBoard.GRIDBOX_SIZE) + 50))) {
-                        if(blokusState.getBoard()[i][j] != BlokusGameState.tileState.LEGAL)
+                        if(blokusState.getBoard()[i][j] != BlokusGameState.tileState.LEGAL)//If tile is not legal, flashes red
                         {
                             drawBoard.flash(Color.RED,50);
                         }

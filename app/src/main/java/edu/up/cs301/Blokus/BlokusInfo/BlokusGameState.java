@@ -222,7 +222,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 placePiece(playerTurn,xPos,yPos,piece,rotateCount);
             }
         }
-        return 0;
+        return 0;//If we get here, ends the player's turn
     }
 
     /**
