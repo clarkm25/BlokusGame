@@ -99,8 +99,21 @@ public class BlokusLocalGame extends LocalGame {
     protected String checkIfGameOver() {
         BlokusGameState blokusState = (BlokusGameState) super.state;
         int outOfMoves = 0;
-        if (blokusState.getPlayerScore(blokusState.getPlayerTurn()) > 0) {
-            return "Player " + blokusState.getPlayerTurn() + " has won!";
+        int piecesUsed = 0;
+
+        //Iterates through each piece per player and checks if it is on the board or not
+        for (int i = 0; i < 21; i++) {
+            if (blokusState.getBlockArray()[blokusState.getPlayerTurn()][i].getOnBoard() == true) {
+                piecesUsed++;
+            }
+        }
+
+        //If all pieces are played then state who the winner is
+        if (piecesUsed == 21) {
+            //Adds bonus points for placing all pieces as stated in rules
+            blokusState.setPlayerScore(blokusState.getPlayerTurn(), 15);
+            return "Player " + blokusState.getPlayerTurn() + " has won with a score of " +
+                    blokusState.getPlayerScore(blokusState.getPlayerTurn()) + "! ";
         }
         else {
             return null;

@@ -79,7 +79,7 @@
         android:layout_marginRight="200dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:background="#D6EAEA"
         android:text="                                                                          Help Menu:
 \n\nBlokus Rules:\n         Each player gets a color and 21 pieces in their given color.
@@ -94,8 +94,8 @@ player is able to place all 21 of their pieces, they will end up with a score eq
 for placing all 21 pieces, a 15 point bonus is given to the player for a total score of 15. There is
 yet another bonus that players can get though which is achieved from placing the 1 block piece
 last. By doing so an additional bonus of 5 points will be given to the player for a total of 20
-points. \n          When placing a piece, the corner that is placed in a legal spot defaults to the top left
-corner. Therefore, if needed the piece can be rotated so that it does not overlap other pieces.
+points. \n\n         IMPORTANT: When placing a piece, the corner that is placed in a legal spot defaults to the top left
+corner. Therefore, if needed the piece can be rotated so that it does not overlap with other pieces.
 \n\nButtons: \nHelp - Opens and closes this menu. \nRotate - Rotates a selected piece 90 degrees
 clockwise. \nQuit - Closes the game. \nPass - Passes the user's turn without placing a piece."/>
 
