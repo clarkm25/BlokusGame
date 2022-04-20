@@ -221,30 +221,6 @@ public class BlokusGameState extends GameState implements Serializable {
     }
 
     /**
-     * This will check the neighbors of a currently placed tile to make sure they do not overlap
-     *
-     * @param currBoard current board to check
-     * @param row current row
-     * @param col current col
-     * @param yDelta row offset
-     * @param xDelta column offset
-     *
-     * @return boolean
-     */
-    public boolean checkMyNeighbor(tileState[][] currBoard, int row, int col, int yDelta, int xDelta) {
-        tileState playerState = getTileStateForId(playerTurn);
-        try {
-            if(currBoard[row+yDelta][col+xDelta] == playerState) {
-                return true;
-            }
-        }
-        catch(ArrayIndexOutOfBoundsException e) {
-            return false;
-        }
-        return false;
-    }
-
-    /**
      * This will rotate a player's given piece 90 degrees clockwise given that it is the
      * player's turn.
      *
@@ -296,22 +272,22 @@ public class BlokusGameState extends GameState implements Serializable {
         for(int i = 0; i<20; i++) {
             for(int j = 0; j<20; j++) {
                 if (i < 19) { //This check will run as long as i is to the left of the right most column
-                    if(checkNeighbor(board,playerTurn,i,j,1,1)) { //If successful increment numChanged
+                    if(checkNeighborCorner(board,playerTurn,i,j,1,1)) { //If successful increment numChanged
                         numChanged++;
                     }
                 }
                 if (i > 0) { //This check will run as long as i is to the right of the left most column
-                    if(checkNeighbor(board,playerTurn,i,j,1,-1)) {
+                    if(checkNeighborCorner(board,playerTurn,i,j,1,-1)) {
                         numChanged++;
                     }
                 }
                 if(j < 19) { //This check will run as long as j is to the left of the right most column
-                    if(checkNeighbor(board,playerTurn,i,j,-1,1)) {
+                    if(checkNeighborCorner(board,playerTurn,i,j,-1,1)) {
                         numChanged++;
                     }
                 }
                 if(j > 0) { //This check will run as long as j is to the right of the left most column
-                    if(checkNeighbor(board,playerTurn,i,j,-1,-1)) {
+                    if(checkNeighborCorner(board,playerTurn,i,j,-1,-1)) {
                         numChanged++;
                     }
                 }
@@ -353,19 +329,55 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean checkNeighbor(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta, int xDelta) {
+    public boolean checkNeighborCorner(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
         try {
             if ((board[yPos][xPos] == playerState //Checks to see if specified tile matches playerState
                     && board[yPos + yDelta][xPos]!=playerState && board[yPos][xPos + xDelta]!=playerState)//Checks the tile below and tile to the right to see if they are not equal to the playerState
-                    && board[yPos + yDelta][xPos + xDelta] == tileState.EMPTY) //Finally, tile to the bottom right must be empty
-            {
+                    && board[yPos + yDelta][xPos + xDelta] == tileState.EMPTY) { //Finally, tile to the bottom right must be empty
                 board[yPos+yDelta][xPos+xDelta] = tileState.LEGAL;
                 return true;
             }
             else {
                 return false;
             }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    /**
+     * checkNeighbors
+     *
+     *  Checks whether or not the tile above, to the left, to the right, and below a given tile
+     *  for a piece has a tile of the same color in it to prevent overlapping. Method also goes and
+     *  makes sure that a tile is not being placed over a tile with a color in it already.
+     *
+     * @param board
+     * @param playerTurn
+     * @param yPos
+     * @param xPos
+     * @param yDelta
+     * @param xDelta
+     * @param piece
+     *
+     * @return boolean stating whether check worked or not
+     */
+    public boolean checkPlacement(tileState[][] board, int playerTurn, int yPos, int xPos,
+                                  int yDelta, int xDelta, BlokusBlock piece) {
+        tileState playerState = getTileStateForId(playerTurn);
+
+        //Creates a temp board based on the current board in play
+        tileState[][] tempBoard = new tileState[20][20];
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                tempBoard[i][j] = board[i][j];
+            }
+        }
+
+        try {
+           return true;
         }
         catch(ArrayIndexOutOfBoundsException e) {
             return false;
