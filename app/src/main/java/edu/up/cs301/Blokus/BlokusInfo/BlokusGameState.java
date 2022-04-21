@@ -402,10 +402,10 @@ public class BlokusGameState extends GameState implements Serializable {
         int neighborNum = 0;
         int row = 0;
         int col = 0;
-        int xDiff = 0;
-        int yDiff = 0;
-        int currRow = 0;
-        int currCol = 0;
+        int xDiff;
+        int yDiff;
+        int currRow;
+        int currCol;
 
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -487,19 +487,17 @@ public class BlokusGameState extends GameState implements Serializable {
                 if (neighborNum != 0) {
                     return true;
                 }
-                else {
-                    return false;
-                }
             }
 
         }
-        return true;
+        return false;
     }
 
     /**
      * checkLegalPerTileX
      *
-     * Checks left (-1 for xDelta) or right (1 for xDelta) tile to see if it has a neighbor. Helper method for checkLegalPerPiece
+     * Checks left (-1 for xDelta) or right (1 for xDelta) tile to see if it has a neighbor.
+     * Helper method for checkLegalPerPiece
      *
      * @param board
      * @param playerTurn
@@ -512,7 +510,10 @@ public class BlokusGameState extends GameState implements Serializable {
     public boolean checkLegalPerTileX(tileState[][] board, int playerTurn, int yPos, int xPos, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
         try {
-            if (board[yPos][xPos + xDelta] == playerState) {
+            if (board[yPos][xPos] == playerState) {
+                return true;
+            }
+            else if (board[yPos][xPos + xDelta] == playerState) {
                 return true;
             }
             else {
@@ -527,7 +528,9 @@ public class BlokusGameState extends GameState implements Serializable {
     /**
      * checkLegalPerTileY
      *
-     * Checks top (-1 for yDelta) or bottom (1 for yDelta) tile to see if it has a neighbor. Helper method for checkLegalPerPiece
+     * Checks top (-1 for yDelta) or bottom (1 for yDelta) tile to see if it has a neighbor.
+     * Helper method for checkLegalPerPiece
+     *
      * @param board
      * @param playerTurn
      * @param yPos
@@ -539,9 +542,13 @@ public class BlokusGameState extends GameState implements Serializable {
     public boolean checkLegalPerTileY(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta) {
         tileState playerState = getTileStateForId(playerTurn);
         try {
-            if (board[yPos + yDelta][xPos] == playerState) {
+            if (board[yPos][xPos] == playerState) {
                 return true;
-            } else {
+            }
+            else if (board[yPos + yDelta][xPos] == playerState) {
+                return true;
+            }
+            else {
                 return false;
             }
         }
