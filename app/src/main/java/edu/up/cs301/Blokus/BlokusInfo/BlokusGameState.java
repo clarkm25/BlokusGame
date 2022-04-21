@@ -28,8 +28,7 @@ public class BlokusGameState extends GameState implements Serializable {
     private BlokusBlock [][] blockArray; //Represents each players collection of pieces
     private tileState[][] board;
     private boolean gameOn;
-    private int row = 0;
-    private int col = 0;
+    private int piecesPlaced;
 
     /** Default ctor */
     public BlokusGameState() {
@@ -39,6 +38,9 @@ public class BlokusGameState extends GameState implements Serializable {
 
         /* int containing the currently selected block type */
         this.selectedType = -1;
+
+        /* int containing current round number */
+        this.piecesPlaced = 0;
 
         /* Array for holding player scores */
         this.playerScore = new int[] {-85,-85,-85,-85};
@@ -92,6 +94,9 @@ public class BlokusGameState extends GameState implements Serializable {
 
         /* Copy process for the currently selected type of piece*/
         this.selectedType = toCopy.selectedType;
+
+        /* Copy process for current round number */
+        this.piecesPlaced = toCopy.piecesPlaced;
 
         /* Copy process for the player scores Starts by initializing a new array then copies contents over */
         this.playerScore = new int[4];
@@ -272,22 +277,22 @@ public class BlokusGameState extends GameState implements Serializable {
         for(int i = 0; i<20; i++) {
             for(int j = 0; j<20; j++) {
                 if (i < 19) { //This check will run as long as i is to the left of the right most column
-                    if(checkNeighborCorner(board,playerTurn,i,j,1,1)) { //If successful increment numChanged
+                    if(checkNeighbor(board,playerTurn,i,j,1,1)) { //If successful increment numChanged
                         numChanged++;
                     }
                 }
                 if (i > 0) { //This check will run as long as i is to the right of the left most column
-                    if(checkNeighborCorner(board,playerTurn,i,j,1,-1)) {
+                    if(checkNeighbor(board,playerTurn,i,j,1,-1)) {
                         numChanged++;
                     }
                 }
                 if(j < 19) { //This check will run as long as j is to the left of the right most column
-                    if(checkNeighborCorner(board,playerTurn,i,j,-1,1)) {
+                    if(checkNeighbor(board,playerTurn,i,j,-1,1)) {
                         numChanged++;
                     }
                 }
                 if(j > 0) { //This check will run as long as j is to the right of the left most column
-                    if(checkNeighborCorner(board,playerTurn,i,j,-1,-1)) {
+                    if(checkNeighbor(board,playerTurn,i,j,-1,-1)) {
                         numChanged++;
                     }
                 }
@@ -329,7 +334,7 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public boolean checkNeighborCorner(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta, int xDelta) {
+    public boolean checkNeighbor(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
         try {
             if ((board[yPos][xPos] == playerState //Checks to see if specified tile matches playerState
@@ -348,7 +353,7 @@ public class BlokusGameState extends GameState implements Serializable {
     }
 
     /**
-     * checkNeighbors
+     * checkLegalPerPiece
      *
      *  Checks whether or not the tile above, to the left, to the right, and below a given tile
      *  for a piece has a tile of the same color in it to prevent overlapping. Method also goes and
@@ -356,33 +361,142 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @param board
      * @param playerTurn
-     * @param yPos
-     * @param xPos
-     * @param yDelta
-     * @param xDelta
      * @param piece
      *
      * @return boolean stating whether check worked or not
      */
-    public boolean checkPlacement(tileState[][] board, int playerTurn, int yPos, int xPos,
-                                  int yDelta, int xDelta, BlokusBlock piece) {
-        tileState playerState = getTileStateForId(playerTurn);
-
-        //Creates a temp board based on the current board in play
-        tileState[][] tempBoard = new tileState[20][20];
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
-                tempBoard[i][j] = board[i][j];
-            }
-        }
+    public boolean checkLegals(tileState[][] board, int playerTurn, BlokusBlock piece) {
 
         try {
-           return true;
+            for (int i = 0; i < 20; i++) {
+                for (int j = 0; j < 20; j++) {
+                    if (board[i][j] == tileState.LEGAL) {
+                        if (checkLegalPerPiece(board, playerTurn, piece, i, j)) {
+                            board[i][j] = tileState.EMPTY;
+                        }
+                    }
+                }
+            }
+            return true;
         }
         catch(ArrayIndexOutOfBoundsException e) {
             return false;
         }
     }
+
+    /**
+     * checkLegalPerPiece
+     *
+     * Checks for any neighbors for a given piece. Helper method for checkLegals.
+     *
+     * @param board
+     * @param playerTurn
+     * @param piece
+     * @param yPos
+     * @param xPos
+     *
+     * @return true if piece can't be placed legally, false if it can
+     */
+    public boolean checkLegalPerPiece(tileState[][] board, int playerTurn, BlokusBlock piece, int yPos, int xPos) {
+        int neighborNum = 0;
+
+        for (int k = 0; k < 5; k++) {
+            for (int n = 0; n < 5; n++) {
+                if (piece.getPieceArr()[k][n] == 2) {
+                    if (xPos < 19) {
+                        //Checks right neighbor
+                        if (this.checkLegalPerTileX(board, playerTurn, yPos, xPos, 1)) {
+                            neighborNum++;
+                        }
+                    }
+                    if (xPos > 0) {
+                        //Checks left neighbor
+                        if (this.checkLegalPerTileX(board, playerTurn, yPos, xPos, -1)) {
+                            neighborNum++;
+                        }
+                    }
+                    if (yPos < 19) {
+                        //Checks bottom neighbor
+                        if (this.checkLegalPerTileY(board, playerTurn, yPos, xPos, 1)) {
+                            neighborNum++;
+                        }
+                    }
+                    if (yPos > 0) {
+                        //Checks top neighbor
+                        if (this.checkLegalPerTileY(board, playerTurn, yPos, xPos, -1)) {
+                            neighborNum++;
+                        }
+                    }
+
+                    if (neighborNum != 0) {
+                        return true;
+                    }
+                    else {
+                        return false;
+                    }
+                }
+                else {
+                    continue; //Unknown value or empty tile - should do nothing
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
+     * checkLegalPerTileX
+     *
+     * Checks left or right tile to see if it has a neighbor. Helper method for checkLegalPerPiece
+     *
+     * @param board
+     * @param playerTurn
+     * @param yPos
+     * @param xPos
+     * @param xDelta
+     *
+     * @return false if no neighbor of same color, true if neighbor of same color
+     */
+    public boolean checkLegalPerTileX(tileState[][] board, int playerTurn, int yPos, int xPos, int xDelta) {
+        tileState playerState = getTileStateForId(playerTurn);
+        try {
+            if (board[yPos][xPos + xDelta] == playerState) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e) {
+            return false;
+        }
+    }
+
+    /**
+     * checkLegalPerTileY
+     *
+     * Checks top or bottom tile to see if it has a neighbor. Helper method for checkLegalPerPiece
+     * @param board
+     * @param playerTurn
+     * @param yPos
+     * @param xPos
+     * @param yDelta
+     *
+     * @return false if no neighbor of same color, true if neighbor of same color
+     */
+    public boolean checkLegalPerTileY(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta) {
+        tileState playerState = getTileStateForId(playerTurn);
+        try {
+            if (board[yPos + yDelta][xPos] == playerState) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        catch(ArrayIndexOutOfBoundsException e){
+            return false;
+        }
+    }
+
 
     /**
      * This will be ran everytime that calcLegalMoves is called to catch the beginning game
@@ -464,16 +578,10 @@ public class BlokusGameState extends GameState implements Serializable {
         return this.playerScore[player];
     }
 
-    public void setRow(int initRow) {
-        row = initRow;
-    }
-
-    public void setCol(int initCol) {
-        col = initCol;
-    }
     public int getSelectedType() { return this.selectedType; }
     public int[] getPlayerScore() { return this.playerScore; }
     public boolean getGameOn() { return this.gameOn; }
+    public int getPiecesPlaced() { return this.piecesPlaced; }
 
     /**
      * Gets color based on given player
@@ -509,6 +617,7 @@ public class BlokusGameState extends GameState implements Serializable {
     public void setSelectedType(int toSet) { this.selectedType = toSet; }
     public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] += toAdd; }
     public void setGameOn(boolean toSet) { this.gameOn = toSet; }
+    public void setPiecesPlaced(int toSet) { this.piecesPlaced += toSet; }
 
     /**
      * This will return a string version of the entire BlokusGameState

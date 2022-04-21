@@ -144,6 +144,10 @@ public class BlokusLocalGame extends LocalGame {
            if(!state.calcLegalMoves(state.getBoard(), playerId)) { //Calculate legal moves after selecting the piece
 
            }
+           if (!state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()])) {
+
+           }
+
            return true;
         }
         else if(action instanceof BlokusRotateAction) {
@@ -175,6 +179,8 @@ public class BlokusLocalGame extends LocalGame {
                         state.setPlayerTurn(0);
                         break;
                 }
+
+                state.setPiecesPlaced(1);
             }
 
 
