@@ -155,10 +155,10 @@ public class BlokusBlock implements Serializable {
                 this.setBlockScore(4);
                 break;
             case 8:
-                this.pieceArr[1][0] = 2;
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[1][0] = 1;
                 this.pieceArr[1][1] = 1;
-                this.pieceArr[0][1] = 1;
-                this.pieceArr[1][2] = 1;
+                this.pieceArr[2][0] = 1;
 
                 this.setBlockScore(4);
                 break;
@@ -190,11 +190,11 @@ public class BlokusBlock implements Serializable {
                 this.setBlockScore(5);
                 break;
             case 12:
-                this.pieceArr[1][0] = 2;
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[1][0] = 1;
                 this.pieceArr[1][1] = 1;
-                this.pieceArr[0][1] = 1;
-                this.pieceArr[1][2] = 1;
-                this.pieceArr[1][3] = 1;
+                this.pieceArr[2][0] = 1;
+                this.pieceArr[3][0] = 1;
 
                 this.setBlockScore(5);
                 break;
@@ -208,11 +208,11 @@ public class BlokusBlock implements Serializable {
                 this.setBlockScore(5);
                 break;
             case 14:
-                this.pieceArr[2][0] = 2;
-                this.pieceArr[2][1] = 1;
+                this.pieceArr[0][0] = 2;
+                this.pieceArr[1][0] = 1;
                 this.pieceArr[1][1] = 1;
+                this.pieceArr[2][1] = 1;
                 this.pieceArr[1][2] = 1;
-                this.pieceArr[0][1] = 1;
 
                 this.setBlockScore(5);
                 break;

@@ -154,6 +154,12 @@ public class BlokusLocalGame extends LocalGame {
           BlokusRotateAction br = (BlokusRotateAction) action;
           playerId = getPlayerIdx(br.getPlayer());
           state.rotatePiece(state.getBlockArray()[playerId][state.getSelectedType()]);//Gets the appropriate piece based off the selected type and ID
+          if(!state.calcLegalMoves(state.getBoard(), playerId)) { //Calculate legal moves after selecting the piece
+
+          }
+          if (!state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()])) {
+
+          }
           return true;
         }
         else if(action instanceof BlokusPlaceAction) {

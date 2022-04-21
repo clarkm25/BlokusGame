@@ -368,6 +368,7 @@ public class BlokusGameState extends GameState implements Serializable {
     public boolean checkLegals(tileState[][] board, int playerTurn, BlokusBlock piece) {
 
         try {
+            //Iterates through all legal places & removes places that do not accept piece array
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
                     if (board[i][j] == tileState.LEGAL) {
@@ -399,46 +400,95 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public boolean checkLegalPerPiece(tileState[][] board, int playerTurn, BlokusBlock piece, int yPos, int xPos) {
         int neighborNum = 0;
+        int row = 0;
+        int col = 0;
+        int xDiff = 0;
+        int yDiff = 0;
 
-        for (int k = 0; k < 5; k++) {
-            for (int n = 0; n < 5; n++) {
-                if (piece.getPieceArr()[k][n] == 2) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (piece.getPieceArr()[i][j] == 2) {
+                    //Records location of i and j in order to subtract it from other tiles of piece
+                    row = i;
+                    col = j;
+                }
+            }
+        }
+
+        //Iterates through all tiles in a piece array to check for neighbors without placing piece
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (piece.getPieceArr()[i][j] == 2) {
+                    xDiff = 0;
+                    yDiff = 0;
+
                     if (xPos < 19) {
                         //Checks right neighbor
-                        if (this.checkLegalPerTileX(board, playerTurn, yPos, xPos, 1)) {
+                        if (this.checkLegalPerTileX(board, playerTurn, yPos + yDiff, xPos + xDiff, 1)) {
                             neighborNum++;
                         }
                     }
                     if (xPos > 0) {
                         //Checks left neighbor
-                        if (this.checkLegalPerTileX(board, playerTurn, yPos, xPos, -1)) {
+                        if (this.checkLegalPerTileX(board, playerTurn, yPos + yDiff, xPos + xDiff, -1)) {
                             neighborNum++;
                         }
                     }
                     if (yPos < 19) {
                         //Checks bottom neighbor
-                        if (this.checkLegalPerTileY(board, playerTurn, yPos, xPos, 1)) {
+                        if (this.checkLegalPerTileY(board, playerTurn, yPos + yDiff, xPos + xDiff, 1)) {
                             neighborNum++;
                         }
                     }
                     if (yPos > 0) {
                         //Checks top neighbor
-                        if (this.checkLegalPerTileY(board, playerTurn, yPos, xPos, -1)) {
+                        if (this.checkLegalPerTileY(board, playerTurn, yPos + yDiff, xPos + xDiff, -1)) {
                             neighborNum++;
                         }
                     }
+                }
+                else if (piece.getPieceArr()[i][j] == 1) {
+                    xDiff = j - col;
+                    yDiff = i - row;
 
-                    if (neighborNum != 0) {
-                        return true;
+                    if ((xPos + xDiff) < 19) {
+                        //Checks right neighbor
+                        if (this.checkLegalPerTileX(board, playerTurn, yPos + yDiff, xPos + xDiff, 1)) {
+                            neighborNum++;
+                        }
                     }
-                    else {
-                        return false;
+                    if ((xPos + xDiff) > 0) {
+                        //Checks left neighbor
+                        if (this.checkLegalPerTileX(board, playerTurn, yPos + yDiff, xPos + xDiff, -1)) {
+                            neighborNum++;
+                        }
+                    }
+                    if ((yPos + yDiff) < 19) {
+                        //Checks bottom neighbor
+                        if (this.checkLegalPerTileY(board, playerTurn, yPos + yDiff, xPos + xDiff, 1)) {
+                            neighborNum++;
+                        }
+                    }
+                    if ((yPos + yDiff) > 0) {
+                        //Checks top neighbor
+                        if (this.checkLegalPerTileY(board, playerTurn, yPos + yDiff, xPos + xDiff, -1)) {
+                            neighborNum++;
+                        }
                     }
                 }
                 else {
                     continue; //Unknown value or empty tile - should do nothing
                 }
+
+                //Will get rid of legal placement
+                if (neighborNum != 0) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
+
         }
         return true;
     }
@@ -446,7 +496,7 @@ public class BlokusGameState extends GameState implements Serializable {
     /**
      * checkLegalPerTileX
      *
-     * Checks left or right tile to see if it has a neighbor. Helper method for checkLegalPerPiece
+     * Checks left (-1 for xDelta) or right (1 for xDelta) tile to see if it has a neighbor. Helper method for checkLegalPerPiece
      *
      * @param board
      * @param playerTurn
@@ -474,7 +524,7 @@ public class BlokusGameState extends GameState implements Serializable {
     /**
      * checkLegalPerTileY
      *
-     * Checks top or bottom tile to see if it has a neighbor. Helper method for checkLegalPerPiece
+     * Checks top (-1 for yDelta) or bottom (1 for yDelta) tile to see if it has a neighbor. Helper method for checkLegalPerPiece
      * @param board
      * @param playerTurn
      * @param yPos
