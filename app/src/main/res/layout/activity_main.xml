@@ -89,7 +89,7 @@ touching an edge of their color or overlapping with any another piece. Each play
 of their pieces as they can until it is no longer possible for them to place any pieces even when
 they are rotated. \n         For scoring, every square in a single piece is worth 1 point. Therefore if a
 player is planning on placing a 4 block piece, it will be worth 4 points. Each players score starts
-at -89 and goes up when a piece is placed as the score is subtracted from the overall score. If a
+at -85 and goes up when a piece is placed as the score is subtracted from the overall score. If a
 player is able to place all 21 of their pieces, they will end up with a score equalling 0. However,
 for placing all 21 pieces, a 15 point bonus is given to the player for a total score of 15. There is
 yet another bonus that players can get though which is achieved from placing the 1 block piece
