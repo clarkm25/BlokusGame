@@ -4,6 +4,7 @@ import java.util.Random;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
+import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
@@ -49,9 +50,6 @@ public class BlokusSmartAi extends GameComputerPlayer {
 
         myState = (BlokusGameState) info;
 
-        //Allow for AI to take time between plays
-        sleep(3);
-
         /* Picks a random piece number and sets both selected row and columns to zero */
         Random r = new Random();
 
@@ -75,19 +73,24 @@ public class BlokusSmartAi extends GameComputerPlayer {
                 pickedPiece = r.nextInt(21);
             } while (myState.getBlockArray()[playerNum][pickedPiece].getOnBoard() == true);
 
+            /* With everything calculated, selects the randomly selected piece */
+            game.sendAction(new BlokusSelectAction(this, pickedPiece));
+
+            //Allow for AI to take time between plays
+            sleep(3);
+
             /* Iterates through the board to find the first legal position */
-            for (int i = 0; i < 20; i++) {
-                for (int j = 0; j < 20; j++) {
-                    if (myState.getBoard()[i][j] == BlokusGameState.tileState.LEGAL) {
-                        selectedRow = i;
-                        selectedColumn = j;
-                        break;
+            for (int k = 0; k < 4; k++) {
+                for (int i = 0; i < 20; i++) {
+                    for (int j = 0; j < 20; j++) {
+                        if (myState.getBoard()[i][j] == BlokusGameState.tileState.LEGAL) {
+                            selectedRow = i;
+                            selectedColumn = j;
+                            break;
+                        }
                     }
                 }
             }
-
-            /* With everything calculated, selects the randomly selected piece */
-            game.sendAction(new BlokusSelectAction(this, pickedPiece));
 
             Logger.log("BlokusSmartAi", "Sending move");
             /* Then, sends an action to place the currently selected piece */
