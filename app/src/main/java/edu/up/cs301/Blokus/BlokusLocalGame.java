@@ -148,8 +148,7 @@ public class BlokusLocalGame extends LocalGame {
         else if(action instanceof BlokusRotateAction) {
           BlokusRotateAction br = (BlokusRotateAction) action;
           playerId = getPlayerIdx(br.getPlayer());
-          if(state.getSelectedType() == -1)
-          {
+          if(state.getSelectedType() == -1) {
               return false;
           }
           state.rotatePiece(state.getBlockArray()[playerId][state.getSelectedType()]);//Gets the appropriate piece based off the selected type and ID
@@ -180,9 +179,11 @@ public class BlokusLocalGame extends LocalGame {
                         state.setPlayerTurn(0);
                         break;
                 }
+                return true;
             }
-
-            return true;
+            else {
+                return false;
+            }
         }
         else if(action instanceof BlokusQuitAction) {
             state.setGameOn(false); //Quits game if its player's turn
