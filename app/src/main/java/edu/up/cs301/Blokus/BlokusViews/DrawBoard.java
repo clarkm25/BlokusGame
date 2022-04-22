@@ -83,7 +83,20 @@ public class DrawBoard extends FlashSurfaceView {
 
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 21; j++) {
-                isRotated[i][j] = i;
+                switch(i) {
+                    case 0:
+                        isRotated[i][j] = 0;
+                        break;
+                    case 1:
+                        isRotated[i][j] = 1;
+                        break;
+                    case 2:
+                        isRotated[i][j] = 3;
+                        break;
+                    case 3:
+                        isRotated[i][j] = 2;
+                        break;
+                }
             }
         }
     } //initialize

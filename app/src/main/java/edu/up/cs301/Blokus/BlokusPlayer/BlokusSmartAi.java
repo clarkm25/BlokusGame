@@ -78,8 +78,8 @@ public class BlokusSmartAi extends GameComputerPlayer {
                 pickedPiece = r.nextInt(21);
             } while (myState.getBlockArray()[playerNum][pickedPiece].getOnBoard());
             game.sendAction(new BlokusSelectAction(this, pickedPiece));
-            myState.calcLegalMoves(myState.getBoard(),playerNum);
-            myState.checkLegals(myState.getBoard(),playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
+            myState.calcLegalMoves(myState.getBoard(), playerNum);
+            myState.checkLegals(myState.getBoard(), playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
             /* Iterates through the board to find the first legal position */
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {

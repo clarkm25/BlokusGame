@@ -54,12 +54,12 @@ public class BlokusGameState extends GameState implements Serializable {
                         this.rotatePiece(this.blockArray[i][j]);
                         break;
                     case 2:
-                        for (int k = 0; k < 2; k++) {
+                        for (int k = 0; k < 3; k++) {
                             this.rotatePiece(this.blockArray[i][j]);
                         }
                         break;
                     case 3:
-                        for (int k = 0; k < 3; k++) {
+                        for (int k = 0; k < 2; k++) {
                             this.rotatePiece(this.blockArray[i][j]);
                         }
                         break;
@@ -339,12 +339,10 @@ public class BlokusGameState extends GameState implements Serializable {
      * @param playerTurn
      * @param piece
      *
-     * @return boolean stating whether check worked or not
+     * @return int stating whether a
      */
     public boolean checkLegals(tileState[][] board, int playerTurn, BlokusBlock piece) {
-
-        if(this.selectedType == -1)
-        {
+        if(this.selectedType == -1) {
             return false;
         }
 
@@ -491,7 +489,8 @@ public class BlokusGameState extends GameState implements Serializable {
     public boolean checkLegalPerTileX(tileState[][] board, int playerTurn, int yPos, int xPos, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
         try {
-            if (board[yPos][xPos] == playerState) {
+            if ((board[yPos][xPos] == tileState.BLUE) || (board[yPos][xPos] == tileState.RED)
+                    || (board[yPos][xPos] == tileState.GREEN) || (board[yPos][xPos] == tileState.YELLOW)) {
                 return true;
             }
             else if (board[yPos][xPos + xDelta] == playerState) {
