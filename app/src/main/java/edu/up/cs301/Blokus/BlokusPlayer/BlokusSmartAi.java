@@ -46,7 +46,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
-        if (info instanceof IllegalMoveInfo) return;
+        if( info instanceof IllegalMoveInfo) return;
 
         myState = (BlokusGameState) info;
         if(myState.getPlayerTurn() != playerNum) return;
@@ -77,7 +77,9 @@ public class BlokusSmartAi extends GameComputerPlayer {
             do {
                 pickedPiece = r.nextInt(21);
             } while (myState.getBlockArray()[playerNum][pickedPiece].getOnBoard());
-
+            game.sendAction(new BlokusSelectAction(this, pickedPiece));
+            myState.calcLegalMoves(myState.getBoard(),playerNum);
+            myState.checkLegals(myState.getBoard(),playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
             /* Iterates through the board to find the first legal position */
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
@@ -90,7 +92,6 @@ public class BlokusSmartAi extends GameComputerPlayer {
             }
 
             myState.rotatePiece(myState.getBlockArray()[playerNum][pickedPiece]);
-            myState.checkLegals(myState.getBoard(),playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
             game.sendAction(new BlokusRotateAction(this));
 
             /* Then, sends an action to place the currently selected piece */
