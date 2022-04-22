@@ -75,13 +75,19 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
             BlokusRotateAction blokusRA = new BlokusRotateAction(this);
             game.sendAction(blokusRA);
             //Rotates piece in player box
-            drawBoard.setIsRotated(blokusState.getPlayerTurn(), blokusState.getSelectedType());
-            drawBoard.invalidate(); //Redraws in order to show piece rotated
+            if(blokusState.getSelectedType() == -1)
+            {
+                drawBoard.flash(Color.RED,50);
+            }
+            else
+            {
+                drawBoard.setIsRotated(blokusState.getPlayerTurn(), blokusState.getSelectedType());
+                drawBoard.invalidate(); //Redraws in order to show piece rotated
+            }
         }
         else if (view.getId() == R.id.quitButton) {
             System.exit(1); //Closes game out
-            BlokusQuitAction blokusQA = new BlokusQuitAction(this);
-            game.sendAction(blokusQA);
+            System.exit(1);
         }
         else if (view.getId() == R.id.helpButton) { //Help Menu shown regardless of player turn
             /**
@@ -190,6 +196,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                 }
             }
         }
+
         //Size of grid
         if ((x > 700) && (x < 1300) && (y > 50) && (y < 650)) {
             for (int i = 0; i < 20; i++) {
@@ -200,6 +207,10 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                         if(blokusState.getBoard()[i][j] != BlokusGameState.tileState.LEGAL)//If tile is not legal, flashes red
                         {
                             drawBoard.flash(Color.RED,50);
+                        }
+                        else if (blokusState.placePiece(playerNum, i, j, blokusState.getBlockArray()[playerNum][selectedPiece],0) == 2)
+                        {
+                            drawBoard.flash(Color.RED, 50);
                         }
                         else
                         {

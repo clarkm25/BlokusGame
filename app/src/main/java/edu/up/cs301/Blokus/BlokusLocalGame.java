@@ -143,16 +143,14 @@ public class BlokusLocalGame extends LocalGame {
            state.setSelectedType(bs.getBlockType()); //Sets the selected type after the selection action happens
            state.calcLegalMoves(state.getBoard(), playerId); //Calculate legal moves after selecting the piece
            state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()]);
-
            return true;
         }
         else if(action instanceof BlokusRotateAction) {
           BlokusRotateAction br = (BlokusRotateAction) action;
           playerId = getPlayerIdx(br.getPlayer());
           state.rotatePiece(state.getBlockArray()[playerId][state.getSelectedType()]);//Gets the appropriate piece based off the selected type and ID
-          state.calcLegalMoves(state.getBoard(), playerId);//Calculate legal moves after selecting the piece
+          state.calcLegalMoves(state.getBoard(), playerId); //Calculate legal moves after selecting the piece
           state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()]);
-          
           return true;
         }
         else if(action instanceof BlokusPlaceAction) {
@@ -179,7 +177,6 @@ public class BlokusLocalGame extends LocalGame {
                         break;
                 }
             }
-
 
             return true;
         }

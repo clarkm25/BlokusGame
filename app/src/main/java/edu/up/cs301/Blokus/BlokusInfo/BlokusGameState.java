@@ -209,7 +209,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 return 0;
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                return 1;
+                return 2;
             }
         }
         return 0;//If we get here, ends the player's turn
