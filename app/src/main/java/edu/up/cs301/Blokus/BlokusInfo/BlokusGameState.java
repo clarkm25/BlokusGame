@@ -198,7 +198,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 return 2;
             }
         }
-        return 0;//If we get here, ends the player's turn
+        return 1;//If we get here, ends the player's turn
     }
 
     /**
