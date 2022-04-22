@@ -46,12 +46,11 @@ public class BlokusSmartAi extends GameComputerPlayer {
     protected void receiveInfo(GameInfo info) {
         if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
 
-        Logger.log("BlokusSmartAi", "My turn!");
-
         myState = (BlokusGameState) info;
-        myState.setSelectedType(-1);
+        if(myState.getPlayerTurn() != playerNum) return;
+        Logger.log("BlokusSmartAi", "My turn!");
         //Allow for AI to take time between plays
-        sleep(3);
+        sleep(.25);
 
         /* Picks a random piece number and sets both selected row and columns to zero */
         Random r = new Random();
@@ -76,7 +75,6 @@ public class BlokusSmartAi extends GameComputerPlayer {
             do {
                 pickedPiece = r.nextInt(21);
             } while (myState.getBlockArray()[playerNum][pickedPiece].getOnBoard());
-            myState.setSelectedType(pickedPiece);
 
             /* Iterates through the board to find the first legal position */
             for (int i = 0; i < 20; i++) {
@@ -89,12 +87,10 @@ public class BlokusSmartAi extends GameComputerPlayer {
                 }
             }
 
+            myState.rotatePiece(myState.getBlockArray()[playerNum][pickedPiece]);
+            myState.checkLegals(myState.getBoard(),playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
+            game.sendAction(new BlokusRotateAction(this));
 
-            Logger.log("BlokusSmartAi", "Sending move");
-            if(myState.checkLegals(myState.getBoard(),playerNum, myState.getBlockArray()[playerNum][pickedPiece]))
-            {
-                game.sendAction(new BlokusRotateAction(this));
-            }
             /* Then, sends an action to place the currently selected piece */
             game.sendAction(new BlokusPlaceAction(this, selectedRow, selectedColumn));
             myState.clearBoard(myState.getBoard());

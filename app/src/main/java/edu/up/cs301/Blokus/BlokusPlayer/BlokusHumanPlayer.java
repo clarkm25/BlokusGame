@@ -252,7 +252,6 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         else {
             blokusState = ((BlokusGameState)info);
             drawBoard.setState((BlokusGameState)info);
-            blokusState.setSelectedType(-1);
             drawBoard.invalidate();
             Logger.log(TAG, "receiving");
         }
