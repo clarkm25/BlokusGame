@@ -491,7 +491,7 @@ public class BlokusGameState extends GameState implements Serializable {
     public boolean checkLegalPerTileX(tileState[][] board, int playerTurn, int yPos, int xPos, int xDelta) {
         tileState playerState = getTileStateForId(playerTurn);
         try {
-            if (board[yPos][xPos] != tileState.EMPTY) {
+            if ((board[yPos][xPos] != tileState.EMPTY) || (board[yPos][xPos] != tileState.LEGAL)) {
                 return true;
             }
             else if (board[yPos][xPos + xDelta] == playerState) {
@@ -523,7 +523,7 @@ public class BlokusGameState extends GameState implements Serializable {
     public boolean checkLegalPerTileY(tileState[][] board, int playerTurn, int yPos, int xPos, int yDelta) {
         tileState playerState = getTileStateForId(playerTurn);
         try {
-            if (board[yPos][xPos] != tileState.EMPTY) {
+            if ((board[yPos][xPos] != tileState.EMPTY) || (board[yPos][xPos] != tileState.LEGAL)) {
                 return true;
             }
             else if (board[yPos + yDelta][xPos] == playerState) {
