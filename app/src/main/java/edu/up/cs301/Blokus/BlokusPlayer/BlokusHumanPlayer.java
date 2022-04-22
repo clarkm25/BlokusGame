@@ -208,7 +208,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                         {
                             drawBoard.flash(Color.RED,50);
                         }
-                        else if (blokusState.placePiece(playerNum, i, j, blokusState.getBlockArray()[playerNum][selectedPiece],0) == 2)
+                        else if (blokusState.placePiece(playerNum, i, j, blokusState.getBlockArray()[playerNum][selectedPiece]) == 2)
                         {
                             drawBoard.flash(Color.RED, 50);
                         }

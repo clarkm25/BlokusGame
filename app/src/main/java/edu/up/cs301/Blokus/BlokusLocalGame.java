@@ -156,7 +156,7 @@ public class BlokusLocalGame extends LocalGame {
         else if(action instanceof BlokusPlaceAction) {
             BlokusPlaceAction bp = (BlokusPlaceAction) action;
             playerId = getPlayerIdx(bp.getPlayer());
-            if(state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()],0) == 0) {
+            if(state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()]) == 0) {
                 state.setPlayerScore(playerId, state.getBlockArray()[playerId][state.getSelectedType()].getBlockScore());
                 /* Sets the appropriate player's turn based on whose turn it currently is */
                 switch (playerId) {

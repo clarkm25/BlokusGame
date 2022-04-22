@@ -132,7 +132,7 @@ public class BlokusGameState extends GameState implements Serializable {
      *
      * @return boolean
      */
-    public int placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece, int rotateInt) {
+    public int placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece) {
         /* Variables to represent the relative x and y coords as well as the current playerState*/
         int relX = 0;
         int relY = 0;
@@ -147,12 +147,6 @@ public class BlokusGameState extends GameState implements Serializable {
             for(int j = 0; j<20; j++) {
                tempBoard[i][j] = this.board[i][j];
             }
-        }
-
-        int rotateCount = rotateInt;
-        /* If the piece has been rotated four times, returns 1 */
-        if(rotateCount == 4) {
-            return 1;
         }
 
         tileState playerState = getTileStateForId(playerTurn);
@@ -186,15 +180,7 @@ public class BlokusGameState extends GameState implements Serializable {
                             currRow = yPos + i - relY;
                             currCol = xPos + j - relX;
 
-                            if(tempBoard[currRow][currCol] != tileState.EMPTY && tempBoard[currRow][currCol] != tileState.LEGAL) {
-                                rotatePiece(piece);
-                                rotateCount++;
-                                placePiece(playerTurn,xPos,yPos,piece,rotateCount);
-                            }
-                            else {
-                                tempBoard[currRow][currCol] = playerState;
-                            }
-
+                            tempBoard[currRow][currCol] = playerState;
                         }
                     }
                 }
