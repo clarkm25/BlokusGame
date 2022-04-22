@@ -216,10 +216,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 return 0;
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                /* Recursive case just in case the piece in its current rotation does not fit */
-                rotatePiece(piece);
-                rotateCount++;
-                placePiece(playerTurn,xPos,yPos,piece,rotateCount);
+                return 2;
             }
         }
         return 0;//If we get here, ends the player's turn
