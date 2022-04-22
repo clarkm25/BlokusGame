@@ -28,7 +28,6 @@ public class BlokusGameState extends GameState implements Serializable {
     private BlokusBlock [][] blockArray; //Represents each players collection of pieces
     private tileState[][] board;
     private boolean gameOn;
-    private int piecesPlaced;
 
     /** Default ctor */
     public BlokusGameState() {
@@ -38,9 +37,6 @@ public class BlokusGameState extends GameState implements Serializable {
 
         /* int containing the currently selected block type */
         this.selectedType = -1;
-
-        /* int containing current round number */
-        this.piecesPlaced = 0;
 
         /* Array for holding player scores */
         this.playerScore = new int[] {-85,-85,-85,-85};
@@ -94,9 +90,6 @@ public class BlokusGameState extends GameState implements Serializable {
 
         /* Copy process for the currently selected type of piece*/
         this.selectedType = toCopy.selectedType;
-
-        /* Copy process for current round number */
-        this.piecesPlaced = toCopy.piecesPlaced;
 
         /* Copy process for the player scores Starts by initializing a new array then copies contents over */
         this.playerScore = new int[4];
@@ -216,10 +209,7 @@ public class BlokusGameState extends GameState implements Serializable {
                 return 0;
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                /* Recursive case just in case the piece in its current rotation does not fit */
-                rotatePiece(piece);
-                rotateCount++;
-                placePiece(playerTurn,xPos,yPos,piece,rotateCount);
+                return 1;
             }
         }
         return 0;//If we get here, ends the player's turn
@@ -634,14 +624,9 @@ public class BlokusGameState extends GameState implements Serializable {
     public BlokusBlock[][] getBlockArray() { return this.blockArray; }
     public tileState[][] getBoard() { return this.board; }
     public int getPlayerTurn() { return this.playerTurn; }
-    public int getPlayerScore(int player) {
-        return this.playerScore[player];
-    }
-
+    public int getPlayerScore(int player) { return this.playerScore[player]; }
     public int getSelectedType() { return this.selectedType; }
-    public int[] getPlayerScore() { return this.playerScore; }
     public boolean getGameOn() { return this.gameOn; }
-    public int getPiecesPlaced() { return this.piecesPlaced; }
 
     /**
      * Gets color based on given player
@@ -677,7 +662,6 @@ public class BlokusGameState extends GameState implements Serializable {
     public void setSelectedType(int toSet) { this.selectedType = toSet; }
     public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] += toAdd; }
     public void setGameOn(boolean toSet) { this.gameOn = toSet; }
-    public void setPiecesPlaced(int toSet) { this.piecesPlaced += toSet; }
 
     /**
      * This will return a string version of the entire BlokusGameState

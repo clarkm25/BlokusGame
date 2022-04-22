@@ -141,12 +141,8 @@ public class BlokusLocalGame extends LocalGame {
            BlokusSelectAction bs = (BlokusSelectAction) action;
            playerId = getPlayerIdx(bs.getPlayer()); //Sets player ID as seen here and below
            state.setSelectedType(bs.getBlockType()); //Sets the selected type after the selection action happens
-           if(!state.calcLegalMoves(state.getBoard(), playerId)) { //Calculate legal moves after selecting the piece
-
-           }
-           if (!state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()])) {
-
-           }
+           state.calcLegalMoves(state.getBoard(), playerId); //Calculate legal moves after selecting the piece
+           state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()]);
 
            return true;
         }
@@ -154,19 +150,16 @@ public class BlokusLocalGame extends LocalGame {
           BlokusRotateAction br = (BlokusRotateAction) action;
           playerId = getPlayerIdx(br.getPlayer());
           state.rotatePiece(state.getBlockArray()[playerId][state.getSelectedType()]);//Gets the appropriate piece based off the selected type and ID
-          if(!state.calcLegalMoves(state.getBoard(), playerId)) { //Calculate legal moves after selecting the piece
-
-          }
-          if (!state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()])) {
-
-          }
+          state.calcLegalMoves(state.getBoard(), playerId);//Calculate legal moves after selecting the piece
+          state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()]);
+          
           return true;
         }
         else if(action instanceof BlokusPlaceAction) {
             BlokusPlaceAction bp = (BlokusPlaceAction) action;
             playerId = getPlayerIdx(bp.getPlayer());
-            state.setPlayerScore(playerId, state.getBlockArray()[playerId][state.getSelectedType()].getBlockScore());
             if(state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()],0) == 0) {
+                state.setPlayerScore(playerId, state.getBlockArray()[playerId][state.getSelectedType()].getBlockScore());
                 /* Sets the appropriate player's turn based on whose turn it currently is */
                 switch (playerId) {
                     case 0:
@@ -185,8 +178,6 @@ public class BlokusLocalGame extends LocalGame {
                         state.setPlayerTurn(0);
                         break;
                 }
-
-                state.setPiecesPlaced(1);
             }
 
 
