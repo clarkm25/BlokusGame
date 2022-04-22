@@ -69,21 +69,25 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
     @Override
     public void onClick(View view) {
         if (game == null) return;
-
+        if(blokusState.getPlayerTurn() != playerNum)
+        {
+            drawBoard.flash(Color.RED, 50);
+            return;
+        }
         //Switches through each button ID and makes an action based on the button
         if (view.getId() == R.id.rotateButton) {
-            BlokusRotateAction blokusRA = new BlokusRotateAction(this);
-            game.sendAction(blokusRA);
-            //Rotates piece in player box
-            if(blokusState.getSelectedType() == -1)
-            {
-                drawBoard.flash(Color.RED,50);
-            }
-            else
-            {
-                drawBoard.setIsRotated(blokusState.getPlayerTurn(), blokusState.getSelectedType());
-                drawBoard.invalidate(); //Redraws in order to show piece rotated
-            }
+                if(blokusState.getSelectedType() == -1)
+                {
+                    drawBoard.flash(Color.RED,50);
+                    return;
+                }
+                else
+                {
+                    BlokusRotateAction blokusRA = new BlokusRotateAction(this);
+                    game.sendAction(blokusRA);
+                    drawBoard.setIsRotated(blokusState.getPlayerTurn(), blokusState.getSelectedType());
+                    drawBoard.invalidate(); //Redraws in order to show piece rotated
+                }//Rotates piece in player box
         }
         else if (view.getId() == R.id.quitButton) {
             System.exit(1); //Closes game out
@@ -208,6 +212,10 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                         {
                             drawBoard.flash(Color.RED,50);
                         }
+                        else if(selectedPiece > 21)
+                        {
+                            drawBoard.flash(Color.RED, 50);
+                        }
                         else if (blokusState.placePiece(playerNum, i, j, blokusState.getBlockArray()[playerNum][selectedPiece]) == 2)
                         {
                             drawBoard.flash(Color.RED, 50);
@@ -244,6 +252,7 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         else {
             blokusState = ((BlokusGameState)info);
             drawBoard.setState((BlokusGameState)info);
+            blokusState.setSelectedType(-1);
             drawBoard.invalidate();
             Logger.log(TAG, "receiving");
         }

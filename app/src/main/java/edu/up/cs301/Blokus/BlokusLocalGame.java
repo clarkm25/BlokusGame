@@ -148,6 +148,10 @@ public class BlokusLocalGame extends LocalGame {
         else if(action instanceof BlokusRotateAction) {
           BlokusRotateAction br = (BlokusRotateAction) action;
           playerId = getPlayerIdx(br.getPlayer());
+          if(state.getSelectedType() == -1)
+          {
+              return false;
+          }
           state.rotatePiece(state.getBlockArray()[playerId][state.getSelectedType()]);//Gets the appropriate piece based off the selected type and ID
           state.calcLegalMoves(state.getBoard(), playerId); //Calculate legal moves after selecting the piece
           state.checkLegals(state.getBoard(), playerId, state.getBlockArray()[playerId][state.getSelectedType()]);
@@ -187,6 +191,7 @@ public class BlokusLocalGame extends LocalGame {
         else if (action instanceof BlokusPassAction) {
             BlokusPassAction bpa = (BlokusPassAction) action;
             playerId = getPlayerIdx(bpa.getPlayer());
+            state.clearBoard(state.getBoard());
 
             switch(playerId) {
                 case 0:

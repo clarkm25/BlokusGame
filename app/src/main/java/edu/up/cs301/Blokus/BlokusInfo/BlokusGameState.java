@@ -343,6 +343,11 @@ public class BlokusGameState extends GameState implements Serializable {
      */
     public boolean checkLegals(tileState[][] board, int playerTurn, BlokusBlock piece) {
 
+        if(this.selectedType == -1)
+        {
+            return false;
+        }
+
         try {
             //Iterates through all legal places & removes places that do not accept piece array
             for (int i = 0; i < 20; i++) {
