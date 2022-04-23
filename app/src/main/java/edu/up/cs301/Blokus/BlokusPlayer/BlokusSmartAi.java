@@ -13,7 +13,8 @@ import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.utilities.Logger;
 
 /**
- * Smart computer player for Blokus Game. Computer player places a piece at random in the first legal place it finds.
+ * Smart computer player for Blokus Game. Computer player places a piece at random
+ * in the first legal place it finds.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
  * @version April 22nd 2022
@@ -22,6 +23,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
 
     //21 pieces
     BlokusGameState myState;
+    int placementTries = 0;
 
     /**
      * BlokusSmartAi
@@ -37,7 +39,8 @@ public class BlokusSmartAi extends GameComputerPlayer {
     /**
      * recieveInfo
      *
-     * Method that makes action for the dumb computer player.
+     * Method that makes action for the dumb computer player. Sends place piece actions to the game.
+     * If unable to place a piece or there are no pieces left, it passes turn.
      *
      * @param info
      */
@@ -59,7 +62,6 @@ public class BlokusSmartAi extends GameComputerPlayer {
         int selectedRow = 0;
         int selectedColumn = 0;
         int piecesLeft = 0;
-        int rotateInt = 0;
 
         //Checks whether or not all the pieces are in player boxes or on the board
         for (int i = 0; i < 21; i++) {
@@ -77,10 +79,6 @@ public class BlokusSmartAi extends GameComputerPlayer {
             } while (myState.getBlockArray()[playerNum][pickedPiece].getOnBoard());
             game.sendAction(new BlokusSelectAction(this, pickedPiece));
 
-            //TODO: Get rid of these lines once we are 100% sure they are not required.
-            //myState.calcLegalMoves(myState.getBoard(), playerNum);
-            //myState.checkLegals(myState.getBoard(), playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
-
             /* Iterates through the board to find the first legal position */
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
@@ -92,12 +90,11 @@ public class BlokusSmartAi extends GameComputerPlayer {
                 }
             }
 
-            //TODO: Get rid of these lines as well, same reason as top ones.
-            //myState.rotatePiece(myState.getBlockArray()[playerNum][pickedPiece]);
-            //game.sendAction(new BlokusRotateAction(this));
-
             /* Then, sends an action to place the currently selected piece */
             game.sendAction(new BlokusPlaceAction(this, selectedRow, selectedColumn));
+            placementTries++; //Adds 1 everytime a placement doesn't work
+
+            //Clears legal placements off board
             myState.clearBoard(myState.getBoard());
         }
         else {
@@ -105,5 +102,9 @@ public class BlokusSmartAi extends GameComputerPlayer {
             game.sendAction(new BlokusPassAction(this));
         }
 
+        //Prevents AI from getting stuck in an infinite loop trying to find a legal placement
+        if (placementTries >= 100) {
+            game.sendAction(new BlokusPassAction(this));
+        }
     } //receiveInfo
 }

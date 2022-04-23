@@ -17,15 +17,15 @@ import java.util.ArrayList;
  * Primary Activity for Blokus
  *
  * PROJECT #J INFO:
- * Game runs perfectly with Dumb AI and with remote play. Legal places are not highlighted based on
+ * Game runs well with both AI and with remote play. Legal places are not highlighted based on
  * certain pieces. If a piece were to go through another piece when placed, it will not highlight
  * that area as a legal placement anymore. Also fixed bug where if piece were to go off the board,
  * it would rotate piece which sometimes ended up causing pieces to overlap. Now the piece will no
  * longer be placeable if it will go out of bounds.
  *
- * However, there is still a problem with the Smart AI players. They will successfully place at
- * least on piece, but after that they will sometimes get stuck in an infinite loop scanning for a
- * legal placement even if it ends up finding one.
+ * With the Smart AI, the AI continuously tries to place pieces. If it reaches a certain amount of
+ * attempted placements it passes the turn. And if all players pass their turn, it ends the game
+ * and finds out who has the highest score.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
  * @version April 19th 2022

@@ -15,7 +15,7 @@ import edu.up.cs301.game.GameFramework.utilities.FlashSurfaceView;
  * pieces, player boxes, grid, and score/ player turn.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version April 19th 2022
+ * @version April 22nd 2022
  */
 public class DrawBoard extends FlashSurfaceView {
 

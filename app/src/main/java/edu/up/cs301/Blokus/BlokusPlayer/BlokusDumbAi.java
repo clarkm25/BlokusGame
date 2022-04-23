@@ -12,7 +12,7 @@ import edu.up.cs301.game.GameFramework.utilities.Logger;
  * Dumb computer player for Blokus that places first piece in first legal spot.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version April 19th 2022
+ * @version April 22nd 2022
  */
 public class BlokusDumbAi extends GameComputerPlayer {
 

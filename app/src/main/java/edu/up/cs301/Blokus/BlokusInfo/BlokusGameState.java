@@ -28,6 +28,7 @@ public class BlokusGameState extends GameState implements Serializable {
     private BlokusBlock [][] blockArray; //Represents each players collection of pieces
     private tileState[][] board;
     private boolean gameOn;
+    private boolean[] isPassed;
 
     /** Default ctor */
     public BlokusGameState() {
@@ -40,6 +41,9 @@ public class BlokusGameState extends GameState implements Serializable {
 
         /* Array for holding player scores */
         this.playerScore = new int[] {-85,-85,-85,-85};
+
+        /* Array holding whether or not player's passed their turn */
+        this.isPassed = new boolean[] {false, false, false, false};
 
         /* Array containing the block objects within each player box and each player's box will be populated with the appropriate blocks */
         blockArray = new BlokusBlock[4][21];
@@ -95,6 +99,11 @@ public class BlokusGameState extends GameState implements Serializable {
         this.playerScore = new int[4];
         for (int i = 0; i<4; i++) {
             this.playerScore[i] = toCopy.playerScore[i];
+        }
+
+        this.isPassed = new boolean[4];
+        for (int i = 0; i<4; i++) {
+            this.isPassed[i] = toCopy.isPassed[i];
         }
 
         /* Copy process for the array of blocks Starts by initializing a new array then copies contents over */
@@ -617,6 +626,7 @@ public class BlokusGameState extends GameState implements Serializable {
     public int getPlayerScore(int player) { return this.playerScore[player]; }
     public int getSelectedType() { return this.selectedType; }
     public boolean getGameOn() { return this.gameOn; }
+    public boolean[] getIsPassed() { return this.isPassed; }
 
     /**
      * Gets color based on given player
@@ -652,6 +662,7 @@ public class BlokusGameState extends GameState implements Serializable {
     public void setSelectedType(int toSet) { this.selectedType = toSet; }
     public void setPlayerScore(int idx, int toAdd){ this.playerScore[idx] += toAdd; }
     public void setGameOn(boolean toSet) { this.gameOn = toSet; }
+    public void setIsPassed(int player, boolean toSet) { this.isPassed[player] = toSet; }
 
     /**
      * This will return a string version of the entire BlokusGameState

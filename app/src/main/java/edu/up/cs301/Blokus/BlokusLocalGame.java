@@ -16,7 +16,7 @@ import edu.up.cs301.game.GameFramework.players.GamePlayer;
  * LocalGame for Blokus which handles interactions between players.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version April 19th 2022
+ * @version April 22nd 2022
  */
 public class BlokusLocalGame extends LocalGame {
 
@@ -97,8 +97,9 @@ public class BlokusLocalGame extends LocalGame {
     @Override
     protected String checkIfGameOver() {
         BlokusGameState blokusState = (BlokusGameState) super.state;
-        int outOfMoves = 0;
         int piecesUsed = 0;
+        int playersPassed = 0;
+        int lastPiece;
 
         //Iterates through each piece per player and checks if it is on the board or not
         for (int i = 0; i < 21; i++) {
@@ -107,12 +108,59 @@ public class BlokusLocalGame extends LocalGame {
             }
         }
 
+        //Checks whether or not the last piece is the single tile piece
+        if (piecesUsed == 20) {
+            if (blokusState.getBlockArray()[blokusState.getPlayerTurn()][0].getOnBoard() == false) {
+                lastPiece = 1;
+            }
+        }
+
+        for (int i = 0; i < 4; i++) {
+            if (blokusState.getIsPassed()[i]) {
+                playersPassed++;
+            }
+        }
+
         //If all pieces are played then state who the winner is
         if (piecesUsed == 21) {
+            lastPiece = 0;
             //Adds bonus points for placing all pieces as stated in rules
             blokusState.setPlayerScore(blokusState.getPlayerTurn(), 15);
+
+            //Bonus points if last piece placed is the single tile piece
+            if (lastPiece == 1) {
+                blokusState.setPlayerScore(blokusState.getPlayerTurn(), 5);
+            }
+
             return "Player " + blokusState.getPlayerTurn() + " has won with a score of " +
                     blokusState.getPlayerScore(blokusState.getPlayerTurn()) + "! ";
+        }
+        else if (playersPassed == 4) { //Means no legal turns left - AI pass if no legal turns found
+            int winningPlayer = 0;
+
+            if ((blokusState.getPlayerScore(0) > blokusState.getPlayerScore(1)) &&
+                    (blokusState.getPlayerScore(0) > blokusState.getPlayerScore(2)) &&
+                    (blokusState.getPlayerScore(0) > blokusState.getPlayerScore(3))) {
+                winningPlayer = 0;
+            }
+            else if ((blokusState.getPlayerScore(1) > blokusState.getPlayerScore(2)) &&
+                    (blokusState.getPlayerScore(1) > blokusState.getPlayerScore(3)) &&
+                    (blokusState.getPlayerScore(1) > blokusState.getPlayerScore(0))) {
+                        winningPlayer = 1;
+            }
+            else if ((blokusState.getPlayerScore(2) > blokusState.getPlayerScore(3)) &&
+                    (blokusState.getPlayerScore(2) > blokusState.getPlayerScore(0)) &&
+                    (blokusState.getPlayerScore(2) > blokusState.getPlayerScore(1))) {
+                winningPlayer = 2;
+            }
+            else if ((blokusState.getPlayerScore(3) > blokusState.getPlayerScore(0)) &&
+                    (blokusState.getPlayerScore(3) > blokusState.getPlayerScore(1)) &&
+                    (blokusState.getPlayerScore(3) > blokusState.getPlayerScore(2))) {
+                winningPlayer = 3;
+            }
+
+            return "Player " + winningPlayer + " has won with a score of " +
+                    blokusState.getPlayerScore(winningPlayer) + "! ";
         }
         else if (blokusState.getGameOn() == false) {
             return "Game Quit! ";
@@ -161,6 +209,7 @@ public class BlokusLocalGame extends LocalGame {
             playerId = getPlayerIdx(bp.getPlayer());
             if(state.placePiece(playerId, bp.getCol(), bp.getRow(), state.getBlockArray()[playerId][state.getSelectedType()]) == 0) {
                 state.setPlayerScore(playerId, state.getBlockArray()[playerId][state.getSelectedType()].getBlockScore());
+                state.setIsPassed(playerId, false); //States player did not skip their turn
                 /* Sets the appropriate player's turn based on whose turn it currently is */
                 switch (playerId) {
                     case 0:
@@ -193,6 +242,7 @@ public class BlokusLocalGame extends LocalGame {
             BlokusPassAction bpa = (BlokusPassAction) action;
             playerId = getPlayerIdx(bpa.getPlayer());
             state.clearBoard(state.getBoard());
+            state.setIsPassed(playerId, true); //States player skipped turn
 
             switch(playerId) {
                 case 0:
