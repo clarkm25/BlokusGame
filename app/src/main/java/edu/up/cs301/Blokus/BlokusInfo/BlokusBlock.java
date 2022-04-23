@@ -36,6 +36,9 @@ public class BlokusBlock implements Serializable {
         }
     }
 
+    /**
+     * Deep copy ctor
+     */
     public BlokusBlock(BlokusBlock toCopy) {
         this.type = toCopy.type;
         this.blockScore = toCopy.blockScore;
@@ -94,7 +97,7 @@ public class BlokusBlock implements Serializable {
             }
         }
 
-        switch (pieceNum) {
+        switch (pieceNum) {//Depending on the piece number, sets it to a specific piece array representation
             case 0:
                 this.pieceArr[0][0] = 2;
 

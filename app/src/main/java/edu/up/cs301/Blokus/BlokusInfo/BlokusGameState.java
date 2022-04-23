@@ -139,7 +139,7 @@ public class BlokusGameState extends GameState implements Serializable {
      * @param yPos given y position
      * @param piece given BlokusBlock
      *
-     * @return boolean
+     * @return int
      */
     public int placePiece(int playerTurn, int xPos, int yPos, BlokusBlock piece) {
         /* Variables to represent the relative x and y coords as well as the current playerState*/
@@ -193,18 +193,19 @@ public class BlokusGameState extends GameState implements Serializable {
                         }
                     }
                 }
+                /* Copies contents of tempBoard over to the board */
                 for(int i = 0; i<20; i++) {
                     for(int j = 0; j<20; j++) {
                         this.board[i][j] = tempBoard[i][j];
                     }
                 }
 
-                this.blockArray[playerTurn][piece.getType()].setOnBoard(true);
+                this.blockArray[playerTurn][piece.getType()].setOnBoard(true);//Sets the piece to be on the board
                 clearBoard(this.getBoard());
-                return 0;
+                return 0;//Returns 0, indicating a successful action
             }
             catch (ArrayIndexOutOfBoundsException e) {
-                return 2;
+                return 2;//Specific int for out of bounds
             }
         }
         return 1;//If we get here, ends the player's turn
@@ -348,10 +349,10 @@ public class BlokusGameState extends GameState implements Serializable {
      * @param playerTurn
      * @param piece
      *
-     * @return int stating whether a
+     * @return boolean
      */
     public boolean checkLegals(tileState[][] board, int playerTurn, BlokusBlock piece) {
-        if(this.selectedType == -1) {
+        if(this.selectedType == -1) { //No type selected, return false
             return false;
         }
 
@@ -387,6 +388,8 @@ public class BlokusGameState extends GameState implements Serializable {
      * @return true if piece can't be placed legally, false if it can
      */
     public boolean checkLegalPerPiece(tileState[][] board, int playerTurn, BlokusBlock piece, int yPos, int xPos) {
+
+       /* Declaration of important ints for later use */
         int neighborNum = 0;
         int row = 0;
         int col = 0;

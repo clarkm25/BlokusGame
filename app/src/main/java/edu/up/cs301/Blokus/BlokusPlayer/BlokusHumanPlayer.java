@@ -68,8 +68,8 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
      */
     @Override
     public void onClick(View view) {
-        if (game == null) return;
-        if(blokusState.getPlayerTurn() != playerNum)
+        if (game == null) return; // If null, returns
+        if(blokusState.getPlayerTurn() != playerNum) // If it is not my turn, flash the screen and returns as well
         {
             drawBoard.flash(Color.RED, 50);
             return;
@@ -212,10 +212,11 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
                         {
                             drawBoard.flash(Color.RED,50);
                         }
-                        else if(selectedPiece > 21)
+                        else if(selectedPiece > 21)//If selected piece is out of bounds, flashes red
                         {
                             drawBoard.flash(Color.RED, 50);
                         }
+                        //If placed piece is out of bounds, flashes red
                         else if (blokusState.placePiece(playerNum, i, j, blokusState.getBlockArray()[playerNum][selectedPiece]) == 2)
                         {
                             drawBoard.flash(Color.RED, 50);
@@ -233,12 +234,25 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
 
         return false;
     } //onTouch
-
+    /**
+     * getTopView
+     *
+     * Method to return the top "view" for the gui
+     *
+     * @return View
+     */
     @Override
     public View getTopView() {
         return myActivity.findViewById(R.id.top_gui_layout);
     } //getTopView
 
+    /**
+     * receiveInfo
+     *
+     * Method to set up and receive a copy of the gamestate to modify
+     *
+     * @param info
+     */
     @Override
     public void receiveInfo(GameInfo info) {
         if (drawBoard == null) return;
@@ -257,6 +271,13 @@ public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchLi
         }
     } //recieveInfo
 
+    /**
+     * setAsGui
+     *
+     * Method to set up the player's GUI
+     *
+     * @param activity
+     */
     @Override
     public void setAsGui(GameMainActivity activity) {
         activity.setContentView(layoutId);

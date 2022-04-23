@@ -50,7 +50,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
         if (info instanceof IllegalMoveInfo) return; //nothing happens if the info is an illegal
 
         myState = (BlokusGameState) info;
-        if(myState.getPlayerTurn() != playerNum) return;
+        if(myState.getPlayerTurn() != playerNum) return; // If it is not my turn, returns
         Logger.log("BlokusSmartAi", "My turn!");
         //Allow for AI to take time between plays
         sleep(.25);
@@ -58,6 +58,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
         /* Picks a random piece number and sets both selected row and columns to zero */
         Random r = new Random();
 
+        /* Declaration of important ints used below */
         int pickedPiece = 0;
         int selectedRow = 0;
         int selectedColumn = 0;
