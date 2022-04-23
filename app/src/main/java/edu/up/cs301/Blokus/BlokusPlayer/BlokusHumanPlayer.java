@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
-import edu.up.cs301.Blokus.BlokusActions.BlokusQuitAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
@@ -28,7 +27,7 @@ import edu.up.cs301.game.R;
  * are set up within this class. GUI is only set to landscape mode.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version April 19th 2022
+ * @version April 22nd 2022
  */
 public class BlokusHumanPlayer extends GameHumanPlayer implements View.OnTouchListener, View.OnClickListener {
 

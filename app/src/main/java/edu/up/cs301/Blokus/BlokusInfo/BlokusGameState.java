@@ -9,7 +9,7 @@ import edu.up.cs301.game.GameFramework.infoMessage.GameState;
  * and deep copy constructor for all of the information being supplied and initialized.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version April 19th 2022
+ * @version April 22nd 2022
  */
 public class BlokusGameState extends GameState implements Serializable {
 

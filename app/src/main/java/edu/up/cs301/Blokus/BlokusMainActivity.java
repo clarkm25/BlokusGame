@@ -28,7 +28,7 @@ import java.util.ArrayList;
  * and finds out who has the highest score.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version April 19th 2022
+ * @version April 22nd 2022
  */
 public class BlokusMainActivity extends GameMainActivity {
 
