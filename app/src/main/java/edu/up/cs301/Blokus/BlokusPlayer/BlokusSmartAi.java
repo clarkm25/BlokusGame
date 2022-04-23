@@ -4,7 +4,6 @@ import java.util.Random;
 
 import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPlaceAction;
-import edu.up.cs301.Blokus.BlokusActions.BlokusRotateAction;
 import edu.up.cs301.Blokus.BlokusActions.BlokusSelectAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
@@ -14,11 +13,10 @@ import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.utilities.Logger;
 
 /**
- * Smart computer player for Blokus Game. Computer Player rotates pieces if there is no legal moves
- * without rotation.
+ * Smart computer player for Blokus Game. Computer player places a piece at random in the first legal place it finds.
  *
  * @author Max Clark, Skyelar Cann, Gavin Raguindin
- * @version April 19th 2022
+ * @version April 22nd 2022
  */
 public class BlokusSmartAi extends GameComputerPlayer {
 
@@ -46,7 +44,7 @@ public class BlokusSmartAi extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
-        if( info instanceof IllegalMoveInfo) return;
+        if (info instanceof IllegalMoveInfo) return; //nothing happens if the info is an illegal
 
         myState = (BlokusGameState) info;
         if(myState.getPlayerTurn() != playerNum) return;
@@ -78,8 +76,11 @@ public class BlokusSmartAi extends GameComputerPlayer {
                 pickedPiece = r.nextInt(21);
             } while (myState.getBlockArray()[playerNum][pickedPiece].getOnBoard());
             game.sendAction(new BlokusSelectAction(this, pickedPiece));
-            myState.calcLegalMoves(myState.getBoard(), playerNum);
-            myState.checkLegals(myState.getBoard(), playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
+
+            //TODO: Get rid of these lines once we are 100% sure they are not required.
+            //myState.calcLegalMoves(myState.getBoard(), playerNum);
+            //myState.checkLegals(myState.getBoard(), playerNum, myState.getBlockArray()[playerNum][pickedPiece]);
+
             /* Iterates through the board to find the first legal position */
             for (int i = 0; i < 20; i++) {
                 for (int j = 0; j < 20; j++) {
@@ -91,8 +92,9 @@ public class BlokusSmartAi extends GameComputerPlayer {
                 }
             }
 
-            myState.rotatePiece(myState.getBlockArray()[playerNum][pickedPiece]);
-            game.sendAction(new BlokusRotateAction(this));
+            //TODO: Get rid of these lines as well, same reason as top ones.
+            //myState.rotatePiece(myState.getBlockArray()[playerNum][pickedPiece]);
+            //game.sendAction(new BlokusRotateAction(this));
 
             /* Then, sends an action to place the currently selected piece */
             game.sendAction(new BlokusPlaceAction(this, selectedRow, selectedColumn));

@@ -3,6 +3,7 @@ package edu.up.cs301.Blokus.BlokusPlayer;
 import edu.up.cs301.Blokus.BlokusActions.BlokusPassAction;
 import edu.up.cs301.Blokus.BlokusInfo.BlokusGameState;
 import edu.up.cs301.game.GameFramework.infoMessage.GameInfo;
+import edu.up.cs301.game.GameFramework.infoMessage.IllegalMoveInfo;
 import edu.up.cs301.game.GameFramework.infoMessage.NotYourTurnInfo;
 import edu.up.cs301.game.GameFramework.players.GameComputerPlayer;
 import edu.up.cs301.game.GameFramework.utilities.Logger;
@@ -39,6 +40,7 @@ public class BlokusDumbAi extends GameComputerPlayer {
     @Override
     protected void receiveInfo(GameInfo info) {
         if (info instanceof NotYourTurnInfo) return; //nothing happens if it isn't players turn
+        if (info instanceof IllegalMoveInfo) return; //nothing happens if the info is an illegal
 
         Logger.log("BlokusDumbAi", "My turn!");
 
